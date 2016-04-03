@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">DineWithUs</string>
+    <string name="profile_name">Niteesh Sundaram</string>
+    <string name="profile_age">22</string>
+    <string name="profile_gender">Male</string>
+    <string name="profile_likes">Likes</string>
+    <string name="profile_like1">1st Like</string>
+    <string name="profile_like2">2nd Like</string>
+    <string name="profile_like3">3rd Like</string>
+    <string name="profile_dislikes">Dislikes</string>
+    <string name="profile_dislike1">1st Dislike</string>
+    <string name="profile_dislike2">2nd Dislike</string>
+    <string name="profile_dislike3">3rd Dislike</string>
+    <string name="profile_phone">Phone Number</string>
+    <string name="profile_phone_hint">(xxx) xxx-xxxx</string>
+    <string name="profile_email">Email</string>
+    <string name="profile_email_hint">Enter Email Address</string>
 </resources>
