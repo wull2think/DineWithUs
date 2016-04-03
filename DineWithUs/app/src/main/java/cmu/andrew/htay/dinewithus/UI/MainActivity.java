@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import cmu.andrew.htay.dinewithus.R;
 import cmu.andrew.htay.dinewithus.fragment.FragmentPageManager;
@@ -24,5 +25,13 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);
         System.out.println("tabLayout - " + tabLayout);
         tabLayout.setupWithViewPager(vp);
+    }
+
+    public void loginMethod(View view) {
+        //do login operations
+    }
+
+    public void addToFavorites(View view) {
+        //add current resteraunt to favorites
     }
 }

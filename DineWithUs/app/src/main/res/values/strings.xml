@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DineWithUs</string>
+    <string name="gpsEnableText">Show only Stores Near Me</string>
 </resources>

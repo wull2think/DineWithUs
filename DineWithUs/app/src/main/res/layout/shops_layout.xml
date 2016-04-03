@@ -1,12 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.35">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            style="@style/TitleFont"
+            android:text="Shops"
+            android:id="@+id/shopTitle" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Current location: "
+                    android:id="@+id/textView6"
+                    android:layout_margin="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="-"
+                    android:id="@+id/currLocationView"
+                    android:layout_marginTop="12dp" />
+            </LinearLayout>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gpsEnableText"
+                android:id="@+id/enableLocationBox"
+                android:checked="false"
+                android:layout_gravity="right" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <SearchView
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:id="@+id/searchShopView"
+        android:layout_gravity="center_horizontal" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.11">
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/shopListView" />
+    </ScrollView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Shops"
-        android:id="@+id/textView4" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Filters"
+        android:id="@+id/textView8"
+        android:layout_weight="0.10"
+        android:textStyle="bold"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.10"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Cuisine"
+            android:id="@+id/textView9"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="2dp" />
+
+        <Spinner
+            android:layout_width="92dp"
+            android:layout_height="match_parent"
+            android:id="@+id/cuisineDropdownView"
+            android:spinnerMode="dropdown"
+            android:layout_weight="0.26"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cuisineSwitchView"
+            android:checked="false"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.10"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Price"
+            android:id="@+id/textView11"
+            android:layout_weight="0.02"
+            android:layout_marginLeft="20dp" />
+
+        <Spinner
+            android:layout_width="92dp"
+            android:layout_height="match_parent"
+            android:id="@+id/priceDropdownView"
+            android:spinnerMode="dropdown"
+            android:layout_weight="0.14"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/priceSwitchView"
+            android:checked="false"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Hours"
+            android:id="@+id/textView10"
+            android:layout_weight="0.10"
+            android:layout_marginLeft="20dp" />
+
+        <EditText
+            android:layout_width="49dp"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/timeStartView"
+            android:layout_weight="0.04" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="to"
+            android:id="@+id/textView12"
+            android:layout_weight="0.02"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp" />
+
+        <EditText
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:ems="10"
+            android:id="@+id/timeEndView"
+            android:layout_weight="0.02"
+            android:layout_marginRight="12dp" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeSwitchView"
+            android:checked="false"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="8dp" />
+    </LinearLayout>
+
 </LinearLayout>
