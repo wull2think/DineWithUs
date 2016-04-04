@@ -19,7 +19,7 @@ public class AppointmentViewFragment extends Fragment {
     private TextView interests_title_text;
     private TextView interests_text;
     private TextView contact_text;
-    public static AppointmentViewFragmentnewInstance() {
+    public static ProfileFragment newInstance() {
         Bundle args = new Bundle();
 
         ProfileFragment fragment = new ProfileFragment();
@@ -39,14 +39,14 @@ public class AppointmentViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.profile_layout, parent, false);
         System.out.println("Appointment View");
-        appointment_text = v.findViewById(R.id.appointment_text);
-        restaurant_text = v.findViewById(R.id.restaurant_text);
-        address_text = v.findViewById(R.id.address_text);
-        time_text = v.findViewById(R.id.time_text);
-        with_text = v.findViewById(R.id.with_text);
-        interests_title_text = v.findViewById(R.id.interests_title_text);
-        interests_text = v.findViewById(R.id.interests_text);
-        contact_text = v.findViewById(R.id.contact_text);
+        appointment_text = (TextView) v.findViewById(R.id.appointment_text);
+        restaurant_text = (TextView) v.findViewById(R.id.restaurant_text);
+        address_text =  (TextView) v.findViewById(R.id.address_text);
+        time_text = (TextView) v.findViewById(R.id.time_text);
+        with_text = (TextView) v.findViewById(R.id.with_text);
+        interests_title_text = (TextView) v.findViewById(R.id.interests_title_text);
+        interests_text = (TextView) v.findViewById(R.id.interests_text);
+        contact_text =  (TextView) v.findViewById(R.id.contact_text);
 
         return v;
     }
