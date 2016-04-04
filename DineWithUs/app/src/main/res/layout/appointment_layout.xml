@@ -8,5 +8,29 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Appointments"
-        android:id="@+id/textView" />
+        android:id="@+id/appointment_text" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TableRow>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Friday | April 1 | 8 PM | Orient-Express"
+        android:id="@+id/button" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sunday | April 3 | 11 AM | Bagel Factory"
+        android:id="@+id/button2"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Monday | April 4 | 7 PM | Lulu&apos;s Noodles"
+        android:id="@+id/button3"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>
