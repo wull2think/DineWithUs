@@ -16,6 +16,9 @@
     <string name="profile_phone_hint">(xxx) xxx-xxxx</string>
     <string name="profile_email">Email</string>
     <string name="profile_email_hint">Enter Email Address</string>
+    <string name="date_today">April 4, 2016</string>
+    <string name="date_free">Free Time Blocks</string>
+    <string name="date_addblock">Add Timeblock</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

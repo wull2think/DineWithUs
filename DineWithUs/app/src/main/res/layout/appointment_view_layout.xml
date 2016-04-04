@@ -45,7 +45,7 @@
     <ImageView
         android:layout_width="205dp"
         android:layout_height="171dp"
-        android:src="@drawable/NiteeshBio"
+        android:src="@drawable/niteeshbio"
         android:layout_below="@+id/time_text"
         android:layout_alignParentEnd="true"
         android:id="@+id/imageView" />
