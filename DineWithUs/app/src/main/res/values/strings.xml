@@ -20,6 +20,10 @@
     <string name="date_free">Free Time Blocks</string>
     <string name="date_addblock">Add Timeblock</string>
 
+    <string name="errorLoginButton">OK</string>
+    <string name="errorLoginTitle">Must Enter a Username</string>
+    <string name="errorLoginMessage">Please Complete the Missing Fields</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
