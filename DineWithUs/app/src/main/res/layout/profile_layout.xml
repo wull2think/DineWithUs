@@ -133,7 +133,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText7"
+        android:id="@+id/phoneEditText"
         android:layout_below="@+id/textView10"
         android:layout_alignParentStart="true"
         android:textColor="#0000ff"
@@ -145,13 +145,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/profile_email"
         android:id="@+id/textView11"
-        android:layout_below="@+id/editText7"
+        android:layout_below="@+id/phoneEditText"
         android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText8"
+        android:id="@+id/emailEditText"
         android:layout_below="@+id/textView11"
         android:layout_alignParentStart="true"
         android:hint="@string/profile_email_hint"
