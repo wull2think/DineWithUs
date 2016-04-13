@@ -1,4 +1,4 @@
-package cmu.andrew.htay.dinewithus.model;
+package cmu.andrew.htay.dinewithus.entities;
 
 /**
  * Created by HuiJun on 4/12/16.

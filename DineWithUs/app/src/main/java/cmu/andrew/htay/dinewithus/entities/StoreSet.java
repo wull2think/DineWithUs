@@ -1,4 +1,4 @@
-package cmu.andrew.htay.dinewithus.model;
+package cmu.andrew.htay.dinewithus.entities;
 
 import java.util.ArrayList;
 
