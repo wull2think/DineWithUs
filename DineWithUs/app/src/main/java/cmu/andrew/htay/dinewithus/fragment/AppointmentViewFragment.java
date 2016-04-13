@@ -19,10 +19,10 @@ public class AppointmentViewFragment extends Fragment {
     private TextView interests_title_text;
     private TextView interests_text;
     private TextView contact_text;
-    public static ProfileFragment newInstance() {
+    public static AppointmentViewFragment newInstance(String appointmentString) {
         Bundle args = new Bundle();
 
-        ProfileFragment fragment = new ProfileFragment();
+        AppointmentViewFragment fragment = new AppointmentViewFragment();
         fragment.setArguments(args);
 
         return fragment;
@@ -37,7 +37,7 @@ public class AppointmentViewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.profile_layout, parent, false);
+        View v = inflater.inflate(R.layout.appointment_view_layout, parent, false);
         System.out.println("Appointment View");
         appointment_text = (TextView) v.findViewById(R.id.appointment_text);
         restaurant_text = (TextView) v.findViewById(R.id.restaurant_text);

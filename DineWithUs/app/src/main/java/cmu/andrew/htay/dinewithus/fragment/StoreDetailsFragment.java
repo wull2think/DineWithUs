@@ -3,12 +3,15 @@ package cmu.andrew.htay.dinewithus.fragment;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import java.lang.reflect.Field;
 
 import cmu.andrew.htay.dinewithus.R;
 
@@ -62,8 +65,8 @@ public class StoreDetailsFragment extends Fragment {
         descriptionView = (TextView) v.findViewById(R.id.descriptionView);
 
         shopNameView.setText(shopName);
-
-
         return v;
     }
+
+
 }

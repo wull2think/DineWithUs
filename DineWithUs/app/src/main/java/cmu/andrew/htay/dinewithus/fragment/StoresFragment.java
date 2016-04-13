@@ -2,6 +2,7 @@ package cmu.andrew.htay.dinewithus.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,11 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.UI.MainActivity;
 
 
 public class StoresFragment extends Fragment {
@@ -35,14 +38,24 @@ public class StoresFragment extends Fragment {
     private Spinner priceDropdownView;
     private Switch priceSwitchView;
     private ArrayList<String> storeNames = new ArrayList<String>();
+    private static String FRAG_HOLDER_ID = "FRAG_HOLDER_ID";
 
-    public static StoresFragment newInstance() {
+    private StoresFragmentHolder fragHolder;
+
+    public static StoresFragment newInstance(StoresFragmentHolder fragHolder) {
         Bundle args = new Bundle();
+
 
         StoresFragment fragment = new StoresFragment();
         fragment.setArguments(args);
+        fragment.setFragHolder(fragHolder);
 
         return fragment;
+    }
+
+
+    public void setFragHolder(StoresFragmentHolder fragHolder) {
+        this.fragHolder = fragHolder;
     }
 
     @Override
@@ -78,18 +91,16 @@ public class StoresFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
+
                 String shopName = (String)shopListView.getItemAtPosition(position);
                 final StoreDetailsFragment sdfrag =
                         StoreDetailsFragment.newInstance(shopName);
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.main_layout, sdfrag)
-                        .addToBackStack(null)//use back to return to previous view
-                        .commit();
 
+                fragHolder.replaceFragment(sdfrag, true);
             }
         });
 
         return v;
     }
+
 }
