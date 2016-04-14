@@ -22,14 +22,14 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 style="@style/TitleFont"
-                android:text="ShopName"
+                android:text="@string/shopDetailsName"
                 android:id="@+id/shopNameView" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Address"
+                android:text="@string/shopDetailsAddr"
                 android:id="@+id/addressView"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="2dp"
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Contact"
+                android:text="@string/shopDetailsContact"
                 android:id="@+id/contactView"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="2dp"
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Hours"
+                android:text="@string/shopDetailsHours"
                 android:id="@+id/hoursView"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="2dp"
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Website"
+            android:text="shopDetailsWebsite"
             android:id="@+id/textView17"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp" />
@@ -150,7 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Rating"
+            android:text="@string/shopDetailsRating"
             android:id="@+id/textView18"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp" />
@@ -166,7 +166,7 @@
     <Button
         android:layout_width="323dp"
         android:layout_height="wrap_content"
-        android:text="Add to Favorites"
+        android:text="@string/shopDetailsFaves"
         android:id="@+id/favoriteButton"
         android:onClick="addToFavorites"
         android:layout_gravity="center_horizontal"
