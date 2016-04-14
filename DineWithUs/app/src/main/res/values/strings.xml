@@ -46,7 +46,7 @@
     <string name="shopLayoutHeader">Shops</string>
     <string name="shopLayoutLocation">Current location:</string>
     <string name="shopLayoutFilters">Filters</string>
-    <string name="shopLayoutCuisine">Cuisinge</string>
+    <string name="shopLayoutCuisine">Cuisine</string>
 
     <string name="errorLoginButton">OK</string>
     <string name="errorLoginTitle">Must Enter a Username</string>
@@ -54,4 +54,17 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shopLayoutPrice">Price</string>
+    <string name="shopLayoutHours">Hours</string>
+    <string name="shopLayoutTo">to</string>
+    <string name="shopDetailsDescription">Details/Description</string>
+    <string name="shopDetailsURL">www.site.com</string>
+    <string name="shopDetailsMenu">Menu</string>
+    <string name="shopDetailsMenuURL">www.site.com/menu</string>
+    <string name="appointmentViewInterests">Interests:</string>
+    <string name="appointmentViewInterestsList">Interests List</string>
+    <string name="appointmentViewContact">Contact:</string>
+    <string name="appointmentViewNumber">1-800-NUM-BERS</string>
+    <string name="loginLayoutName">Name</string>
+    <string name="loginLayoutPassword">Password</string>
 </resources>

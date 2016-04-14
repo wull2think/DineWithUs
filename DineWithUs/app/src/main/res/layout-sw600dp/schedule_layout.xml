@@ -9,11 +9,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/schedule_header"
         android:id="@+id/textView3"
-        android:layout_margin="10dp" />
+        android:layout_margin="20dp" />
 
     <CalendarView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="465dp"
         android:id="@+id/calendarView"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="15dp" />
 </LinearLayout>

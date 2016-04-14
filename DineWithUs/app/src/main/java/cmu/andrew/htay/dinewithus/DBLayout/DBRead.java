@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
-import cmu.andrew.htay.dinewithus.entities.Store;
 
 /**
  * Created by HuiJun on 4/14/16.

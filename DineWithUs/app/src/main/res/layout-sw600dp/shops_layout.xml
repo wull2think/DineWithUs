@@ -9,7 +9,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.35">
+        android:layout_weight="0.11"
+        android:weightSum="1">
 
         <TextView
             android:layout_width="wrap_content"
@@ -17,7 +18,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             style="@style/TitleFont"
             android:text="@string/shopLayoutHeader"
-            android:id="@+id/shopTitle" />
+            android:id="@+id/shopTitle"
+            android:layout_weight="0.63" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -66,7 +68,7 @@
         android:layout_height="195dp"
         android:id="@+id/scrollView"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.11">
+        android:layout_weight="0.26">
 
         <ListView
             android:layout_width="wrap_content"
@@ -91,7 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"
+        android:layout_weight="0.18"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp">
 
@@ -99,10 +101,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/shopLayoutFilters"
+            android:text="@string/shopLayoutCuisine"
             android:id="@+id/textView9"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="2dp" />
+            android:layout_marginTop="2dp"
+            android:layout_weight="0.01" />
 
         <Spinner
             android:layout_width="92dp"
@@ -129,7 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"
+        android:layout_weight="0.21"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp">
 
@@ -139,8 +142,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/shopLayoutPrice"
             android:id="@+id/textView11"
-            android:layout_weight="0.02"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginLeft="20dp"
+            android:layout_weight="0.01" />
 
         <Spinner
             android:layout_width="92dp"
@@ -175,7 +178,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/shopLayoutHours"
             android:id="@+id/textView10"
-            android:layout_weight="0.10"
+            android:layout_weight="0.02"
             android:layout_marginLeft="20dp" />
 
         <EditText
@@ -192,7 +195,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/shopLayoutTo"
             android:id="@+id/textView12"
-            android:layout_weight="0.02"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp" />
 
@@ -202,7 +204,7 @@
             android:inputType="time"
             android:ems="10"
             android:id="@+id/timeEndView"
-            android:layout_weight="0.02"
+            android:layout_weight="0.03"
             android:layout_marginRight="12dp" />
 
         <Switch
