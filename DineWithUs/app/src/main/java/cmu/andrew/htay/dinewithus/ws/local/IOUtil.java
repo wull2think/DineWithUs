@@ -1,6 +1,7 @@
 package cmu.andrew.htay.dinewithus.ws.local;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,5 +41,10 @@ public class IOUtil {
             System.out.println("Error - " + e);
 
         }
+    }
+
+    public void makeToastLog(String errorMessage, Context context) {
+        Toast.makeText(context, errorMessage,
+                Toast.LENGTH_SHORT).show();
     }
 }
