@@ -1,15 +1,13 @@
-package cmu.andrew.htay.dinewithus.fragment;
+package cmu.andrew.htay.dinewithus.fragment.stores;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.lang.reflect.Field;
-
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.fragment.shared.HolderFragment;
 
 
 public class StoresFragmentHolder extends HolderFragment {

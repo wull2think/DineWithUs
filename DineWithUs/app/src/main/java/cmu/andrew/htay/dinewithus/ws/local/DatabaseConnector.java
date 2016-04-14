@@ -1,4 +1,4 @@
-package cmu.andrew.htay.dinewithus.util;
+package cmu.andrew.htay.dinewithus.ws.local;
 
 /**
  * Created by HuiJun on 4/12/16.
@@ -47,7 +47,6 @@ public class DatabaseConnector
             database.close(); // close the database connection
     } // end method close
 
-    // inserts a new calculation in the database
     public void storeCalc(int zip, double totalPayment,
                           double monthlyPayment, String payoffDate)
     {

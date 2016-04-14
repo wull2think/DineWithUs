@@ -1,4 +1,4 @@
-package cmu.andrew.htay.dinewithus.fragment;
+package cmu.andrew.htay.dinewithus.fragment.appointment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.fragment.shared.HolderFragment;
 
 
 public class AppointmentFragmentHolder extends HolderFragment {

@@ -1,8 +1,7 @@
-package cmu.andrew.htay.dinewithus.fragment;
+package cmu.andrew.htay.dinewithus.fragment.stores;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +9,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import cmu.andrew.htay.dinewithus.R;
-import cmu.andrew.htay.dinewithus.UI.MainActivity;
 
 
 public class StoresFragment extends Fragment {

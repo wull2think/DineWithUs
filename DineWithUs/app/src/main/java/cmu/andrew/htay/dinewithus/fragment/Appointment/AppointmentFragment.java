@@ -1,4 +1,4 @@
-package cmu.andrew.htay.dinewithus.fragment;
+package cmu.andrew.htay.dinewithus.fragment.appointment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,15 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import cmu.andrew.htay.dinewithus.R;
-import cmu.andrew.htay.dinewithus.UI.MainActivity;
 import cmu.andrew.htay.dinewithus.entities.Appointment;
 
 

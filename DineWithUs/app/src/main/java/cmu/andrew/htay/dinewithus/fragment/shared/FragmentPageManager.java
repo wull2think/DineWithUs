@@ -1,10 +1,15 @@
-package cmu.andrew.htay.dinewithus.fragment;
+package cmu.andrew.htay.dinewithus.fragment.shared;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
+
+import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentFragmentHolder;
+import cmu.andrew.htay.dinewithus.fragment.profile.ProfileFragment;
+import cmu.andrew.htay.dinewithus.fragment.schedule.ScheduleFragment;
+import cmu.andrew.htay.dinewithus.fragment.stores.StoresFragmentHolder;
 
 /**
  * Created by HuiJun on 3/30/16.

@@ -1,4 +1,4 @@
-package cmu.andrew.htay.dinewithus.util;
+package cmu.andrew.htay.dinewithus.ws.local;
 
 import android.content.Context;
 

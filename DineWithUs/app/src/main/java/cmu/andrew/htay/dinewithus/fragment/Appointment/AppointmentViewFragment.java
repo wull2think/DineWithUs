@@ -1,4 +1,4 @@
-package cmu.andrew.htay.dinewithus.fragment;
+package cmu.andrew.htay.dinewithus.fragment.appointment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
