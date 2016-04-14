@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             style="@style/TitleFont"
-            android:text="Shops"
+            android:text="@string/shopLayoutHeader"
             android:id="@+id/shopTitle" />
 
         <LinearLayout
@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Current location: "
+                    android:text="@string/shopLayoutLocation"
                     android:id="@+id/textView6"
                     android:layout_margin="12dp" />
 
@@ -79,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Filters"
+        android:text="@string/shopLayoutFilters"
         android:id="@+id/textView8"
         android:layout_weight="0.10"
         android:textStyle="bold"
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Cuisine"
+            android:text="@string/shopLayoutFilters"
             android:id="@+id/textView9"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="2dp" />
