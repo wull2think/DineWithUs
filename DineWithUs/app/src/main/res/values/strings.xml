@@ -67,4 +67,5 @@
     <string name="appointmentViewNumber">1-800-NUM-BERS</string>
     <string name="loginLayoutName">Name</string>
     <string name="loginLayoutPassword">Password</string>
+    <string name="scheduleViewText">Schedule View</string>
 </resources>

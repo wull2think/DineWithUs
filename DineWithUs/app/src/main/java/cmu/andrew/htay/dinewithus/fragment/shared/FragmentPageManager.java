@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentFragmentHolder;
 import cmu.andrew.htay.dinewithus.fragment.profile.ProfileFragment;
 import cmu.andrew.htay.dinewithus.fragment.schedule.ScheduleFragment;
+import cmu.andrew.htay.dinewithus.fragment.schedule.ScheduleFragmentHolder;
 import cmu.andrew.htay.dinewithus.fragment.stores.StoresFragmentHolder;
 
 /**
@@ -44,7 +45,7 @@ public class FragmentPageManager extends FragmentPagerAdapter {
             case 2: //stores
                 return StoresFragmentHolder.newInstance();
             case 3: //schedule
-                return ScheduleFragment.newInstance();
+                return ScheduleFragmentHolder.newInstance();
             default:
                 return null;
         }
