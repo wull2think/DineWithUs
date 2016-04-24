@@ -49,6 +49,10 @@ public class Appointment {
     public void setDate(Date date){
         this.appointmentDate = date;
     }
+    
+    public void setAppointmentID(int appointmentID){
+        this.appointmentID = appointmentID;
+    }
 
 
 
