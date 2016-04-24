@@ -50,8 +50,42 @@ public class JDBCAdapter {
     //add
     
     //add to User
-    //add to Profile
+    public int addUser(String username, String password) {
+
+		String query =  "INSERT INTO appointments "+ 
+		" (`USERNAME`, `PASSWORD`) " +
+	    " VALUES (" + "\""+ username + "\", " + password + "\");" ;
+
+    	try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	query = "SELECT LAST_INSERT_ID()";
+    	
+    	int userID = 0;
+		try {
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				userID = rs.getInt("last_id");
+			}
+		}
+		catch (SQLException ex) {
+			System.err.println(ex);
+		}
+    	
+		return userID;
+    	
+   }
     
+    //add to Profile
+    public void addProfile(Profile profile) {		
+		
+    	
+    	
+   }
     
     //add to Appointments
 	public int addAppointment(Appointment appointment) {		
@@ -104,9 +138,9 @@ public class JDBCAdapter {
 		int startTime = schedule.getStartTime();
 		int endTime = schedule.getEndTime();
 		
-		String query =  "INSERT INTO appointments "+ 
+		String query =  "INSERT INTO schedules "+ 
 		" (`DATE`, `START`, `END`) " +
-	    " VALUES (" + date + "," + startTime + ", " + endTime+"\");" ;
+	    " VALUES (" + date + "," + startTime + ", " + endTime+");" ;
 
     	try {
 			statement.executeUpdate(query);
@@ -137,18 +171,120 @@ public class JDBCAdapter {
     //add to Dislikes
     
     //add MapAppointment
-    //add MapProfiles
+	public void addAppointmentMapping(int idUser, int idAppointment) {		
+		String query =  "INSERT INTO appointments "+ 
+		" (`idUser`, `idAppointment`) " +
+	    " VALUES (" + idUser + "," + idAppointment + ");" ;
+
+    	try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+   }
+	
     //add MapSchedule
+	public void addScheduleMapping(int idUser, int idSchedule) {		
+		String query =  "INSERT INTO appointments "+ 
+		" (`idUser`, `idSchedule`) " +
+	    " VALUES (" + idUser + "," + idSchedule + ");" ;
+
+    	try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+   }
     
     
     
     //update
     
     //update User
+	public void updatePassword(int idUser, String newPassword) {
+		String query =  "UPDATE users " + " SET " + 
+				"PASSWORD" + " = " + newPassword +
+				" WHERE idUser = " + idUser + ";" ;
+	
+	try {
+		statement.executeUpdate(query);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	}
+	
     //update Profile
+	public void updateProfile(int idUser, String field, String value) {
+		String query =  "UPDATE profiles " + " SET " + field + " = " + value +
+					" WHERE idUser = " + idUser + ";" ;
+    	
+		try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
     //update Appointment
+	public void updateAppointment(int idAppointment,String field, String value) {
+		String query =  "UPDATE appointments " + " SET " + field + " = " + value +
+				" WHERE idAppointment = " + idAppointment + ";" ;
+	
+		try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
     //update Schedule
+	public void updateSchedule(int idSchedule, String field, String value) {
+		String query =  "UPDATE schedules " + " SET " + field + " = " + value +
+				" WHERE idSchedule = " + idSchedule + ";" ;
+	
+		try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+
+	public void updateScheduleDate(int idSchedule, Date date) {
+		String query =  "UPDATE schedules " + " SET " + "DATE" + " = " + date +
+				" WHERE idSchedule = " + idSchedule + ";" ;
+	
+		try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
     //update Store
+	public void updateStore(int idStore, String field, String value) {
+		String query =  "UPDATE stores " + " SET " + field + " = " + value +
+				" WHERE idStore = " + idStore + ";" ;
+	
+		try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
     
     
     //delete
@@ -315,12 +451,9 @@ public class JDBCAdapter {
 
 		try {
 			ResultSet rs = statement.executeQuery(query);
-			int i = 0;
 			while (rs.next()) {
-				if(i < 3) {
-					storedProfile.setLikes(rs.getString("Like"), i);
-					i++;
-				}
+				storedProfile.addLike(rs.getString("Like"));
+				
 			}
 		}
 		catch (SQLException ex) {
@@ -335,10 +468,7 @@ public class JDBCAdapter {
 			ResultSet rs = statement.executeQuery(query);
 			int i = 0;
 			while (rs.next()) {
-				if(i < 3) {
-					storedProfile.setDislikes(rs.getString("Dislike"), i);
-					i++;
-				}
+				storedProfile.addDislike(rs.getString("Dislike"));
 			}
 		}
 		catch (SQLException ex) {
@@ -360,7 +490,7 @@ public class JDBCAdapter {
 		try {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
-				appointmentIDs.add(rs.getInt("idAppointments"));
+				appointmentIDs.add(rs.getInt("idAppointment"));
 			}
 		}
 		catch (SQLException ex) {
@@ -377,11 +507,12 @@ public class JDBCAdapter {
 
 		Appointment appointment = new Appointment();
 		String query =  "SELECT * FROM " + "appointments"  + 
-				" WHERE idAppointments = \"" + appointmentID + "\";";
+				" WHERE idAppointment = \"" + appointmentID + "\";";
 
 		try {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
+				appointment.setAppointmentID(rs.getInt("idAppointment"));
 				appointment.setMemberIDs(rs.getInt("idUSER_A"), rs.getInt("idUSER_B"));
 				appointment.setRestaurantID(rs.getInt("idStore"));
 				appointment.setDate(rs.getDate("DATE"));
@@ -430,6 +561,7 @@ public class JDBCAdapter {
 		try {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
+				schedule.setID(rs.getInt("idSchedule"));
 				schedule.setDate(rs.getDate("DATE"));
 				schedule.setStartTime(rs.getInt("START"));
 				schedule.setEndTime(rs.getInt("END"));
@@ -463,6 +595,7 @@ public class JDBCAdapter {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				Store store = new Store();
+				store.setStoreID(rs.getInt("idStore"));
 				store.setName(rs.getString("NAME"));
 				store.setAddress(rs.getString("LOCATION"));
 				store.setLatitude(rs.getLong("LATITUDE"));
