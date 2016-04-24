@@ -68,17 +68,17 @@ public class Appointment {
         return this.appointmentDate;
     }
     
-    public int getStartTime(int startTime){
+    public int getStartTime(){
     	return this.startTime;
     }
     
 
-    public int getEndTime(int endTime){
+    public int getEndTime(){
     	return this.endTime;
     }
   
 
-    public String getStatus(String status){
+    public String getStatus(){
     	return this.status;
     }
 
