@@ -6,7 +6,6 @@ package model;
  */
 public class Store {
 
-	private int storeID;
     private String name;
     private String address;
     private long latitude;
@@ -25,10 +24,6 @@ public class Store {
 
     }
 
-    public int getStoreID() {
-    	return storeID;
-    }
-    
     public String getName() {
         return name;
     }
@@ -79,10 +74,6 @@ public class Store {
 
     public String getWebsiteURL() {
         return websiteURL;
-    }
-    
-    public void setStoreID(int storeID) {
-    	this.storeID = storeID;
     }
 
     public void setName(String name) {

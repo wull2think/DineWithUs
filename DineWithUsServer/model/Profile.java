@@ -1,21 +1,19 @@
 package model;
 
-import java.util.ArrayList;
-
 /**
  * Created by HuiJun on 4/14/16.
  */
 public class Profile {
     private String firstname, lastname;
-    private ArrayList<String> Likes, Dislikes;
+    private String [] Likes, Dislikes;
     private String phone, email;
     private int age;
 
     public Profile() {
         this.firstname = "Niteesh";
         this.lastname = "Sundaram";
-        this.Likes = new ArrayList<String>();
-        this.Dislikes = new ArrayList<String>();
+        this.Likes = new String[3];
+        this.Dislikes = new String[3];
         this.phone = "(412) 303-0054";
         this.email = "nsundara@andrew.cmu.edu";
         this.age = 22;
@@ -61,27 +59,19 @@ public class Profile {
         return this.age;
     }
 
-    public void addLike(String like) {
-        this.Likes.add(like);
+    public void setLikes(String like, int i) {
+        this.Likes[i] = like;
     }
 
-    public ArrayList<String> getLikes() {
+    public String [] getLikes() {
         return this.Likes;
     }
 
-    public void addDislike(String dislike) {
-        this.Dislikes.add(dislike);
+    public void setDislikes(String dislike, int i) {
+        this.Dislikes[i] = dislike;
     }
 
-    public void removeDislike(String dislike) {
-        this.Dislikes.remove(dislike);
-    }
-    
-    public void removeLike(String like) {
-        this.Likes.add(like);
-    }
-
-    public ArrayList<String> getDislikes() {
+    public String [] getDislikes() {
         return this.Dislikes;
     }
 }
