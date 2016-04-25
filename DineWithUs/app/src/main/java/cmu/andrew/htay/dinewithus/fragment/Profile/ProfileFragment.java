@@ -18,6 +18,8 @@ public class ProfileFragment extends Fragment {
     private EditText dislike1EditText, dislike2EditText, dislike3EditText;
     private EditText phoneEditText, emailEditText;
 
+    private String[] likes = new String[3];
+    private String[] dislikes = new String[3];
     private String like1, like2, like3;
     private String dislike1, dislike2, dislike3;
     private String phone, email;
@@ -82,11 +84,13 @@ public class ProfileFragment extends Fragment {
             try
             {
                 like1 = s.toString();
+                likes[0] = like1;
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
                 like1 = "American"; // default if an exception occurs
+                likes[0] = like1;
                 saveProfile();
             } // end catch
         } // end method onTextChanged
@@ -113,11 +117,13 @@ public class ProfileFragment extends Fragment {
             try
             {
                 like2 = s.toString();
+                likes[1] = like2;
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
                 like2 = "American"; // default if an exception occurs
+                likes[1] = like2;
                 saveProfile();
             } // end catch
         } // end method onTextChanged
@@ -144,11 +150,13 @@ public class ProfileFragment extends Fragment {
             try
             {
                 like3 = s.toString();
+                likes[2] = like3;
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
                 like3 = "American"; // default if an exception occurs
+                likes[2] = like3;
                 saveProfile();
             } // end catch
         } // end method onTextChanged
@@ -175,11 +183,13 @@ public class ProfileFragment extends Fragment {
             try
             {
                 dislike1 = s.toString();
+                dislikes[0] = dislike1;
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
                 dislike1 = "Canadian"; // default if an exception occurs
+                dislikes[0] = dislike1;
                 saveProfile();
             } // end catch
         } // end method onTextChanged
@@ -205,12 +215,14 @@ public class ProfileFragment extends Fragment {
         {
             try
             {
-                dislike1 = s.toString();
+                dislike2 = s.toString();
+                dislikes[1] = dislike2;
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
-                dislike1 = "Canadian"; // default if an exception occurs
+                dislike2 = "Canadian"; // default if an exception occurs
+                dislikes[1] = dislike2;
                 saveProfile();
             } // end catch
         } // end method onTextChanged
@@ -236,12 +248,14 @@ public class ProfileFragment extends Fragment {
         {
             try
             {
-                dislike1 = s.toString();
+                dislike3 = s.toString();
+                dislikes[2] = dislike3;
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
-                dislike1 = "Canadian"; // default if an exception occurs
+                dislike3 = "Canadian"; // default if an exception occurs
+                dislikes[2] = dislike3;
                 saveProfile();
             } // end catch
         } // end method onTextChanged
