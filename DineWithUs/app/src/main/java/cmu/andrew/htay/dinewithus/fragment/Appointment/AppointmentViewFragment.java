@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentViewFragment;
 
 
 public class AppointmentViewFragment extends Fragment {
