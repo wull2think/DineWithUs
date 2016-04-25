@@ -1,19 +1,22 @@
 package cmu.andrew.htay.dinewithus.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  * Created by HuiJun on 4/14/16.
  */
-public class Profile {
+public class Profile  implements Serializable {
     private String firstname, lastname;
-    private String [] Likes, Dislikes;
+    private ArrayList<String> Likes, Dislikes;
     private String phone, email;
     private int age;
 
     public Profile() {
         this.firstname = "Niteesh";
         this.lastname = "Sundaram";
-        this.Likes = new String[3];
-        this.Dislikes = new String[3];
+        this.Likes = new ArrayList<String>();
+        this.Dislikes = new ArrayList<String>();
         this.phone = "(412) 303-0054";
         this.email = "nsundara@andrew.cmu.edu";
         this.age = 22;
@@ -59,19 +62,27 @@ public class Profile {
         return this.age;
     }
 
-    public void setLikes(String like, int i) {
-        this.Likes[i] = like;
+    public void addLike(String like) {
+        this.Likes.add(like);
     }
 
-    public String [] getLikes() {
+    public ArrayList<String> getLikes() {
         return this.Likes;
     }
 
-    public void setDislikes(String dislike, int i) {
-        this.Dislikes[i] = dislike;
+    public void addDislike(String dislike) {
+        this.Dislikes.add(dislike);
     }
 
-    public String [] getDislikes() {
+    public void removeDislike(String dislike) {
+        this.Dislikes.remove(dislike);
+    }
+    
+    public void removeLike(String like) {
+        this.Likes.add(like);
+    }
+
+    public ArrayList<String> getDislikes() {
         return this.Dislikes;
     }
 }

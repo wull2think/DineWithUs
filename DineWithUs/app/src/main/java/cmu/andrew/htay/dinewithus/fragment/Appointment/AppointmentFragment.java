@@ -55,7 +55,7 @@ public class AppointmentFragment extends Fragment {
 
         appointmentListView = (ListView) v.findViewById(R.id.appointmentListView);
 
-        this.appLHM = Appointment.getAllAppointments(0);
+        this.appLHM = new LinkedHashMap<String, Appointment>();
         ArrayList<String> appointmentList = new ArrayList<String>();
         for(String key : this.appLHM.keySet()){
             appointmentList.add(key);

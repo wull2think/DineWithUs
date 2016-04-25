@@ -1,10 +1,14 @@
 package cmu.andrew.htay.dinewithus.entities;
 
+import java.io.Serializable;
+
+
 /**
  * Created by HuiJun on 4/12/16.
  */
-public class Store {
+public class Store implements Serializable {
 
+	private int storeID;
     private String name;
     private String address;
     private long latitude;
@@ -23,6 +27,10 @@ public class Store {
 
     }
 
+    public int getStoreID() {
+    	return storeID;
+    }
+    
     public String getName() {
         return name;
     }
@@ -73,6 +81,10 @@ public class Store {
 
     public String getWebsiteURL() {
         return websiteURL;
+    }
+    
+    public void setStoreID(int storeID) {
+    	this.storeID = storeID;
     }
 
     public void setName(String name) {

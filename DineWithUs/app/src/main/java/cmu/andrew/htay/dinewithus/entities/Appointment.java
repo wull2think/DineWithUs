@@ -1,18 +1,20 @@
 package cmu.andrew.htay.dinewithus.entities;
 
-import java.sql.Time;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
  * Created by ashresth on 4/10/2016.
  */
-public class Appointment {
+public class Appointment implements Serializable {
     private int appointmentID;
     private int[] memberIDs;
     private int restaurantID;
-    private Date appointmentDate;
+    private String appointmentDate;
+    private int startTime;
+    private int endTime;
+    private String status;
 
     public Appointment(){
         //TODO: Create appointment in database
@@ -31,9 +33,28 @@ public class Appointment {
         this.restaurantID = ID;
     }
 
-    public void setDate(Date date){
+    public void setStartTime(int startTime){
+        this.startTime = startTime;
+    }
+    
+
+    public void setEndTime(int endTime){
+        this.endTime = endTime;
+    }
+  
+
+    public void setStatus(String status){
+        this.status = status;
+    }
+
+    public void setDate(String date){
         this.appointmentDate = date;
     }
+    
+    public void setAppointmentID(int appointmentID){
+        this.appointmentID = appointmentID;
+    }
+
 
 
     public int[] getMemberIDs(){
@@ -48,9 +69,25 @@ public class Appointment {
         return this.appointmentID;
     }
 
-    public Date getDate(){
+    public String getDate(){
         return this.appointmentDate;
     }
+    
+    public int getStartTime(){
+    	return this.startTime;
+    }
+    
+
+    public int getEndTime(){
+    	return this.endTime;
+    }
+  
+
+    public String getStatus(){
+    	return this.status;
+    }
+
+    
 
     public String getDateString(){
         //TODO: Remove timezone and year from this
@@ -62,12 +99,14 @@ public class Appointment {
         return "Orient-Express";
     }
 
+    
+    
     public String toString(){
         //TODO: Remove timezone and year from this
         return this.appointmentDate.toString() + " | " + this.getRestaurantName();
     }
 
-    public static LinkedHashMap<String, Appointment> getAllAppointments(int userID){
+    /*public static LinkedHashMap<String, Appointment> getAllAppointments(int userID){
         //TODO: Access database
         LinkedHashMap<String, Appointment> appLHM = new LinkedHashMap<String, Appointment>();
         Appointment A = new Appointment();
@@ -78,7 +117,7 @@ public class Appointment {
         appLHM.put(A.toString(), A);
         appLHM.put(B.toString(), B);
         return appLHM;
-    }
+    }*/
 
     /*
     public static ArrayList<Appointment> getAllAppointments(int userID){

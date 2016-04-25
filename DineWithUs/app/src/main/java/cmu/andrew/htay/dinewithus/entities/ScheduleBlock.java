@@ -1,21 +1,30 @@
 package cmu.andrew.htay.dinewithus.entities;
 
+
+import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by HuiJun on 4/14/16.
  */
-public class ScheduleBlock {
+public class ScheduleBlock implements Serializable {
+	private int sbID;
     private int startTime;
     private int endTime;
-    private Calendar date;
+    private String date;
 
     public ScheduleBlock() {
         this.startTime = 0;
         this.endTime = 24;
-        this.date = Calendar.getInstance();
     }
 
+
+    public int getID() {
+        return sbID;
+    }
+
+    
     public int getStartTime() {
         return startTime;
     }
@@ -24,10 +33,16 @@ public class ScheduleBlock {
         return endTime;
     }
 
-    public Calendar getDate() {
+    public String getDate() {
         return date;
     }
 
+
+    public void setID(int id) {
+        this.sbID = id;
+    }
+
+    
     public void setStartTime(int startTime) {
         this.startTime = startTime;
     }
@@ -36,7 +51,7 @@ public class ScheduleBlock {
         this.endTime = endTime;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
