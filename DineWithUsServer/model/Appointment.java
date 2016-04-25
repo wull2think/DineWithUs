@@ -10,7 +10,7 @@ public class Appointment {
     private int appointmentID;
     private int[] memberIDs;
     private int restaurantID;
-    private Date appointmentDate;
+    private String appointmentDate;
     private int startTime;
     private int endTime;
     private String status;
@@ -46,7 +46,7 @@ public class Appointment {
         this.status = status;
     }
 
-    public void setDate(Date date){
+    public void setDate(String date){
         this.appointmentDate = date;
     }
     
@@ -68,7 +68,7 @@ public class Appointment {
         return this.appointmentID;
     }
 
-    public Date getDate(){
+    public String getDate(){
         return this.appointmentDate;
     }
     
@@ -100,13 +100,12 @@ public class Appointment {
 
     
     
-    
     public String toString(){
         //TODO: Remove timezone and year from this
         return this.appointmentDate.toString() + " | " + this.getRestaurantName();
     }
 
-    public static LinkedHashMap<String, Appointment> getAllAppointments(int userID){
+    /*public static LinkedHashMap<String, Appointment> getAllAppointments(int userID){
         //TODO: Access database
         LinkedHashMap<String, Appointment> appLHM = new LinkedHashMap<String, Appointment>();
         Appointment A = new Appointment();
@@ -117,7 +116,7 @@ public class Appointment {
         appLHM.put(A.toString(), A);
         appLHM.put(B.toString(), B);
         return appLHM;
-    }
+    }*/
 
     /*
     public static ArrayList<Appointment> getAllAppointments(int userID){

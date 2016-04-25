@@ -11,13 +11,11 @@ public class ScheduleBlock {
 	private int sbID;
     private int startTime;
     private int endTime;
-    private Date date;
+    private String date;
 
     public ScheduleBlock() {
         this.startTime = 0;
         this.endTime = 24;
-        Calendar time = Calendar.getInstance();
-        this.date = time.getTime();
     }
 
 
@@ -34,7 +32,7 @@ public class ScheduleBlock {
         return endTime;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -52,7 +50,7 @@ public class ScheduleBlock {
         this.endTime = endTime;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
