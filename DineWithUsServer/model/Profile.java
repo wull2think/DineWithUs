@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by HuiJun on 4/14/16.
  */
-public class Profile {
+public class Profile  implements Serializable {
     private String firstname, lastname;
     private ArrayList<String> Likes, Dislikes;
     private String phone, email;

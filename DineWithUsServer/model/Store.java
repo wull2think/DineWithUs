@@ -1,10 +1,12 @@
 package model;
 
+import java.io.Serializable;
+
 
 /**
  * Created by HuiJun on 4/12/16.
  */
-public class Store {
+public class Store implements Serializable {
 
 	private int storeID;
     private String name;

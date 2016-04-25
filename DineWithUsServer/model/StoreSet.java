@@ -1,12 +1,13 @@
 package model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by HuiJun on 4/12/16.
  */
-public class StoreSet {
+public class StoreSet implements Serializable {
     private ArrayList<Store> storeList;
 
     public StoreSet()  {

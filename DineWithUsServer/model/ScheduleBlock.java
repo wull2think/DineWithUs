@@ -1,13 +1,14 @@
 package model;
 
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Created by HuiJun on 4/14/16.
  */
-public class ScheduleBlock {
+public class ScheduleBlock implements Serializable {
 	private int sbID;
     private int startTime;
     private int endTime;

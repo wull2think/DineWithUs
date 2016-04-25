@@ -1,12 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
 /**
  * Created by ashresth on 4/10/2016.
  */
-public class Appointment {
+public class Appointment implements Serializable {
     private int appointmentID;
     private int[] memberIDs;
     private int restaurantID;
