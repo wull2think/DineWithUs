@@ -190,6 +190,52 @@ public class DBMethods extends DatabaseConstants {
 		
 	}
 	
+	//add
+	//add appointment for user
+	public int addAppointment(Appointment appointment) {
+		jdbc = new JDBCAdapter(url, driverName,
+                user, passwd);
+
+		int userA_ID = appointment.getMemberIDs()[0];
+		int userB_ID = appointment.getMemberIDs()[1];
+		int appointmentID = jdbc.addAppointment(appointment);
+		appointment.setAppointmentID(appointmentID);
+		jdbc.addAppointmentMapping(userA_ID, appointmentID);	
+		jdbc.addAppointmentMapping(userB_ID, appointmentID);	
+		
+		
+		try {
+			jdbc.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return appointmentID;
+		
+	}
+	
+	//add schedule for user
+	public int addScheduleBlock(String username, ScheduleBlock sb) {
+		jdbc = new JDBCAdapter(url, driverName,
+                user, passwd);
+
+		int userID = jdbc.getUserID(username);
+		int sbID = jdbc.addSchedule(sb);
+		sb.setID(sbID);
+		jdbc.addScheduleMapping(userID, sbID);	
+		
+		
+		try {
+			jdbc.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sbID;
+	}
+	
 	//update
 	
 	//update profile for username

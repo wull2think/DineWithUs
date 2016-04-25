@@ -69,7 +69,7 @@ public class JDBCAdapter {
 		try {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
-				userID = rs.getInt("last_id");
+				userID = rs.getInt(1);
 			}
 		}
 		catch (SQLException ex) {
@@ -89,7 +89,7 @@ public class JDBCAdapter {
     
     //add to Appointments
 	public int addAppointment(Appointment appointment) {		
-		Date date = new Date(appointment.getDate().getTime());
+		String date = appointment.getDate();
 		int idStore = appointment.getRestaurantID();
 		int startTime = appointment.getStartTime();
 		int endTime = appointment.getEndTime();
@@ -104,7 +104,7 @@ public class JDBCAdapter {
 		" (`NAME`, `DATE`, `START`, `END`, " +
 		"`idStore`, `idUSER_A`, `idUSER_B`, `STATUS`) " +
 	    " VALUES (" + "\""+ restaurantName + "\", " + 
-		date + "," + startTime + ", " + endTime +
+	    "\"" + date + "\"," + startTime + ", " + endTime +
 	    ", " + idStore + ", " + idUserA + ", " + idUserB + 
 	    ", \""+ status + "\");" ;
 
@@ -121,7 +121,7 @@ public class JDBCAdapter {
 		try {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
-				appointmentID = rs.getInt("last_id");
+				appointmentID = rs.getInt(1);
 			}
 		}
 		catch (SQLException ex) {
@@ -134,13 +134,13 @@ public class JDBCAdapter {
     
     //add to Schedule
 	public int addSchedule(ScheduleBlock schedule) {		
-		Date date = new Date(schedule.getDate().getTime());
+		String date = schedule.getDate();
 		int startTime = schedule.getStartTime();
 		int endTime = schedule.getEndTime();
 		
 		String query =  "INSERT INTO schedules "+ 
 		" (`DATE`, `START`, `END`) " +
-	    " VALUES (" + date + "," + startTime + ", " + endTime+");" ;
+	    " VALUES (\"" + date + "\"," + startTime + ", " + endTime+");" ;
 
     	try {
 			statement.executeUpdate(query);
@@ -155,7 +155,7 @@ public class JDBCAdapter {
 		try {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
-				scheduleID = rs.getInt("last_id");
+				scheduleID = rs.getInt(1);
 			}
 		}
 		catch (SQLException ex) {
@@ -172,7 +172,7 @@ public class JDBCAdapter {
     
     //add MapAppointment
 	public void addAppointmentMapping(int idUser, int idAppointment) {		
-		String query =  "INSERT INTO appointments "+ 
+		String query =  "INSERT INTO mapappointments "+ 
 		" (`idUser`, `idAppointment`) " +
 	    " VALUES (" + idUser + "," + idAppointment + ");" ;
 
@@ -187,7 +187,7 @@ public class JDBCAdapter {
 	
     //add MapSchedule
 	public void addScheduleMapping(int idUser, int idSchedule) {		
-		String query =  "INSERT INTO appointments "+ 
+		String query =  "INSERT INTO mapschedule "+ 
 		" (`idUser`, `idSchedule`) " +
 	    " VALUES (" + idUser + "," + idSchedule + ");" ;
 
@@ -515,7 +515,7 @@ public class JDBCAdapter {
 				appointment.setAppointmentID(rs.getInt("idAppointment"));
 				appointment.setMemberIDs(rs.getInt("idUSER_A"), rs.getInt("idUSER_B"));
 				appointment.setRestaurantID(rs.getInt("idStore"));
-				appointment.setDate(rs.getDate("DATE"));
+				appointment.setDate(rs.getString("DATE"));
 				appointment.setStartTime(rs.getInt("START"));
 				appointment.setEndTime(rs.getInt("END"));
 				appointment.setStatus(rs.getString("STATUS"));
@@ -562,7 +562,7 @@ public class JDBCAdapter {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
 				schedule.setID(rs.getInt("idSchedule"));
-				schedule.setDate(rs.getDate("DATE"));
+				schedule.setDate(rs.getString("DATE"));
 				schedule.setStartTime(rs.getInt("START"));
 				schedule.setEndTime(rs.getInt("END"));
 				
