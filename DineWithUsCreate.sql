@@ -25,18 +25,18 @@ DROP TABLE IF EXISTS `appointments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `appointments` (
-  `idAppointments` int(11) NOT NULL,
+  `idAppointment` int(11) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(45) DEFAULT NULL,
-  `DATE` datetime DEFAULT NULL,
+  `DATE` varchar(45) DEFAULT NULL,
   `START` int(11) DEFAULT NULL,
   `END` int(11) DEFAULT NULL,
   `idStore` int(11) DEFAULT NULL,
   `idUSER_A` int(11) DEFAULT NULL,
   `idUSER_B` int(11) DEFAULT NULL,
   `STATUS` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idAppointments`),
-  UNIQUE KEY `idAppointments_UNIQUE` (`idAppointments`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`idAppointment`),
+  UNIQUE KEY `idAppointments_UNIQUE` (`idAppointment`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +45,7 @@ CREATE TABLE `appointments` (
 
 LOCK TABLES `appointments` WRITE;
 /*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
+INSERT INTO `appointments` VALUES (11,'Orient-Express','5/25/16',1000,1100,1,1,2,'PENDING'),(12,'Orient-Express','5/22/16',1500,1700,1,2,3,'PENDING'),(13,'Orient-Express','5/25/16',1000,1100,1,1,2,'PENDING'),(14,'Orient-Express','5/22/16',1500,1700,1,2,3,'PENDING'),(15,'Orient-Express','5/25/16',1000,1100,1,1,2,'PENDING'),(16,'Orient-Express','5/22/16',1500,1700,1,2,3,'PENDING');
 /*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,10 +111,10 @@ DROP TABLE IF EXISTS `mapappointments`;
 CREATE TABLE `mapappointments` (
   `idMap` int(11) NOT NULL AUTO_INCREMENT,
   `idUser` int(11) DEFAULT NULL,
-  `idAppointments` int(11) DEFAULT NULL,
+  `idAppointment` int(11) DEFAULT NULL,
   PRIMARY KEY (`idMap`),
   UNIQUE KEY `idMap_UNIQUE` (`idMap`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,6 +123,7 @@ CREATE TABLE `mapappointments` (
 
 LOCK TABLES `mapappointments` WRITE;
 /*!40000 ALTER TABLE `mapappointments` DISABLE KEYS */;
+INSERT INTO `mapappointments` VALUES (13,1,11),(14,2,11),(15,2,12),(16,3,12),(17,1,13),(18,2,13),(19,2,14),(20,3,14),(21,1,15),(22,2,15),(23,2,16),(24,3,16);
 /*!40000 ALTER TABLE `mapappointments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +165,7 @@ CREATE TABLE `mapschedule` (
   `idSchedule` int(11) DEFAULT NULL,
   PRIMARY KEY (`idMap`),
   UNIQUE KEY `idMap_UNIQUE` (`idMap`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,6 +174,7 @@ CREATE TABLE `mapschedule` (
 
 LOCK TABLES `mapschedule` WRITE;
 /*!40000 ALTER TABLE `mapschedule` DISABLE KEYS */;
+INSERT INTO `mapschedule` VALUES (19,1,22),(20,1,23),(21,1,24);
 /*!40000 ALTER TABLE `mapschedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +195,7 @@ CREATE TABLE `profiles` (
   `EMAIL` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `idProfiles_UNIQUE` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,7 +204,7 @@ CREATE TABLE `profiles` (
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
-INSERT INTO `profiles` VALUES (1,'HUIJUN','TAY',24,'none','412-265-8369','htay@andrew.cmu.edu');
+INSERT INTO `profiles` VALUES (1,'HUIJUN','TAY',24,'none','412-265-8369','htay@andrew.cmu.edu'),(2,'ASHISH','S',21,'none','none','ashish@gmail.com'),(3,'NITEESH','TEST',10000,'none','default','fire@gmail.com');
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,13 +216,13 @@ DROP TABLE IF EXISTS `schedules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedules` (
-  `idSchedule` int(11) NOT NULL,
-  `DATE` datetime DEFAULT NULL,
+  `idSchedule` int(11) NOT NULL AUTO_INCREMENT,
+  `DATE` varchar(45) DEFAULT NULL,
   `START` int(11) DEFAULT NULL,
   `END` int(11) DEFAULT NULL,
   PRIMARY KEY (`idSchedule`),
   UNIQUE KEY `idUser_UNIQUE` (`idSchedule`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -228,6 +231,7 @@ CREATE TABLE `schedules` (
 
 LOCK TABLES `schedules` WRITE;
 /*!40000 ALTER TABLE `schedules` DISABLE KEYS */;
+INSERT INTO `schedules` VALUES (22,'3/10/16',900,1100),(23,'3/12/16',2000,2100),(24,'3/15/16',1600,1800);
 /*!40000 ALTER TABLE `schedules` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -281,7 +285,7 @@ CREATE TABLE `users` (
   `PASSWORD` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `idUser_UNIQUE` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,7 +294,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'htay','test');
+INSERT INTO `users` VALUES (1,'htay','test'),(2,'ashish','testagain'),(3,'niteesh','swordfish');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -303,4 +307,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-23 17:10:34
+-- Dump completed on 2016-04-24 22:04:55
