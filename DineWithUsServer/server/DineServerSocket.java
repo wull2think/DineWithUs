@@ -3,6 +3,7 @@ package server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -80,12 +81,19 @@ public class DineServerSocket extends Socket
 		case "Profile":
 			username = args[2];
 			Profile prof = DBWrapper.getProfile(username);
+
+	        System.out.println("SENDING LIKES/DISLIKES: " + prof.getLikes().get(0) + 
+	        		" " + prof.getDislikes().get(0));
+	        System.out.println("SENDING LIKES/DISLIKES: " + prof.getLikes().get(1) + 
+	        		" " + prof.getDislikes().get(1));
+	        System.out.println("SENDING LIKES/DISLIKES: " + prof.getLikes().get(2) + 
+	        		" " + prof.getDislikes().get(2));
 			os.writeObject(prof);
 			System.out.println("Wrote profile object");
 			break;
 		case "Stores":
             //Stores CUISINE PRICE OPENINGTIME CLOSINGTIME LATITUDE LONGITUDE RANGE
-			String cuisine = args[2];
+			String cuisine = "\""+args[2]+"\"";
 			String price = args[3];
 			String opening = args[4];
 			String closing = args[5];
@@ -126,16 +134,34 @@ public class DineServerSocket extends Socket
 		String username = args[2];;
 		PrintWriter writer = new PrintWriter
  	      (new OutputStreamWriter (server.getOutputStream()));
+		ObjectInputStream reader = null;
 		
 		String reply = "";
 		
 		switch(targetEntity){
 			case "Profile":
+				Profile clientProfile = new Profile();
 				reply = "READY FOR PROFILE";
 		    	System.out.println("Got Profile for " + 
 		    			username + ", replying: " +reply);
 		    	writer.println(reply);
 				writer.flush();
+				try {
+		            reader = new ObjectInputStream(server.getInputStream());
+		            clientProfile = (Profile) reader.readObject();
+		        } catch (ClassNotFoundException e) {
+		            e.printStackTrace();
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        } catch (Exception e) {
+		            System.err.println(e);
+		        }
+				
+				System.out.println("GOT PROFILE of " + username + 
+						"- FIRST NAME: " + clientProfile.getFirstname());
+				
+				System.out.println("PHONE " + clientProfile.getPhone());
+				
 				break;
 			case "Appointments":
 				reply = "READY FOR APPOINTMENTS";
