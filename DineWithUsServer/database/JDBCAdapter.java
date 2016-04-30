@@ -11,11 +11,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 
-import model.Appointment;
-import model.Profile;
-import model.ScheduleBlock;
-import model.Store;
-import model.StoreSet;
+import cmu.andrew.htay.dinewithus.entities.Appointment;
+import cmu.andrew.htay.dinewithus.entities.Profile;
+import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
+import cmu.andrew.htay.dinewithus.entities.Store;
+import cmu.andrew.htay.dinewithus.entities.StoreSet;
+
+
 
 //helper class based on the provided JDBC code
 //provides common methods for building SQL queries
@@ -94,7 +96,7 @@ public class JDBCAdapter {
 		int startTime = appointment.getStartTime();
 		int endTime = appointment.getEndTime();
 		String status = appointment.getStatus();
-		String restaurantName = appointment.getRestaurantName();
+		String name = appointment.getName();
 		
 		
 		int idUserA = appointment.getMemberIDs()[0];
@@ -103,7 +105,7 @@ public class JDBCAdapter {
 		String query =  "INSERT INTO appointments "+ 
 		" (`NAME`, `DATE`, `START`, `END`, " +
 		"`idStore`, `idUSER_A`, `idUSER_B`, `STATUS`) " +
-	    " VALUES (" + "\""+ restaurantName + "\", " + 
+	    " VALUES (" + "\""+ name + "\", " + 
 	    "\"" + date + "\"," + startTime + ", " + endTime +
 	    ", " + idStore + ", " + idUserA + ", " + idUserB + 
 	    ", \""+ status + "\");" ;
@@ -512,6 +514,7 @@ public class JDBCAdapter {
 		try {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
+				appointment.setAppointmentName(rs.getString("NAME"));
 				appointment.setAppointmentID(rs.getInt("idAppointment"));
 				appointment.setMemberIDs(rs.getInt("idUSER_A"), rs.getInt("idUSER_B"));
 				appointment.setRestaurantID(rs.getInt("idStore"));
@@ -585,6 +588,10 @@ public class JDBCAdapter {
 			set = set+id+",";
 		}
 		
+		if(idList.isEmpty()) {
+			System.err.println("No Stores Found for Search");
+			return storeSet;
+		}
 		//cut the , off the last bit
 		set = set.substring(0,set.length()-1);
 
@@ -609,6 +616,7 @@ public class JDBCAdapter {
 				store.setMenuURL(rs.getString("MENUURL"));
 				store.setShopPictureURL(rs.getString("IMAGEURL"));
 				store.setWebsiteURL(rs.getString("WEBSITE"));
+				store.setPhone(rs.getString("PHONE"));
 				storeSet.addStore(store);
 			}
 		}
@@ -621,14 +629,45 @@ public class JDBCAdapter {
 		return storeSet;
 	}
 	
-	//get all store ids where field equals value
-	public ArrayList<Integer> getStoreIDs(String field, String value) {
+	//get all store ids where 
+	//cuisine, price and/or rating equals value
+	public ArrayList<Integer> getStoreIDs(String cuisine, 
+			String price, String opening, String closing) {
 
 		ArrayList<Integer> storeIDs = new ArrayList<Integer>();
 		
-		String query =  "SELECT idStore FROM " + "stores" + 
-				" WHERE " + field + " = " + value;
+		String template =  "SELECT idStore FROM " + "stores" + 
+				" WHERE idStore IS NOT NULL";
+		
 
+        StringBuilder sb = new StringBuilder();
+        sb.append(template);
+		
+		 if(!cuisine.equals("*")) {
+			sb.append(" AND CUISINE = ");
+			sb.append(cuisine);
+			
+		 }
+		 if(!price.equals("*")) {
+				sb.append(" AND PRICERANGE = ");
+				sb.append(price);
+		 }
+
+		 if(!opening.equals("*")) {
+				sb.append(" AND START >= ");
+				sb.append(opening);
+			 
+		 }
+		 
+		 if(!closing.equals("*")) {
+				sb.append(" AND END <= ");
+				sb.append(closing);
+		 }
+		 
+
+        String query = sb.toString();
+		System.out.println(query);
+		
 		try {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {
@@ -643,22 +682,55 @@ public class JDBCAdapter {
 		
 	}
 	
-	//get all store ids where field equals value
-	public ArrayList<Integer> getStoreIDsWithinRange(long latitude, 
-			long longitude, long range) {
+	//get all store ids with latitude, longitude in range and
+	//cuisine, price and/or rating equals value
+	public ArrayList<Integer> getStoreIDsWithinRange(String cuisine, 
+			String price, String opening, String closing,
+			double latitude, 
+			double longitude, double range) {
 		
 
-		long latMax = latitude + range;
-		long latMin = latitude - range;
-		long longMax = longitude + range;
-		long longMin = longitude - range;
+		double latMax = latitude + range;
+		double latMin = latitude - range;
+		double longMax = longitude + range;
+		double longMin = longitude - range;
 
 		ArrayList<Integer> storeIDs = new ArrayList<Integer>();
 		
-		String query =  "SELECT idStore FROM " + "stores" + 
-				" WHERE LATITUDE > " + latMin + " AND LATITUDE < " + latMax +
-				" AND LONGITUDE > " + longMin + " AND LONGITUDE < " +longMax;
+		String template =  "SELECT idStore FROM " + "stores" + 
+				" WHERE idStore IS NOT NULL" +
+				" AND LATITUDE > " + latMin + " AND LATITUDE < " + latMax +
+				" AND LONGITUDE > " + longMin + " AND LONGITUDE < " +longMax;;
+		
 
+        StringBuilder sb = new StringBuilder();
+        sb.append(template);
+		
+        if(!cuisine.equals("*")) {
+			sb.append(" AND CUISINE = ");
+			sb.append(cuisine);
+			
+		 }
+		 if(!price.equals("*")) {
+				sb.append(" AND PRICERANGE = ");
+				sb.append(price);
+		 }
+
+		 if(!opening.equals("*")) {
+				sb.append(" AND START >= ");
+				sb.append(opening);
+			 
+		 }
+		 
+		 if(!closing.equals("*")) {
+				sb.append(" AND END <= ");
+				sb.append(closing);
+		 }
+		 
+
+        String query = sb.toString();
+		System.out.println(query);
+		
 		try {
 			ResultSet rs = statement.executeQuery(query);
 			while (rs.next()) {

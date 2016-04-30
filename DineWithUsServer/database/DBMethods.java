@@ -4,10 +4,12 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Appointment;
-import model.Profile;
-import model.ScheduleBlock;
-import model.StoreSet;
+import cmu.andrew.htay.dinewithus.entities.Appointment;
+import cmu.andrew.htay.dinewithus.entities.Profile;
+import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
+import cmu.andrew.htay.dinewithus.entities.StoreSet;
+
+
 
 public class DBMethods extends DatabaseConstants {
 	
@@ -103,80 +105,27 @@ public class DBMethods extends DatabaseConstants {
 		
 		return sbList;
 	}
-	
-	//get store with rating
-	public StoreSet getStoresWithRating(int rating) {
+		
+		
+    //get store with location
+	public StoreSet getStores(String cuisine, String price, 
+			String opening, String closing,
+			double latitude, double longitude, double myrange) {
+		
 		
 		jdbc = new JDBCAdapter(url, driverName,
                 user, passwd);
 
-		String ratingString = Integer.toString(rating);
-		ArrayList<Integer> storeIDs = jdbc.getStoreIDs("RATING", ratingString);
-		StoreSet storeSet = jdbc.getStoresWithIDs(storeIDs);
-		
-		try {
-			jdbc.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ArrayList<Integer> storeIDs = null;
+		if (myrange > 0) { //range is not -1, no GPS in use
+			storeIDs = 
+					jdbc.getStoreIDsWithinRange(cuisine, price, 
+							opening, closing, latitude, 
+							longitude, myrange);
+		} else {
+			storeIDs = 
+					jdbc.getStoreIDs(cuisine, price, opening, closing);
 		}
-		
-		return storeSet;
-		
-	}
-		
-		
-    //get store with location
-	public StoreSet getStoresWithLocation(long latitude, long longitude, long range) {
-		
-		
-		jdbc = new JDBCAdapter(url, driverName,
-                user, passwd);
-		
-		ArrayList<Integer> storeIDs = 
-				jdbc.getStoreIDsWithinRange(latitude, longitude, range);
-		StoreSet storeSet = jdbc.getStoresWithIDs(storeIDs);
-		
-		try {
-			jdbc.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return storeSet;
-		
-	}
-	
-    //get store with cuisine
-	public StoreSet getStoresWithCuisine(String cuisine) {
-		
-		jdbc = new JDBCAdapter(url, driverName,
-                user, passwd);
-		
-		ArrayList<Integer> storeIDs = 
-				jdbc.getStoreIDs("CUISINE", "\""+ cuisine +"\"");
-		StoreSet storeSet = jdbc.getStoresWithIDs(storeIDs);
-		
-		try {
-			jdbc.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return storeSet;
-		
-		}	
-			
-    //get store with pricerange
-	public StoreSet getStoresWithPriceRange(int priceRange) {
-		
-		jdbc = new JDBCAdapter(url, driverName,
-                user, passwd);
-		String priceRangeString = Integer.toString(priceRange);
-		ArrayList<Integer> storeIDs = 
-				jdbc.getStoreIDs("PRICERANGE", priceRangeString);
 		StoreSet storeSet = jdbc.getStoresWithIDs(storeIDs);
 		
 		try {
