@@ -95,7 +95,8 @@ public class JDBCAdapter {
 		int idStore = appointment.getRestaurantID();
 		int startTime = appointment.getStartTime();
 		int endTime = appointment.getEndTime();
-		String status = appointment.getStatus();
+		String statusA = appointment.getStatus()[0];
+		String statusB = appointment.getStatus()[1];
 		String name = appointment.getName();
 		
 		
@@ -104,11 +105,12 @@ public class JDBCAdapter {
 
 		String query =  "INSERT INTO appointments "+ 
 		" (`NAME`, `DATE`, `START`, `END`, " +
-		"`idStore`, `idUSER_A`, `idUSER_B`, `STATUS`) " +
+		"`idStore`, `idUSER_A`, `idUSER_B`, `STATUS_A`, `STATUS_B`) " +
 	    " VALUES (" + "\""+ name + "\", " + 
 	    "\"" + date + "\"," + startTime + ", " + endTime +
 	    ", " + idStore + ", " + idUserA + ", " + idUserB + 
-	    ", \""+ status + "\");" ;
+	    ", \""+ statusA + "\"" + 
+	    ", \""+ statusB + "\");" ;
 
     	try {
 			statement.executeUpdate(query);
@@ -262,9 +264,9 @@ public class JDBCAdapter {
 	}
 	
 
-	public void updateScheduleDate(int idSchedule, Date date) {
-		String query =  "UPDATE schedules " + " SET " + "DATE" + " = " + date +
-				" WHERE idSchedule = " + idSchedule + ";" ;
+	public void updateScheduleDate(int idSchedule, String date) {
+		String query =  "UPDATE schedules " + " SET " + "DATE" + " = \"" + date +
+				"\" WHERE idSchedule = " + idSchedule + ";" ;
 	
 		try {
 			statement.executeUpdate(query);
@@ -521,7 +523,7 @@ public class JDBCAdapter {
 				appointment.setDate(rs.getString("DATE"));
 				appointment.setStartTime(rs.getInt("START"));
 				appointment.setEndTime(rs.getInt("END"));
-				appointment.setStatus(rs.getString("STATUS"));
+				appointment.setStatus(rs.getString("STATUS_A"), rs.getString("STATUS_B"));
 			}
 		}
 		catch (SQLException ex) {

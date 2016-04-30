@@ -120,7 +120,7 @@ public class ProfileFragment extends Fragment {
     }
 
     public void sendUpdate() {
-        ProfileUpdate pUpdateTask = new ProfileUpdate(myProfile);
+        ProfileUpdate pUpdateTask = new ProfileUpdate("htay", myProfile);
         pUpdateTask.execute();
     }
 

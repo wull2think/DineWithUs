@@ -81,13 +81,6 @@ public class DineServerSocket extends Socket
 		case "Profile":
 			username = args[2];
 			Profile prof = DBWrapper.getProfile(username);
-
-	        System.out.println("SENDING LIKES/DISLIKES: " + prof.getLikes().get(0) + 
-	        		" " + prof.getDislikes().get(0));
-	        System.out.println("SENDING LIKES/DISLIKES: " + prof.getLikes().get(1) + 
-	        		" " + prof.getDislikes().get(1));
-	        System.out.println("SENDING LIKES/DISLIKES: " + prof.getLikes().get(2) + 
-	        		" " + prof.getDislikes().get(2));
 			os.writeObject(prof);
 			System.out.println("Wrote profile object");
 			break;
@@ -156,27 +149,97 @@ public class DineServerSocket extends Socket
 		        } catch (Exception e) {
 		            System.err.println(e);
 		        }
-				
-				System.out.println("GOT PROFILE of " + username + 
-						"- FIRST NAME: " + clientProfile.getFirstname());
-				
-				System.out.println("PHONE " + clientProfile.getPhone());
+				updateProfile(username, clientProfile);
 				
 				break;
 			case "Appointments":
+				ArrayList<Appointment> clientAppts = new ArrayList<Appointment>();
 				reply = "READY FOR APPOINTMENTS";
 		    	System.out.println("Got Appointments for " + 
 		    			username + ", replying: " +reply);
 		    	writer.println(reply);
 				writer.flush();
+				try {
+		            reader = new ObjectInputStream(server.getInputStream());
+		            clientAppts = (ArrayList<Appointment>) reader.readObject();
+		        } catch (ClassNotFoundException e) {
+		            e.printStackTrace();
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        } catch (Exception e) {
+		            System.err.println(e);
+		        }
+				updateAppointments(username, clientAppts);
 				break;
 			case "Schedules":
+				ArrayList<ScheduleBlock> clientSchedules = new ArrayList<>();
 				reply = "READY FOR SCHEDULES";
 		    	System.out.println("Got Schedules for " + 
 		    			username + ", replying: " +reply);
 		    	writer.println(reply);
 				writer.flush();
+				try {
+		            reader = new ObjectInputStream(server.getInputStream());
+		            clientSchedules = (ArrayList<ScheduleBlock>) reader.readObject();
+		        } catch (ClassNotFoundException e) {
+		            e.printStackTrace();
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        } catch (Exception e) {
+		            System.err.println(e);
+		        }
+				updateSchedule(username, clientSchedules);
 				break;
+		}
+	}
+	
+	private void updateProfile(String username, Profile profile) {
+		System.out.println("GOT PROFILE: " + profile.getFirstname() + 
+				" " + profile.getLastname());
+		DBMethods DBWrapper = new DBMethods();
+
+		DBWrapper.updateProfileName(username, 
+				profile.getFirstname(), profile.getLastname());
+		DBWrapper.updateProfileAge(username, profile.getAge());
+		DBWrapper.updateProfileAge(username, profile.getAge());
+		DBWrapper.updateProfilePhoneString(username, profile.getPhone());
+		DBWrapper.updateProfileGender(username, profile.getGender());
+		DBWrapper.updateProfileEmail(username, profile.getEmail());
+		
+	}
+	
+	private void updateAppointments(String username, 
+			ArrayList<Appointment> apptList) {
+		DBMethods DBWrapper = new DBMethods();
+		for (Appointment appt : apptList) {
+			System.out.println("GOT APPT: " + appt.getAppointmentID());
+			System.out.println(appt.getStatus()[0]+ " " + appt.getStatus()[1]);
+			if(appt.getAppointmentID() >= 0) { //apt exists in DB
+				DBWrapper.updateAppointmentStatus(appt.getAppointmentID(), 
+						appt.getStatus()[0], appt.getStatus()[1]);
+			}
+			else { //appt does not exist, create new one
+				DBWrapper.addAppointment(appt);
+				
+			}
+		}
+	}
+	
+	private void updateSchedule(String username, 
+			ArrayList<ScheduleBlock> sbList) {
+		DBMethods DBWrapper = new DBMethods();
+		for (ScheduleBlock sb : sbList) {
+			System.out.println("GOT SCHEDULE: " + sb.getID());
+			System.out.println(sb.getStartTime() + " - " + sb.getEndTime());
+			if(sb.getID() >= 0) { //apt exists in DB
+				DBWrapper.updateScheduleStart(sb.getID(), sb.getStartTime());
+				DBWrapper.updateScheduleEnd(sb.getID(), sb.getEndTime());
+				DBWrapper.updateScheduleDate(sb.getID(), sb.getDate());
+			}
+			else { //appt does not exist, create new one
+				DBWrapper.addScheduleBlock(username, sb);
+				
+			}
 		}
 	}
 

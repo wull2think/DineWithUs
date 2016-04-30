@@ -9,15 +9,16 @@ import android.os.AsyncTask;
 import java.util.ArrayList;
 
 import cmu.andrew.htay.dinewithus.entities.Profile;
+import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientConnector;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientUpdater;
 
-public class ProfileUpdate extends AsyncTask<Void, Void, Void> {
-    private Profile profile;
+public class ScheduleUpdate extends AsyncTask<Void, Void, Void> {
+    private ArrayList<ScheduleBlock>  sbList;
     private String username;
 
-    public ProfileUpdate(String username, Profile profile) {
-        this.profile = profile;
+    public ScheduleUpdate(String username, ArrayList<ScheduleBlock> sbList) {
+        this.sbList = sbList;
         this.username = username;
     }
 
@@ -32,10 +33,10 @@ public class ProfileUpdate extends AsyncTask<Void, Void, Void> {
             System.out.println("Connected");
             if(clientIO.initReaderWriter()) {
                 System.out.println("Sending output");
-                clientIO.sendOutput("UPDATE Profile " + username);
+                clientIO.sendOutput("UPDATE Schedules " + username);
                 serverReply = clientIO.handleHandshake();
-                if(serverReply.equals("READY FOR PROFILE")) {
-                    clientIO.sendEntity(profile);
+                if(serverReply.equals("READY FOR SCHEDULES")) {
+                    clientIO.sendEntity(sbList);
                 }
             }
         }
