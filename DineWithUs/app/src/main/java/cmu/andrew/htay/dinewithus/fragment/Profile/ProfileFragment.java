@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import cmu.andrew.htay.dinewithus.R;
 import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.intents.ProfileGet;
+import cmu.andrew.htay.dinewithus.intents.ProfileUpdate;
+import cmu.andrew.htay.dinewithus.intents.ScheduleGet;
+import cmu.andrew.htay.dinewithus.intents.ScheduleUpdate;
 
 
 public class ProfileFragment extends Fragment {
@@ -52,8 +55,6 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myProfile = new Profile();
-        profTask = new ProfileGet(myProfile);
-        profTask.execute();
         //Populate array list with three dummy values
         likes = myProfile.getLikes();
         likes.add(0, "");
@@ -102,8 +103,25 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        getUpdate();
         return v;
     }
+
+    public void sendUpdate() {
+        ProfileUpdate profTask = new ProfileUpdate("htay", myProfile);
+        profTask.execute();
+
+    }
+
+    public void getUpdate() {
+        ProfileGet profTask = new ProfileGet("htay", myProfile, this);
+        profTask.execute();
+    }
+
+    public void updateAllFields() {
+
+    }
+
 
     //Source: https://www.simplifiedcoding.net/android-camera-app-tutorial-create-a-simple-camera-app/
     //We

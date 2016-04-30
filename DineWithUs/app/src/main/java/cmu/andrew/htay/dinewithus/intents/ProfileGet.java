@@ -73,10 +73,6 @@ public class ProfileGet extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
-        System.out.println("GOT NAME: " + profile.getFirstname() + " " + profile.getLastname());
-        System.out.println("GOT LIKES/DISLIKES: " + profile.getLikes().get(0) + " " + profile.getDislikes().get(0));
-        System.out.println("GOT LIKES/DISLIKES: " + profile.getLikes().get(1) + " " + profile.getDislikes().get(1));
-        System.out.println("GOT LIKES/DISLIKES: " + profile.getLikes().get(2) + " " + profile.getDislikes().get(2));
         profileFrag.updateAllFields();
     }
 

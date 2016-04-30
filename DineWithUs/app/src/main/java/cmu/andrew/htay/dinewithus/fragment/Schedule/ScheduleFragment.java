@@ -74,8 +74,8 @@ public class ScheduleFragment extends Fragment {
     }
 
     public void getUpdate() {
-        ScheduleGet profTask = new ScheduleGet("htay", sbList, this);
-        profTask.execute();
+        ScheduleGet sbTask = new ScheduleGet("htay", sbList, this);
+        sbTask.execute();
     }
 
     public void updateAllFields() {
