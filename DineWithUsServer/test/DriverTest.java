@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import model.Appointment;
-import model.Profile;
-import model.ScheduleBlock;
-import model.Store;
-import model.StoreSet;
+import cmu.andrew.htay.dinewithus.entities.Appointment;
+import cmu.andrew.htay.dinewithus.entities.Profile;
+import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
+import cmu.andrew.htay.dinewithus.entities.Store;
+import cmu.andrew.htay.dinewithus.entities.StoreSet;
+
 import database.DBMethods;
 import database.DatabaseConstants;
 
@@ -28,21 +29,29 @@ public class DriverTest extends DatabaseConstants {
 		System.out.println(userProfile.getEmail());
 		System.out.println(userProfile.getAge());
 		System.out.println(userProfile.getLikes());
-		System.out.println(userProfile.getLikes());
-		System.out.println(userProfile.getLikes());
-		System.out.println(userProfile.getDislikes());
-		System.out.println(userProfile.getDislikes());
 		System.out.println(userProfile.getDislikes());
 		
-		StoreSet storeSet = dbm.getStoresWithRating(3);
+		//Stores CUISINE PRICE OPENINGTIME CLOSINGTIME LATITUDE LONGITUDE RANGE
+		System.out.println("========= TEST GET HOURS  ======== ");
+		StoreSet storeSet = dbm.getStores("*", "*", "1200", "2200", 0, 1.02, -1);
 		
 		ArrayList<Store> storeList = storeSet.getStoreList();
 		for(Store store : storeList) {
 			System.out.println(store.getName());
 			System.out.println(store.getDescription());
 		}
+
+		System.out.println("========= TEST GET LOCATION  ======== ");
+		storeSet = dbm.getStores("*", "*", "*", "*", 100, 100, 1000);
 		
-	    storeSet = dbm.getStoresWithLocation(100, 100, 1000);
+		storeList = storeSet.getStoreList();
+		for(Store store : storeList) {
+			System.out.println(store.getName());
+			System.out.println(store.getDescription());
+		}
+
+		System.out.println("========= TEST GET CUISINE  ======== ");
+		storeSet = dbm.getStores("\"CHINESE\"", "*", "*", "*", 0, 0, -1);
 		
 		storeList = storeSet.getStoreList();
 		for(Store store : storeList) {
@@ -50,15 +59,9 @@ public class DriverTest extends DatabaseConstants {
 			System.out.println(store.getDescription());
 		}
 		
-	    storeSet = dbm.getStoresWithCuisine("CHINESE");
-		
-		storeList = storeSet.getStoreList();
-		for(Store store : storeList) {
-			System.out.println(store.getName());
-			System.out.println(store.getDescription());
-		}
-		
-		storeSet = dbm.getStoresWithPriceRange(2);
+
+		System.out.println("========= TEST GET PRICE  ======== ");
+		storeSet = dbm.getStores("*", "3", "*", "*", 0, 0, -1);
 		
 		storeList = storeSet.getStoreList();
 		for(Store store : storeList) {
@@ -69,7 +72,7 @@ public class DriverTest extends DatabaseConstants {
 		System.out.println("Authenticating...");
 		System.out.println(dbm.authenticate("htay", "test"));
 		
-		
+		/*
 		Appointment appt1 = new Appointment();		
 		appt1.setMemberIDs(1, 2);
 		appt1.setRestaurantID(1);
@@ -88,9 +91,9 @@ public class DriverTest extends DatabaseConstants {
 		appt2.setStatus("PENDING");
 		appt2.setDate("5/22/16");
 		appt2.setAppointmentID(-1);
-		
-		System.out.println("adding appt: " + dbm.addAppointment(appt1));
-		System.out.println("adding appt: " + dbm.addAppointment(appt2));
+		*/
+		//System.out.println("adding appt: " + dbm.addAppointment(appt1));
+		//System.out.println("adding appt: " + dbm.addAppointment(appt2));
 		
 		
 		ArrayList<Appointment> appointmentList = dbm.getAppointments("htay");
@@ -98,7 +101,7 @@ public class DriverTest extends DatabaseConstants {
 		for(Appointment appt : appointmentList) {
 			System.out.println("----------------------------------------------");
 			System.out.println("   AppointmentID: " + appt.getAppointmentID());
-			System.out.println("   Store: " + appt.getRestaurantName());
+			System.out.println("   Name: " + appt.getName());
 			System.out.println("   Date: " + appt.getDate());
 			System.out.println("   Start: " + appt.getStartTime());
 			System.out.println("   End: " + appt.getEndTime());
@@ -107,6 +110,7 @@ public class DriverTest extends DatabaseConstants {
 			System.out.println("   Status: " + appt.getStatus());
 		}
 
+		/*
 		ScheduleBlock sb1 = new ScheduleBlock();
         sb1.setDate("3/10/16");
         sb1.setStartTime(900);
@@ -128,6 +132,7 @@ public class DriverTest extends DatabaseConstants {
 		System.out.println("adding sb: " + dbm.addScheduleBlock("htay", sb1));
 		System.out.println("adding sb: " + dbm.addScheduleBlock("htay", sb2));
 		System.out.println("adding sb: " + dbm.addScheduleBlock("htay", sb3));
+		*/
 		
 		ArrayList<ScheduleBlock> sbList = dbm.getScheduleBlocks("htay");
 		System.out.println("=========== PRINTING SCHEDULE ===========");

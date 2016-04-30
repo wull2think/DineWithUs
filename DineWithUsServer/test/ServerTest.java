@@ -1,12 +1,14 @@
 package test;
 
-import model.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.*;
+
+import cmu.andrew.htay.dinewithus.entities.*;
+
 
 import server.DineServerSocket;
 
