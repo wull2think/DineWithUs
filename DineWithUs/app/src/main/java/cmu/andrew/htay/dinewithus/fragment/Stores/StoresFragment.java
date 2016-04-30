@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -36,6 +37,7 @@ public class StoresFragment extends Fragment {
     private Switch timeSwitchView;
     private Spinner priceDropdownView;
     private Switch priceSwitchView;
+    private Button searchButton;
     private ArrayList<String> storeNames;
     private static String FRAG_HOLDER_ID = "FRAG_HOLDER_ID";
 
