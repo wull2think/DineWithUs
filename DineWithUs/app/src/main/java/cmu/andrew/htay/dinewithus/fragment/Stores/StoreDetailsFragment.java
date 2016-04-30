@@ -10,6 +10,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.entities.Store;
+import cmu.andrew.htay.dinewithus.intents.WebImage;
 
 
 public class StoreDetailsFragment extends Fragment {
@@ -24,14 +26,14 @@ public class StoreDetailsFragment extends Fragment {
     private RatingBar ratingView;
     private TextView descriptionView;
 
-    private String shopName;
-    private static String SHOP_NAME_ID = "SHOP_NAME_ID";
+    private Store store;
+    private static String SHOP_ID = "SHOP_ID";
 
-    public static StoreDetailsFragment newInstance(String shopName) {
+    public static StoreDetailsFragment newInstance(Store store) {
         Bundle args = new Bundle();
 
         StoreDetailsFragment fragment = new StoreDetailsFragment();
-        args.putSerializable(SHOP_NAME_ID, shopName);
+        args.putSerializable(SHOP_ID, store);
         fragment.setArguments(args);
 
         return fragment;
@@ -40,7 +42,7 @@ public class StoreDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        shopName = (String)getArguments().getSerializable(SHOP_NAME_ID);
+        store = (Store)getArguments().getSerializable(SHOP_ID);
 
     }
 
@@ -60,9 +62,27 @@ public class StoreDetailsFragment extends Fragment {
         ratingView = (RatingBar) v.findViewById(R.id.ratingBar);
         descriptionView = (TextView) v.findViewById(R.id.descriptionView);
 
-        shopNameView.setText(shopName);
+        shopNameView.setText(store.getName());
+        shopAddressView.setText(store.getAddress());
+        shopContactView.setText(store.getPhone());
+        ratingView.setNumStars(store.getRating());
+        descriptionView.setText(store.getDescription());
+        websiteView.setText(store.getWebsiteURL());
+        menuView.setText(store.getMenuURL());
+
+        int start = store.getOpeningTime();
+        int end = store.getClosingTime();
+
+        String hours = start + " to " + end;
+        shopHoursView.setText(hours);
+
+
+        WebImage setImageTask = new WebImage(shopPhotoView, store.getShopPictureURL());
+        setImageTask.execute();
+
         return v;
     }
+
 
 
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.intents.AppointmentGet;
 import cmu.andrew.htay.dinewithus.entities.Appointment;
 
 
@@ -22,6 +23,8 @@ public class AppointmentFragment extends Fragment {
     private AppointmentFragmentHolder fragHolder;
     private ListView appointmentListView;
     private LinkedHashMap<String, Appointment> appLHM;
+    private AppointmentGet apptTask;
+    private ArrayList<String> appointmentList;
 
     public static AppointmentFragment newInstance(AppointmentFragmentHolder fragHolder) {
         Bundle args = new Bundle();
@@ -41,6 +44,10 @@ public class AppointmentFragment extends Fragment {
         /*appointmentList.add("Friday | April 1 | 8 PM | Orient-Express");
         appointmentList.add("Sunday | April 3 | 11 AM | Bagel Factory");
         appointmentList.add("Monday | April 4 | 7 PM | Lulu&apos;s Noodles");*/
+
+        this.appLHM = new LinkedHashMap<String, Appointment>();
+        appointmentList = new ArrayList<String>();
+
     }
 
 
@@ -55,11 +62,6 @@ public class AppointmentFragment extends Fragment {
 
         appointmentListView = (ListView) v.findViewById(R.id.appointmentListView);
 
-        this.appLHM = new LinkedHashMap<String, Appointment>();
-        ArrayList<String> appointmentList = new ArrayList<String>();
-        for(String key : this.appLHM.keySet()){
-            appointmentList.add(key);
-        }
 
         ArrayAdapter<String> appointmentAdapter =
                 new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, appointmentList);
@@ -70,37 +72,18 @@ public class AppointmentFragment extends Fragment {
 
 
                 String appointmentString = (String) appointmentListView.getItemAtPosition(position);
+                Appointment appt = appLHM.get(appointmentString);
                 final AppointmentViewFragment avfrag =
-                        AppointmentViewFragment.newInstance(appointmentString);
+                        AppointmentViewFragment.newInstance(appt);
 
                 fragHolder.replaceFragment(avfrag, true);
             }
         });
 
-
-
-        /*
-        ArrayList<Appointment> appArrayList = Appointment.getAllAppointments(0); //TODO: Implement getAllAppointments
-        ArrayList<Button> appButtonList = new ArrayList<Button>();
-        for(int i = 0; i < appArrayList.size(); i++){
-            final Appointment A = appArrayList.get(i);
-            Button B = new Button(getActivity());
-            //B.setId(A.getAppointmentID());
-            String date = A.getDateString();
-            String restName = A.getRestaurantName();
-            B.setText(date + "|" + restName);
-            B.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int appID = A.getAppointmentID();
-                    Toast.makeText(this, Integer.toString(appID),
-                            Toast.LENGTH_SHORT).show();
-                    //TODO: Write code to make this go to an AppointmentViewFragment
-                }
-            });
-            appButtonList.add(B);
-        }*/
-
+        if(apptTask == null) {
+            apptTask = new AppointmentGet(appointmentList, appLHM, appointmentAdapter);
+            apptTask.execute();
+        }
 
         return v;
     }

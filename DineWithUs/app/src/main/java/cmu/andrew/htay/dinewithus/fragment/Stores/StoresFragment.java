@@ -18,6 +18,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.entities.Store;
+import cmu.andrew.htay.dinewithus.entities.StoreSet;
+import cmu.andrew.htay.dinewithus.intents.StoreGet;
 
 
 public class StoresFragment extends Fragment {
@@ -33,10 +36,13 @@ public class StoresFragment extends Fragment {
     private Switch timeSwitchView;
     private Spinner priceDropdownView;
     private Switch priceSwitchView;
-    private ArrayList<String> storeNames = new ArrayList<String>();
+    private ArrayList<String> storeNames;
     private static String FRAG_HOLDER_ID = "FRAG_HOLDER_ID";
 
     private StoresFragmentHolder fragHolder;
+    private StoreSet storeSet;
+    private StoreGet getShopsTask;
+    private ArrayAdapter<String> shopsAdapter;
 
     public static StoresFragment newInstance(StoresFragmentHolder fragHolder) {
         Bundle args = new Bundle();
@@ -57,8 +63,8 @@ public class StoresFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        storeNames.add("TestStore");
+        storeSet = new StoreSet();
+        storeNames = new ArrayList<String>();
     }
 
 
@@ -79,8 +85,7 @@ public class StoresFragment extends Fragment {
         priceDropdownView = (Spinner) v.findViewById(R.id.priceDropdownView);
         priceSwitchView = (Switch) v.findViewById(R.id.priceSwitchView);
 
-
-        ArrayAdapter<String> shopsAdapter =
+        shopsAdapter =
                 new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, storeNames);
         shopListView.setAdapter(shopsAdapter);
         shopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,13 +93,20 @@ public class StoresFragment extends Fragment {
                                     int position, long id) {
 
 
-                String shopName = (String)shopListView.getItemAtPosition(position);
+                String shopName = (String) shopListView.getItemAtPosition(position);
+                Store s = storeSet.getStore(shopName);
                 final StoreDetailsFragment sdfrag =
-                        StoreDetailsFragment.newInstance(shopName);
+                        StoreDetailsFragment.newInstance(s);
 
                 fragHolder.replaceFragment(sdfrag, true);
             }
         });
+
+        if(getShopsTask == null) {
+            getShopsTask = new StoreGet(storeNames, storeSet, shopsAdapter);
+            getShopsTask.execute();
+        }
+
 
         return v;
     }

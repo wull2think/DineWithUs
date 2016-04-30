@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.entities.Profile;
+import cmu.andrew.htay.dinewithus.intents.ProfileGet;
 
 
 public class ProfileFragment extends Fragment {
@@ -23,6 +25,8 @@ public class ProfileFragment extends Fragment {
     private String like1, like2, like3;
     private String dislike1, dislike2, dislike3;
     private String phone, email;
+    private ProfileGet profTask;
+    private Profile myProfile;
 
     public static ProfileFragment newInstance() {
         Bundle args = new Bundle();
@@ -36,6 +40,9 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myProfile = new Profile();
+        profTask = new ProfileGet(myProfile);
+        profTask.execute();
 
     }
 

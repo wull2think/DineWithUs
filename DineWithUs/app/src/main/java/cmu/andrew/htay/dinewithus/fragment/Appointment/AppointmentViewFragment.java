@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentViewFragment;
 
 
@@ -20,11 +21,16 @@ public class AppointmentViewFragment extends Fragment {
     private TextView interests_title_text;
     private TextView interests_text;
     private TextView contact_text;
-    public static AppointmentViewFragment newInstance(String appointmentString) {
+    private static final String APPOINTMENT_ID = "APPOINTMENT_ID";
+    private Appointment appointment;
+
+
+    public static AppointmentViewFragment newInstance(Appointment appt) {
         Bundle args = new Bundle();
 
         AppointmentViewFragment fragment = new AppointmentViewFragment();
         fragment.setArguments(args);
+        args.putSerializable(APPOINTMENT_ID, appt);
 
         return fragment;
     }
@@ -32,6 +38,7 @@ public class AppointmentViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        appointment = (Appointment)getArguments().getSerializable(APPOINTMENT_ID);
 
     }
 
@@ -48,6 +55,9 @@ public class AppointmentViewFragment extends Fragment {
         interests_title_text = (TextView) v.findViewById(R.id.interests_title_text);
         interests_text = (TextView) v.findViewById(R.id.interests_text);
         contact_text =  (TextView) v.findViewById(R.id.contact_text);
+
+        appointment_text.setText(appointment.getName());
+
 
         return v;
     }

@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
  * Created by ashresth on 4/10/2016.
  */
 public class Appointment implements Serializable {
+    private String name;
     private int appointmentID;
     private int[] memberIDs;
     private int restaurantID;
@@ -36,12 +37,12 @@ public class Appointment implements Serializable {
     public void setStartTime(int startTime){
         this.startTime = startTime;
     }
-    
+
 
     public void setEndTime(int endTime){
         this.endTime = endTime;
     }
-  
+
 
     public void setStatus(String status){
         this.status = status;
@@ -50,12 +51,14 @@ public class Appointment implements Serializable {
     public void setDate(String date){
         this.appointmentDate = date;
     }
-    
+
     public void setAppointmentID(int appointmentID){
         this.appointmentID = appointmentID;
     }
 
-
+    public void setAppointmentName(String name){
+        this.name = name;
+    }
 
     public int[] getMemberIDs(){
         return this.memberIDs;
@@ -72,66 +75,38 @@ public class Appointment implements Serializable {
     public String getDate(){
         return this.appointmentDate;
     }
-    
+
     public int getStartTime(){
-    	return this.startTime;
+        return this.startTime;
     }
-    
+
 
     public int getEndTime(){
-    	return this.endTime;
+        return this.endTime;
     }
-  
+
 
     public String getStatus(){
-    	return this.status;
+        return this.status;
     }
 
-    
+
 
     public String getDateString(){
         //TODO: Remove timezone and year from this
         return this.appointmentDate.toString();
     }
 
-    public String getRestaurantName(){
+    public String getName(){
         //TODO: Implement this
-        return "Orient-Express";
+        return name;
     }
 
-    
-    
-    public String toString(){
+
+
+    public String toString() {
         //TODO: Remove timezone and year from this
-        return this.appointmentDate.toString() + " | " + this.getRestaurantName();
+        return this.appointmentDate.toString() + " | " + this.getName();
     }
-
-    /*public static LinkedHashMap<String, Appointment> getAllAppointments(int userID){
-        //TODO: Access database
-        LinkedHashMap<String, Appointment> appLHM = new LinkedHashMap<String, Appointment>();
-        Appointment A = new Appointment();
-        A.setDate(new Date(1460424489));
-        Appointment B = new Appointment();
-        B.setDate(new Date(1459468800));
-        B.appointmentID = 2;
-        appLHM.put(A.toString(), A);
-        appLHM.put(B.toString(), B);
-        return appLHM;
-    }*/
-
-    /*
-    public static ArrayList<Appointment> getAllAppointments(int userID){
-        //TODO: Access database
-        ArrayList<Appointment> appList = new ArrayList<Appointment>();
-        Appointment A = new Appointment();
-        A.setDate(new Date(1460424489));
-        Appointment B = new Appointment();
-        B.setDate(new Date(1460424489));
-        B.appointmentID = 2;
-        appList.add(A);
-        appList.add(B);
-        return appList;
-    }
-    */
 
 }

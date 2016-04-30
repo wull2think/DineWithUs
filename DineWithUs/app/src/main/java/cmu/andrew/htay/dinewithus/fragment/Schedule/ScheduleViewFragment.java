@@ -78,7 +78,7 @@ public class ScheduleViewFragment extends Fragment {
         radioTime2.setChecked(false);
         radioTime2.setClickable(false);
 
-        radioTime1.setOnClickListener(new View.OnClickListener() {
+        /*radioTime1.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -88,7 +88,7 @@ public class ScheduleViewFragment extends Fragment {
 
                 fragHolder.replaceFragment(avfrag, true);
             }
-        });
+        });*/
         return v;
     }
 }

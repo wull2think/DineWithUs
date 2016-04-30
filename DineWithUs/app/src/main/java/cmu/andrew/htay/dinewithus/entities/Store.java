@@ -22,6 +22,8 @@ public class Store implements Serializable {
     private String menuURL;
     private String shopPictureURL;
     private String websiteURL;
+    private String phone;
+    private String hoursNotes;
 
     public Store() {
 
@@ -82,6 +84,14 @@ public class Store implements Serializable {
     public String getWebsiteURL() {
         return websiteURL;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getHoursNotes() {
+        return hoursNotes;
+    }
     
     public void setStoreID(int storeID) {
     	this.storeID = storeID;
@@ -137,6 +147,14 @@ public class Store implements Serializable {
 
     public void setWebsiteURL(String websiteURL) {
         this.websiteURL = websiteURL;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setHoursNotes(String phone) {
+        this.hoursNotes = hoursNotes;
     }
 
     public boolean hasCoordinates(long latitude, long longitude) {
