@@ -7,7 +7,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Typeface;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -21,6 +28,8 @@ public class ProfileFragment extends Fragment {
     private EditText like1EditText, like2EditText, like3EditText;
     private EditText dislike1EditText, dislike2EditText, dislike3EditText;
     private EditText phoneEditText, emailEditText;
+
+    private ImageButton btnCamera;
 
     private ArrayList<String> likes;
     private ArrayList<String> dislikes;
@@ -62,6 +71,8 @@ public class ProfileFragment extends Fragment {
         View v = inflater.inflate(R.layout.profile_layout, parent, false);
         System.out.println("PROFILE VIEW");
 
+        btnCamera = (ImageButton) v.findViewById(R.id.imageButton);
+
         like1EditText = (EditText) v.findViewById(R.id.like1EditText);
         like2EditText = (EditText) v.findViewById(R.id.like2EditText);
         like3EditText = (EditText) v.findViewById(R.id.like3EditText);
@@ -84,7 +95,32 @@ public class ProfileFragment extends Fragment {
         phoneEditText.addTextChangedListener(phoneWatcher);
         emailEditText.addTextChangedListener(emailWatcher);
 
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCamera();
+            }
+        });
+
         return v;
+    }
+
+    //Source: https://www.simplifiedcoding.net/android-camera-app-tutorial-create-a-simple-camera-app/
+    //We
+    private void openCamera() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == getActivity().RESULT_OK) {
+            Bitmap bp = (Bitmap) data.getExtras().get("data");
+            btnCamera.setImageBitmap(bp);
+            btnCamera.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
     }
 
     private void saveProfile() {

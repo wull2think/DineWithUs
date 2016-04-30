@@ -68,4 +68,6 @@
     <string name="loginLayoutName">Name</string>
     <string name="loginLayoutPassword">Password</string>
     <string name="scheduleViewText">Schedule View</string>
+
+    <string name="camera_button">&#xf030; Take Picture</string>
 </resources>
