@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import cmu.andrew.htay.dinewithus.R;
 import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.intents.ProfileGet;
+import cmu.andrew.htay.dinewithus.intents.ProfileUpdate;
 
 
 public class ProfileFragment extends Fragment {
@@ -21,13 +23,16 @@ public class ProfileFragment extends Fragment {
     private EditText like1EditText, like2EditText, like3EditText;
     private EditText dislike1EditText, dislike2EditText, dislike3EditText;
     private EditText phoneEditText, emailEditText;
+    private TextView nameView;
+    private TextView ageView;
+    private TextView genderView;
 
     private ArrayList<String> likes;
     private ArrayList<String> dislikes;
+    private ArrayList<EditText> textViewList;
     private String like1, like2, like3;
     private String dislike1, dislike2, dislike3;
     private String phone, email;
-    private ProfileGet profTask;
     private Profile myProfile;
 
     public static ProfileFragment newInstance() {
@@ -42,9 +47,8 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        textViewList = new ArrayList<EditText>();
         myProfile = new Profile();
-        profTask = new ProfileGet(myProfile);
-        profTask.execute();
         //Populate array list with three dummy values
         likes = myProfile.getLikes();
         likes.add(0, "");
@@ -84,8 +88,47 @@ public class ProfileFragment extends Fragment {
         phoneEditText.addTextChangedListener(phoneWatcher);
         emailEditText.addTextChangedListener(emailWatcher);
 
+        nameView = (TextView) v.findViewById(R.id.nameView);
+        ageView = (TextView) v.findViewById(R.id.ageView);
+        genderView = (TextView) v.findViewById(R.id.genderView);
+        getUpdate();
+
         return v;
     }
+
+    /*private EditText like1EditText, like2EditText, like3EditText;
+    private EditText dislike1EditText, dislike2EditText, dislike3EditText;
+    private EditText phoneEditText, emailEditText;
+    private TextView nameView;
+    private TextView ageView;
+    private TextView genderView;*/
+
+    public void updateAllFields() {
+        System.out.println("NEW NAME: "+  myProfile.getFirstname() + " " + myProfile.getLastname());
+        nameView.setText(myProfile.getFirstname() + " " + myProfile.getLastname());
+        ageView.setText(Integer.toString(myProfile.getAge()));
+        phoneEditText.setText(myProfile.getPhone());
+        emailEditText.setText(myProfile.getEmail());
+        genderView.setText(myProfile.getGender());
+        dislike1EditText.setText(myProfile.getDislikes().get(0));
+        dislike2EditText.setText(myProfile.getDislikes().get(1));
+        dislike3EditText.setText(myProfile.getDislikes().get(2));
+        like1EditText.setText(myProfile.getLikes().get(0));
+        like2EditText.setText(myProfile.getLikes().get(1));
+        like3EditText.setText(myProfile.getLikes().get(2));
+
+    }
+
+    public void sendUpdate() {
+        ProfileUpdate pUpdateTask = new ProfileUpdate(myProfile);
+        pUpdateTask.execute();
+    }
+
+    public void getUpdate() {
+        ProfileGet profTask = new ProfileGet("htay", myProfile, this);
+        profTask.execute();
+    }
+
 
     private void saveProfile() {
         return;

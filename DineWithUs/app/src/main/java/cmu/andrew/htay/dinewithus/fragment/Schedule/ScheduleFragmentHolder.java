@@ -13,6 +13,7 @@ import cmu.andrew.htay.dinewithus.fragment.shared.HolderFragment;
 
 public class ScheduleFragmentHolder extends HolderFragment {
 
+    private ScheduleFragment sbFragment;
 
     public static ScheduleFragmentHolder newInstance() {
         Bundle args = new Bundle();
@@ -33,8 +34,8 @@ public class ScheduleFragmentHolder extends HolderFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.schedule_holder, parent, false);
-        ScheduleFragment fragment = ScheduleFragment.newInstance(this);
-        replaceFragment(fragment, false);
+        sbFragment = ScheduleFragment.newInstance(this);
+        replaceFragment(sbFragment, false);
 
         return v;
     }
@@ -47,6 +48,10 @@ public class ScheduleFragmentHolder extends HolderFragment {
         } else {
             getChildFragmentManager().beginTransaction().replace(R.id.schedule_holder, fragment).commit();
         }
+    }
+
+    public ScheduleFragment getScheduleFragment() {
+        return sbFragment;
     }
 
 

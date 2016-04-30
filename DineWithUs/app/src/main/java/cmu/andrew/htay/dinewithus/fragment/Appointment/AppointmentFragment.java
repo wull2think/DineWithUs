@@ -23,8 +23,8 @@ public class AppointmentFragment extends Fragment {
     private AppointmentFragmentHolder fragHolder;
     private ListView appointmentListView;
     private LinkedHashMap<String, Appointment> appLHM;
-    private AppointmentGet apptTask;
     private ArrayList<String> appointmentList;
+    ArrayAdapter<String> appointmentAdapter;
 
     public static AppointmentFragment newInstance(AppointmentFragmentHolder fragHolder) {
         Bundle args = new Bundle();
@@ -63,7 +63,7 @@ public class AppointmentFragment extends Fragment {
         appointmentListView = (ListView) v.findViewById(R.id.appointmentListView);
 
 
-        ArrayAdapter<String> appointmentAdapter =
+        appointmentAdapter =
                 new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, appointmentList);
         appointmentListView.setAdapter(appointmentAdapter);
         appointmentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -79,12 +79,21 @@ public class AppointmentFragment extends Fragment {
                 fragHolder.replaceFragment(avfrag, true);
             }
         });
-
-        if(apptTask == null) {
-            apptTask = new AppointmentGet(appointmentList, appLHM, appointmentAdapter);
-            apptTask.execute();
-        }
+        getUpdate();
 
         return v;
+    }
+
+    public void sendUpdate() {
+
+    }
+
+    public void getUpdate() {
+        AppointmentGet apptTask = new AppointmentGet("htay", appointmentList, appLHM, this);
+        apptTask.execute();
+    }
+
+    public void updateAllFields() {
+        appointmentAdapter.notifyDataSetChanged();
     }
 }

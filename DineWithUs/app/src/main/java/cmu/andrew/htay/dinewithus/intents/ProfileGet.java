@@ -5,20 +5,26 @@ package cmu.andrew.htay.dinewithus.intents;
  */
 
 import android.os.AsyncTask;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.entities.Profile;
+import cmu.andrew.htay.dinewithus.fragment.profile.ProfileFragment;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientConnector;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientRequester;
 
 public class ProfileGet extends AsyncTask<Void, Void, Void> {
-    Profile profile;
+    private Profile profile;
+    private ProfileFragment profileFrag;
+    private String username = "htay";
 
-    public ProfileGet(Profile profile) {
+    public ProfileGet(String username, Profile profile, ProfileFragment profileFrag) {
         this.profile = profile;
+        this.profileFrag = profileFrag;
+        this.username = username;
     }
 
     @Override
@@ -32,7 +38,7 @@ public class ProfileGet extends AsyncTask<Void, Void, Void> {
             System.out.println("Connected");
             if(clientIO.initReaderWriter()) {
                 System.out.println("Sending output");
-                clientIO.sendOutput("GET Profile htay");
+                clientIO.sendOutput("GET Profile " + username);
                 serverProfile = clientIO.handleProfile();
             }
             clientIO.closeSession();
@@ -47,6 +53,8 @@ public class ProfileGet extends AsyncTask<Void, Void, Void> {
         ArrayList<String> likes = serverProfile.getLikes();
         ArrayList<String> dislikes = serverProfile.getDislikes();
 
+        profile.getLikes().clear();
+        profile.getDislikes().clear();
         for (String like : likes) {
             profile.addLike(like);
         }
@@ -65,6 +73,11 @@ public class ProfileGet extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
+        System.out.println("GOT NAME: " + profile.getFirstname() + " " + profile.getLastname());
+        System.out.println("GOT LIKES/DISLIKES: " + profile.getLikes().get(0) + " " + profile.getDislikes().get(0));
+        System.out.println("GOT LIKES/DISLIKES: " + profile.getLikes().get(1) + " " + profile.getDislikes().get(1));
+        System.out.println("GOT LIKES/DISLIKES: " + profile.getLikes().get(2) + " " + profile.getDislikes().get(2));
+        profileFrag.updateAllFields();
     }
 
 }
