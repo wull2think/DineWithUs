@@ -63,18 +63,11 @@
         android:id="@+id/searchShopView"
         android:layout_gravity="center_horizontal" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="195dp"
-        android:id="@+id/scrollView"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.26">
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/shopListView" />
-    </ScrollView>
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="444dp"
+        android:id="@+id/shopListView"
+        android:layout_weight="0.16" />
 
     <TextView
         android:layout_width="wrap_content"
