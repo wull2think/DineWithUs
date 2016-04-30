@@ -645,7 +645,9 @@ public class JDBCAdapter {
 		
 		 if(!cuisine.equals("*")) {
 			sb.append(" AND CUISINE = ");
+			sb.append("\"");
 			sb.append(cuisine);
+			sb.append("\"");
 			
 		 }
 		 if(!price.equals("*")) {
@@ -708,7 +710,9 @@ public class JDBCAdapter {
 		
         if(!cuisine.equals("*")) {
 			sb.append(" AND CUISINE = ");
+			sb.append("\"");
 			sb.append(cuisine);
+			sb.append("\"");
 			
 		 }
 		 if(!price.equals("*")) {

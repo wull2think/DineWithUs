@@ -93,7 +93,7 @@ public class DineServerSocket extends Socket
 			break;
 		case "Stores":
             //Stores CUISINE PRICE OPENINGTIME CLOSINGTIME LATITUDE LONGITUDE RANGE
-			String cuisine = "\""+args[2]+"\"";
+			String cuisine = args[2];
 			String price = args[3];
 			String opening = args[4];
 			String closing = args[5];

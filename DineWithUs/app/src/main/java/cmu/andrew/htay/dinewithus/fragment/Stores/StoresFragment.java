@@ -43,6 +43,7 @@ public class StoresFragment extends Fragment {
     private StoresFragmentHolder fragHolder;
     private StoreSet storeSet;
     private StoreGet getShopsTask;
+    private ArrayAdapter<String> shopsAdapter;
 
     public static StoresFragment newInstance(StoresFragmentHolder fragHolder) {
         Bundle args = new Bundle();
@@ -85,7 +86,7 @@ public class StoresFragment extends Fragment {
         priceDropdownView = (Spinner) v.findViewById(R.id.priceDropdownView);
         priceSwitchView = (Switch) v.findViewById(R.id.priceSwitchView);
 
-        ArrayAdapter<String> shopsAdapter =
+        shopsAdapter =
                 new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, storeNames);
         shopListView.setAdapter(shopsAdapter);
         shopListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -113,6 +114,6 @@ public class StoresFragment extends Fragment {
     }
 
     public void updateAllFields() {
-
+        shopsAdapter.notifyDataSetChanged();
     }
 }
