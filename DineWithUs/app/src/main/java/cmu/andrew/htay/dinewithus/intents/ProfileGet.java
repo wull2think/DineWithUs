@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientConnector;
+import cmu.andrew.htay.dinewithus.ws.remote.ClientRequester;
 
 public class ProfileGet extends AsyncTask<Void, Void, Void> {
     Profile profile;
@@ -23,7 +24,7 @@ public class ProfileGet extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... arg0) {
 
-        ClientConnector clientIO = new ClientConnector();
+        ClientRequester clientIO = new ClientRequester();
 
         Profile serverProfile = new Profile();
         System.out.println("Connecting to server...");

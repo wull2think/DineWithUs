@@ -9,22 +9,17 @@ import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
-import cmu.andrew.htay.dinewithus.entities.Profile;
+import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
 import cmu.andrew.htay.dinewithus.entities.Store;
 import cmu.andrew.htay.dinewithus.entities.StoreSet;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientConnector;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientRequester;
 
-public class StoreGet extends AsyncTask<Void, Void, Void> {
-    StoreSet storeSet;
-    ArrayList<String> storeNames;
-    ArrayAdapter<String> shopsAdapter;
-    ArrayList<Store> serverStoreList;
+public class ScheduleGet extends AsyncTask<Void, Void, Void> {
+    ArrayList<ScheduleBlock> scheduleList;
 
-    public StoreGet(ArrayList<String> storeNames, StoreSet storeSet, ArrayAdapter<String> shopsAdapter) {
-        this.storeSet = storeSet;
-        this.storeNames = storeNames;
-        this.shopsAdapter = shopsAdapter;
+    public ScheduleGet(ArrayList<ScheduleBlock> scheduleList) {
+        this.scheduleList = scheduleList;
     }
 
     @Override
@@ -32,26 +27,24 @@ public class StoreGet extends AsyncTask<Void, Void, Void> {
 
         ClientRequester clientIO = new ClientRequester();
 
-        StoreSet serverStoreSet = new StoreSet();
+        ArrayList<ScheduleBlock> sbList = new ArrayList<>();
         System.out.println("Connecting to server...");
         if(clientIO.openConnection()) {
             System.out.println("Connected");
             if(clientIO.initReaderWriter()) {
                 System.out.println("Sending output");
                 //Stores CUISINE PRICE OPENINGTIME CLOSINGTIME LATITUDE LONGITUDE RANGE
-                clientIO.sendOutput("GET Stores * * * * 0 0 -1");
-                serverStoreSet = clientIO.handleStoreSet();
+                clientIO.sendOutput("GET Schedules htay");
+                sbList = clientIO.handleSchedule();
             }
             clientIO.closeSession();
         }
 
-        serverStoreList = serverStoreSet.getStoreList();
-        System.out.println("GOT STORES: ");
+        System.out.println("GOT SCHEDULEBLOCKS: ");
 
-        for (Store s : serverStoreList) {
-            System.out.println("STORE: " + s.getName());
-            storeNames.add(s.getName());
-            storeSet.addStore(s);
+        for (ScheduleBlock sb : sbList) {
+            System.out.println("ScheduleBlock: " + sb.getID());
+            scheduleList.add(sb);
         }
 
         return null;
@@ -61,7 +54,6 @@ public class StoreGet extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
 
-        shopsAdapter.notifyDataSetChanged();
     }
 
 }
