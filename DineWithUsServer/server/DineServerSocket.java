@@ -100,7 +100,7 @@ public class DineServerSocket extends Socket
 			os.writeObject(stores);
 			break;
 		case "Appointments":
-			username = args[1];
+			username = args[2];
 			ArrayList<Appointment> apptList = DBWrapper.getAppointments(username);
 			for(Appointment appt : apptList) {
 				System.out.println(appt);
