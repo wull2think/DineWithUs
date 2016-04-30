@@ -12,19 +12,22 @@ import java.util.ArrayList;
 import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.entities.Store;
 import cmu.andrew.htay.dinewithus.entities.StoreSet;
+import cmu.andrew.htay.dinewithus.fragment.schedule.ScheduleFragment;
+import cmu.andrew.htay.dinewithus.fragment.stores.StoresFragment;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientConnector;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientRequester;
 
 public class StoreGet extends AsyncTask<Void, Void, Void> {
-    StoreSet storeSet;
-    ArrayList<String> storeNames;
-    ArrayAdapter<String> shopsAdapter;
-    ArrayList<Store> serverStoreList;
+    private StoreSet storeSet;
+    private ArrayList<String> storeNames;
+    private ArrayAdapter<String> shopsAdapter;
+    private ArrayList<Store> serverStoreList;
+    private StoresFragment storefrag;
 
-    public StoreGet(ArrayList<String> storeNames, StoreSet storeSet, ArrayAdapter<String> shopsAdapter) {
+    public StoreGet(ArrayList<String> storeNames, StoreSet storeSet, StoresFragment storefrag) {
         this.storeSet = storeSet;
         this.storeNames = storeNames;
-        this.shopsAdapter = shopsAdapter;
+        this.storefrag = storefrag;
     }
 
     @Override
@@ -48,6 +51,9 @@ public class StoreGet extends AsyncTask<Void, Void, Void> {
         serverStoreList = serverStoreSet.getStoreList();
         System.out.println("GOT STORES: ");
 
+        storeNames.clear();
+        storeSet.removeAllStores();
+
         for (Store s : serverStoreList) {
             System.out.println("STORE: " + s.getName());
             storeNames.add(s.getName());
@@ -60,8 +66,7 @@ public class StoreGet extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
-
-        shopsAdapter.notifyDataSetChanged();
+        storefrag.updateAllFields();
     }
 
 }

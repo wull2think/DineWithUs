@@ -12,6 +12,8 @@ import cmu.andrew.htay.dinewithus.fragment.shared.HolderFragment;
 
 public class AppointmentFragmentHolder extends HolderFragment {
 
+    AppointmentFragment apptfragment;
+
 
     public static AppointmentFragmentHolder newInstance() {
         Bundle args = new Bundle();
@@ -32,8 +34,8 @@ public class AppointmentFragmentHolder extends HolderFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.appointment_holder, parent, false);
-        AppointmentFragment fragment = AppointmentFragment.newInstance(this);
-        replaceFragment(fragment, false);
+        apptfragment = AppointmentFragment.newInstance(this);
+        replaceFragment(apptfragment, false);
 
         return v;
     }
@@ -48,6 +50,9 @@ public class AppointmentFragmentHolder extends HolderFragment {
         }
     }
 
+    public AppointmentFragment getAppointmentFragment() {
+        return apptfragment;
+    }
 
 
 }

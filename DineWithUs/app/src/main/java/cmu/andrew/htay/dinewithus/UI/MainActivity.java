@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         pageManager = new FragmentPageManager(getSupportFragmentManager(),
                 MainActivity.this);
 
-        vp.addOnPageChangeListener(new MyPageChangeListener());
+        vp.addOnPageChangeListener(new MyPageChangeListener(pageManager));
         vp.setAdapter(pageManager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);

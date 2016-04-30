@@ -130,4 +130,8 @@ public class StoreSet implements Serializable {
         return filteredStores;
     }
 
+    public void removeAllStores() {
+        this.storeList.clear();
+    }
+
 }

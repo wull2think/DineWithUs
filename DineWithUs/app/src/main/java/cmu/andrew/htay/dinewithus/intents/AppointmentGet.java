@@ -11,20 +11,23 @@ import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 
 import cmu.andrew.htay.dinewithus.entities.Appointment;
+import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentFragment;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientConnector;
 import cmu.andrew.htay.dinewithus.ws.remote.ClientRequester;
 
 public class AppointmentGet extends AsyncTask<Void, Void, Void> {
 
-    ArrayList<String> appointmentList;
-    LinkedHashMap<String, Appointment> appLHM;
-    ArrayAdapter<String> appointmentAdapter;
+    private ArrayList<String> appointmentList;
+    private LinkedHashMap<String, Appointment> appLHM;
+    AppointmentFragment apptFrag;
+    private String username;
 
-    public AppointmentGet(ArrayList<String> appointmentList,
-                          LinkedHashMap<String, Appointment> appLHM, ArrayAdapter<String> appointmentAdapter) {
+    public AppointmentGet(String username, ArrayList<String> appointmentList,
+                          LinkedHashMap<String, Appointment> appLHM, AppointmentFragment apptFrag) {
         this.appointmentList = appointmentList;
         this.appLHM = appLHM;
-        this.appointmentAdapter = appointmentAdapter;
+        this.apptFrag = apptFrag;
+        this.username = username;
     }
 
     @Override
@@ -38,13 +41,14 @@ public class AppointmentGet extends AsyncTask<Void, Void, Void> {
             System.out.println("Connected");
             if(clientIO.initReaderWriter()) {
                 System.out.println("Sending output");
-                clientIO.sendOutput("GET Appointments htay");
+                clientIO.sendOutput("GET Appointments " + username);
                 serverApptList = clientIO.handleAppointment();
             }
             clientIO.closeSession();
         }
 
-        //appointmentList.clear();
+        appointmentList.clear();
+        appLHM.clear();
         for(Appointment appt : serverApptList) {
             String apptName = appt.getName();
             System.out.println("ADDING APPOINTMENT: "+apptName);
@@ -58,7 +62,7 @@ public class AppointmentGet extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
-        appointmentAdapter.notifyDataSetChanged();
+        apptFrag.updateAllFields();
     }
 
 }

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import cmu.andrew.htay.dinewithus.R;
 import cmu.andrew.htay.dinewithus.entities.Store;
 import cmu.andrew.htay.dinewithus.entities.StoreSet;
+import cmu.andrew.htay.dinewithus.intents.AppointmentGet;
 import cmu.andrew.htay.dinewithus.intents.StoreGet;
 
 
@@ -102,13 +103,17 @@ public class StoresFragment extends Fragment {
             }
         });
 
-        if(getShopsTask == null) {
-            getShopsTask = new StoreGet(storeNames, storeSet, shopsAdapter);
-            getShopsTask.execute();
-        }
-
+        getUpdate();
 
         return v;
     }
 
+    public void getUpdate() {
+        getShopsTask = new StoreGet(storeNames, storeSet, this);
+        getShopsTask.execute();
+    }
+
+    public void updateAllFields() {
+        shopsAdapter.notifyDataSetChanged();
+    }
 }

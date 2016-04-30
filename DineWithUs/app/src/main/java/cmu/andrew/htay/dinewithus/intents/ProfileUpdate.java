@@ -32,11 +32,11 @@ public class ProfileUpdate extends AsyncTask<Void, Void, Void> {
                 System.out.println("Sending output");
                 clientIO.sendOutput("UPDATE Profile htay");
                 serverReply = clientIO.handleProfileHandshake();
+                System.out.println("SERVER REPLY: " + serverReply);
+                clientIO.sendProfile(profile);
             }
-            clientIO.closeSession();
         }
-
-        System.out.println("SERVER REPLY: "+serverReply);
+        clientIO.closeSession();
 
         return null;
     }

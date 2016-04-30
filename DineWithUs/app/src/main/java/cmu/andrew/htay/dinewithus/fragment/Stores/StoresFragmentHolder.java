@@ -12,6 +12,7 @@ import cmu.andrew.htay.dinewithus.fragment.shared.HolderFragment;
 
 public class StoresFragmentHolder extends HolderFragment {
 
+    private StoresFragment storefragment;
 
     public static StoresFragmentHolder newInstance() {
         Bundle args = new Bundle();
@@ -32,8 +33,8 @@ public class StoresFragmentHolder extends HolderFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.shop_holder, parent, false);
-        StoresFragment fragment = StoresFragment.newInstance(this);
-        replaceFragment(fragment, false);
+        storefragment = StoresFragment.newInstance(this);
+        replaceFragment(storefragment, false);
 
         return v;
     }
@@ -46,6 +47,10 @@ public class StoresFragmentHolder extends HolderFragment {
         } else {
             getChildFragmentManager().beginTransaction().replace(R.id.shop_holder, fragment).commit();
         }
+    }
+
+    public StoresFragment getStoresFragment() {
+        return storefragment;
     }
 
 

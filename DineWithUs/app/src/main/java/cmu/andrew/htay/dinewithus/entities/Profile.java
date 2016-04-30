@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Profile  implements Serializable {
     private String firstname, lastname;
     private ArrayList<String> Likes, Dislikes;
-    private String phone, email;
+    private String phone, email, gender;
     private int age;
 
     public Profile() {
@@ -58,8 +58,16 @@ public class Profile  implements Serializable {
         this.age = age;
     }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public int getAge() {
         return this.age;
+    }
+
+    public String getGender() {
+        return this.gender;
     }
 
     public void addLike(String like) {
@@ -77,7 +85,7 @@ public class Profile  implements Serializable {
     public void removeDislike(String dislike) {
         this.Dislikes.remove(dislike);
     }
-    
+
     public void removeLike(String like) {
         this.Likes.add(like);
     }
