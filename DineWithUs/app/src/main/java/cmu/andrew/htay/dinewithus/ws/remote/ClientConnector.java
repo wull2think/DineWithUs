@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.entities.Profile;
+import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
 import cmu.andrew.htay.dinewithus.entities.StoreSet;
 
 /**
@@ -68,53 +69,6 @@ public class ClientConnector
             System.out.println("INITALIZED");
             return true;
         }
-
-        public ArrayList<Appointment> handleAppointment() {
-            ArrayList<Appointment> appointmentList = new ArrayList<>();
-            try {
-                reader = new ObjectInputStream(sock.getInputStream());
-                appointmentList = (ArrayList<Appointment>) reader.readObject();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-            return appointmentList;
-        }
-
-
-        public Profile handleProfile() {
-            Profile myProfile = new Profile();
-            try {
-                reader = new ObjectInputStream(sock.getInputStream());
-                myProfile = (Profile) reader.readObject();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-            return myProfile;
-        }
-
-        public StoreSet handleStoreSet() {
-            StoreSet storeSet = new StoreSet();
-            try {
-                reader = new ObjectInputStream(sock.getInputStream());
-                storeSet = (StoreSet) reader.readObject();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-            return storeSet;
-        }
-
 
     //default send output, sends Strings
         public void sendOutput(String strOutput){

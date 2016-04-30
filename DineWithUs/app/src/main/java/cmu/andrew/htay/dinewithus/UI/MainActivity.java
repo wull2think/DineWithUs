@@ -11,6 +11,7 @@ import android.view.View;
 import cmu.andrew.htay.dinewithus.R;
 import cmu.andrew.htay.dinewithus.fragment.shared.FragmentPageManager;
 import cmu.andrew.htay.dinewithus.fragment.shared.HolderFragment;
+import cmu.andrew.htay.dinewithus.fragment.shared.MyPageChangeListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("ViewPage - " + vp);
         pageManager = new FragmentPageManager(getSupportFragmentManager(),
                 MainActivity.this);
+
+        vp.addOnPageChangeListener(new MyPageChangeListener());
         vp.setAdapter(pageManager);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_bar);

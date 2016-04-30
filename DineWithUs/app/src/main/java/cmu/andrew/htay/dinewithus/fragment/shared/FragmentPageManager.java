@@ -17,7 +17,7 @@ import cmu.andrew.htay.dinewithus.fragment.stores.StoresFragmentHolder;
  */
 
 //tab manager for handling tabbing views
-public class FragmentPageManager extends FragmentPagerAdapter {
+public class FragmentPageManager extends SmartFragmentStatePageAdapter {
 
     final int PAGE_COUNT = 4;
     private String tabNames[] = new String[]
@@ -69,4 +69,6 @@ public class FragmentPageManager extends FragmentPagerAdapter {
     public boolean isPrimaryFrag(Fragment frag) {
         return frag == currentFragment;
     }
+
+
 }
