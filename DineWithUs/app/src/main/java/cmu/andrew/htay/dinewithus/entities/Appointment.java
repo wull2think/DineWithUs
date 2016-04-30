@@ -9,13 +9,13 @@ import java.util.LinkedHashMap;
  */
 public class Appointment implements Serializable {
     private String name;
-    private int appointmentID;
+    private int appointmentID = -1;
     private int[] memberIDs;
     private int restaurantID;
     private String appointmentDate;
     private int startTime;
     private int endTime;
-    private String status;
+    private String[] status;
 
     public Appointment(){
         //TODO: Create appointment in database
@@ -23,6 +23,7 @@ public class Appointment implements Serializable {
         this.appointmentID = 0;
 
         this.memberIDs = new int[2];
+        this.status = new String[2];
     }
 
     public void setMemberIDs(int ID1, int ID2){
@@ -44,8 +45,9 @@ public class Appointment implements Serializable {
     }
 
 
-    public void setStatus(String status){
-        this.status = status;
+    public void setStatus(String statusA, String statusB){
+        this.status[0] = statusA;
+        this.status[1] = statusB;
     }
 
     public void setDate(String date){
@@ -86,7 +88,7 @@ public class Appointment implements Serializable {
     }
 
 
-    public String getStatus(){
+    public String[] getStatus(){
         return this.status;
     }
 
@@ -104,7 +106,7 @@ public class Appointment implements Serializable {
 
 
 
-    public String toString() {
+    public String toString(){
         //TODO: Remove timezone and year from this
         return this.appointmentDate.toString() + " | " + this.getName();
     }

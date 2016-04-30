@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by HuiJun on 4/14/16.
  */
 public class ScheduleBlock implements Serializable {
-	private int sbID;
+	private int sbID = -1;
     private int startTime;
     private int endTime;
     private String date;
