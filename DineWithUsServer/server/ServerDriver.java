@@ -11,9 +11,10 @@ public class ServerDriver {
 	//set up and build server object for testing
 	public static void main(String[] args) {
 		ServerSocket server = null;
+		System.out.println("Running Server...\n");
 
 		try{
-			server = new ServerSocket(256);
+			server = new ServerSocket(8080);
 			DineServerSocket.dispatch(server);
 		}
 		catch(Exception e){

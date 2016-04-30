@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.net.*;
+import java.util.ArrayList;
+
+import cmu.andrew.htay.dinewithus.entities.*;
 
 import database.DBMethods;
-import model.*;
 
 public class DineServerSocket extends Socket
 	implements Runnable{
@@ -46,36 +48,70 @@ public class DineServerSocket extends Socket
 	}
 	
 	public void handleSession(){
-		DBMethods DBWrapper = new DBMethods();
-		ObjectOutputStream os;
-		String username;
-		StoreSet stores;
 		try{
 			BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
-			String[] args = in.readLine().split(" ");
-			switch(args[0]){
-			case "Profile":
-				username = args[1];
-				Profile prof = DBWrapper.getProfile(username);
-				os = new ObjectOutputStream(server.getOutputStream());
-				os.writeObject(prof);
-				System.out.println("Wrote profile object");
-				break;
-			case "StoreRating":
-				int rating = Integer.parseInt(args[1]);
-				stores = DBWrapper.getStoresWithRating(rating);
-				os = new ObjectOutputStream(server.getOutputStream());
-				os.writeObject(stores);
-				break;
-			case "Appointments":
-				username = args[1];
-				break;
-			//TODO: implement StoreLocation, StoreCuisine, StorePriceRange, Appointments
+			String inputLine = in.readLine();
+			System.out.println(inputLine);
+			String[] args = inputLine.split(" ");
+			String op = args[0];
+			String targetEntity = args[1];
+			if(op.equals("GET")) {
+				sendEntity(targetEntity, args);
+			}
+			else if(op.equals("UPDATE")) {
+				
 			}
 		}
 		catch(IOException e){
 			System.err.println("Failed to dispatch" + e.toString());
 		}
 	}
+	
+	public void sendEntity(String targetEntity, String[] args) throws IOException {
+		DBMethods DBWrapper = new DBMethods();
+		ObjectOutputStream os;
+		String username;
+
+		switch(targetEntity){
+		case "Profile":
+			username = args[2];
+			Profile prof = DBWrapper.getProfile(username);
+			os = new ObjectOutputStream(server.getOutputStream());
+			os.writeObject(prof);
+			System.out.println("Wrote profile object");
+			break;
+		case "Stores":
+            //Stores CUISINE PRICE OPENINGTIME CLOSINGTIME LATITUDE LONGITUDE RANGE
+			String cuisine = args[2];
+			String price = args[3];
+			String opening = args[4];
+			String closing = args[5];
+			double longitude = Double.parseDouble(args[6]);
+			double latitude = Double.parseDouble(args[7]);
+			double range = Double.parseDouble(args[8]);
+			
+			StoreSet stores = DBWrapper.getStores(cuisine, price, opening, closing,
+					latitude, longitude, range);
+			ArrayList<Store> storeList = stores.getStoreList();
+			for (Store s : storeList) {
+				System.out.println("Sending Store: " + s.getName());
+			}
+			os = new ObjectOutputStream(server.getOutputStream());
+			os.writeObject(stores);
+			break;
+		case "Appointments":
+			username = args[1];
+			ArrayList<Appointment> apptList = DBWrapper.getAppointments(username);
+			for(Appointment appt : apptList) {
+				System.out.println(appt);
+				System.out.println(appt.getName());
+			}
+			os = new ObjectOutputStream(server.getOutputStream());
+			os.writeObject(apptList);
+			System.out.println("Wrote AppointmentList object");
+			break;
+		}
+	}
+
 	
 }
