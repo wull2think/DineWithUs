@@ -5,7 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import cmu.andrew.htay.dinewithus.R;
@@ -22,18 +23,18 @@ public class ScheduleViewFragment extends Fragment {
     private TextView interests_title_text;
     private TextView interests_text;
     private TextView contact_text;
-    private RadioButton radioTime1;
-    private RadioButton radioTime2;
-    private RadioButton radioTime3;
-    private RadioButton radioTime4;
-    private RadioButton radioTime5;
-    private RadioButton radioTime6;
-    private RadioButton radioTime7;
-    private RadioButton radioTime8;
-    private RadioButton radioTime9;
-    private RadioButton radioTime10;
-    private RadioButton radioTime11;
-    private RadioButton radioTime12;
+    private CheckBox checkTime1;
+    private CheckBox checkTime2;
+    private CheckBox checkTime3;
+    private CheckBox checkTime4;
+    private CheckBox checkTime5;
+    private CheckBox checkTime6;
+    private CheckBox checkTime7;
+    private CheckBox checkTime8;
+    private CheckBox checkTime9;
+    private CheckBox checkTime10;
+    private CheckBox checkTime11;
+    private CheckBox checkTime12;
 
     private ScheduleFragmentHolder fragHolder;
 
@@ -57,28 +58,29 @@ public class ScheduleViewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.schedule_view_layout, parent, false);
 
-        radioTime1 = (RadioButton) v.findViewById(R.id.radioTime1);
-        radioTime2 = (RadioButton) v.findViewById(R.id.radioTime2);
-        radioTime3 = (RadioButton) v.findViewById(R.id.radioTime3);
-        radioTime4 = (RadioButton) v.findViewById(R.id.radioTime4);
-        radioTime5 = (RadioButton) v.findViewById(R.id.radioTime5);
-        radioTime6 = (RadioButton) v.findViewById(R.id.radioTime6);
+        checkTime1 = (CheckBox) v.findViewById(R.id.checkTime1);
+        checkTime2 = (CheckBox) v.findViewById(R.id.checkTime2);
+        checkTime3 = (CheckBox) v.findViewById(R.id.checkTime3);
+        checkTime4 = (CheckBox) v.findViewById(R.id.checkTime4);
+        checkTime5 = (CheckBox) v.findViewById(R.id.checkTime5);
+        checkTime6 = (CheckBox) v.findViewById(R.id.checkTime6);
 
-        radioTime7 = (RadioButton) v.findViewById(R.id.radioTime7);
-        radioTime8 = (RadioButton) v.findViewById(R.id.radioTime8);
-        radioTime9 = (RadioButton) v.findViewById(R.id.radioTime9);
-        radioTime10 = (RadioButton) v.findViewById(R.id.radioTime10);
-        radioTime11 = (RadioButton) v.findViewById(R.id.radioTime11);
-        radioTime12 = (RadioButton) v.findViewById(R.id.radioTime12);
+        checkTime7 = (CheckBox) v.findViewById(R.id.checkTime7);
+        checkTime8 = (CheckBox) v.findViewById(R.id.checkTime8);
+        checkTime9 = (CheckBox) v.findViewById(R.id.checkTime9);
+        checkTime10 = (CheckBox) v.findViewById(R.id.checkTime10);
+        checkTime11 = (CheckBox) v.findViewById(R.id.checkTime11);
+        checkTime12 = (CheckBox) v.findViewById(R.id.checkTime12);
+
+        Button saveTimeButton =
+                (Button) v.findViewById(R.id.saveTimeButton);
+        saveTimeButton.setOnClickListener(saveTimeButtonClicked);
 
 
         /* Needs to return from database a list of possible appointments for each day.
            This will appropriately set the radio buttons. */
-        radioTime1.setChecked(true);
-        radioTime2.setChecked(false);
-        radioTime2.setClickable(false);
 
-        /*radioTime1.setOnClickListener(new View.OnClickListener() {
+        /*checkTime1.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -91,4 +93,11 @@ public class ScheduleViewFragment extends Fragment {
         });*/
         return v;
     }
+
+    View.OnClickListener saveTimeButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //Save Schedule Data
+        }
+    };
 }
