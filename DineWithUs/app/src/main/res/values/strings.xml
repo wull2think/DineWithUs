@@ -69,5 +69,18 @@
     <string name="loginLayoutPassword">Password</string>
     <string name="scheduleViewText">Schedule View</string>
 
+
     <string name="camera_button">&#xf030; Take Picture</string>
+    
+    <string-array name="cuisine_array">
+        <item>Chinese</item>
+        <item>Indian</item>
+        <item>Fast Food</item>
+    </string-array>
+    <string-array name="price_array">
+        <item>Cheap</item>
+        <item>Average</item>
+        <item>Expensive</item>
+    </string-array>
+
 </resources>
