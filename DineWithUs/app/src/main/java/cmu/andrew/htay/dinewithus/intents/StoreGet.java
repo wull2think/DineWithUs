@@ -23,11 +23,13 @@ public class StoreGet extends AsyncTask<Void, Void, Void> {
     private ArrayAdapter<String> shopsAdapter;
     private ArrayList<Store> serverStoreList;
     private StoresFragment storefrag;
+    private String request;
 
-    public StoreGet(ArrayList<String> storeNames, StoreSet storeSet, StoresFragment storefrag) {
+    public StoreGet(ArrayList<String> storeNames, StoreSet storeSet, StoresFragment storefrag, String request) {
         this.storeSet = storeSet;
         this.storeNames = storeNames;
         this.storefrag = storefrag;
+        this.request = request;
     }
 
     @Override
@@ -42,7 +44,9 @@ public class StoreGet extends AsyncTask<Void, Void, Void> {
             if(clientIO.initReaderWriter()) {
                 System.out.println("Sending output");
                 //Stores CUISINE PRICE OPENINGTIME CLOSINGTIME LATITUDE LONGITUDE RANGE
-                clientIO.sendOutput("GET Stores * * * * 0 0 -1");
+                //clientIO.sendOutput("GET Stores * * * * 0 0 -1");
+                clientIO.sendOutput(request);
+
                 serverStoreSet = clientIO.handleStoreSet();
             }
             clientIO.closeSession();
