@@ -4,6 +4,7 @@ package cmu.andrew.htay.dinewithus.intents;
  * Created by HuiJun on 4/25/16.
  */
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import java.util.ArrayList;
@@ -15,16 +16,18 @@ import cmu.andrew.htay.dinewithus.ws.remote.ClientUpdater;
 public class ProfileUpdate extends AsyncTask<Void, Void, Void> {
     private Profile profile;
     private String username;
+    private Context context;
 
-    public ProfileUpdate(String username, Profile profile) {
+    public ProfileUpdate(String username, Profile profile, Context context) {
         this.profile = profile;
         this.username = username;
+        this.context = context;
     }
 
     @Override
     protected Void doInBackground(Void... arg0) {
 
-        ClientUpdater clientIO = new ClientUpdater();
+        ClientUpdater clientIO = new ClientUpdater(context);
 
         String serverReply = "";
         System.out.println("Connecting to server...");

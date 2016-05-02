@@ -249,9 +249,11 @@ public class DineServerSocket extends Socket
 		DBMethods DBWrapper = new DBMethods();
 		for (Appointment appt : apptList) {
 			System.out.println("GOT APPT: " + appt.getAppointmentID());
+			System.out.println(appt.getName());
 			System.out.println(appt.getStatus()[0]+ " " + appt.getStatus()[1]);
 			if(appt.getAppointmentID() >= 0) { //apt exists in DB
 				DBWrapper.updateAppointmentStatus(appt.getAppointmentID(), 
+						appt.getName(),
 						appt.getStatus()[0], appt.getStatus()[1]);
 			}
 			else { //appt does not exist, create new one

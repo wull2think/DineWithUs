@@ -293,11 +293,13 @@ public class DBMethods extends DatabaseConstants {
 	
 	
 	//update appointment status for appointmentID
-	public void updateAppointmentStatus(int appointmentID, String statusA, String statusB) {
+	public void updateAppointmentStatus(int appointmentID, String name,
+			String statusA, String statusB) {
 
 		jdbc = new JDBCAdapter(url, driverName,
                 user, passwd);
 
+		jdbc.updateAppointment(appointmentID, "NAME", "\""+name+"\"");
 		jdbc.updateAppointment(appointmentID, "STATUS_A", "\""+statusA+"\"");
 		jdbc.updateAppointment(appointmentID, "STATUS_B", "\""+statusB+"\"");
 		

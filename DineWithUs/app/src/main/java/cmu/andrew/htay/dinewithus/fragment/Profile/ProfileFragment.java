@@ -108,13 +108,13 @@ public class ProfileFragment extends Fragment {
     }
 
     public void sendUpdate() {
-        ProfileUpdate profTask = new ProfileUpdate("htay", myProfile);
+        ProfileUpdate profTask = new ProfileUpdate("htay", myProfile, getContext());
         profTask.execute();
 
     }
 
     public void getUpdate() {
-        ProfileGet profTask = new ProfileGet("htay", myProfile, this);
+        ProfileGet profTask = new ProfileGet("htay", myProfile, this, getContext());
         profTask.execute();
     }
 
