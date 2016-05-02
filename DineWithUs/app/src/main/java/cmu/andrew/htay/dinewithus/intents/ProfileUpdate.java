@@ -37,7 +37,7 @@ public class ProfileUpdate extends AsyncTask<Void, Void, Void> {
                 System.out.println("Sending output");
                 clientIO.sendOutput("UPDATE Profile " + username);
                 serverReply = clientIO.handleHandshake();
-                if(serverReply.equals("READY FOR PROFILE")) {
+                if(serverReply != null && serverReply.equals("READY FOR PROFILE")) {
                     clientIO.sendEntity(profile);
                 }
             }

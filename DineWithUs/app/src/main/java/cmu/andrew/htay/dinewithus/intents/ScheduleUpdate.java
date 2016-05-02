@@ -39,7 +39,7 @@ public class ScheduleUpdate extends AsyncTask<Void, Void, Void> {
                 System.out.println("Sending output");
                 clientIO.sendOutput("UPDATE Schedules " + username);
                 serverReply = clientIO.handleHandshake();
-                if(serverReply.equals("READY FOR SCHEDULES")) {
+                if(serverReply != null && serverReply.equals("READY FOR SCHEDULES")) {
                     clientIO.sendEntity(sbList);
                 }
             }
