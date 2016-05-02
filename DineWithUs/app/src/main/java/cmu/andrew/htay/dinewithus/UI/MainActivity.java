@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager vp;
     private FragmentPageManager pageManager;
-    private String username;
+    public String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
