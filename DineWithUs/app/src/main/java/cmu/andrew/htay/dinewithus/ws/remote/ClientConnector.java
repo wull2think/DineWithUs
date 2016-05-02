@@ -100,6 +100,11 @@ public class ClientConnector
                 System.err.println(error);
                 IOUtil.logFile(context, "log.txt", error);
             }
+            catch (Exception e){
+                String error = "Error closing socket to " + strHost;
+                System.err.println(error);
+                IOUtil.logFile(context, "log.txt", error);
+            }
         }
 
     }
