@@ -119,7 +119,16 @@ public class ProfileFragment extends Fragment {
     }
 
     public void updateAllFields() {
-
+        likes = myProfile.getLikes();
+        dislikes = myProfile.getDislikes();
+        like1EditText.setText(likes.get(0));
+        like2EditText.setText(likes.get(1));
+        like3EditText.setText(likes.get(2));
+        dislike1EditText.setText(likes.get(0));
+        dislike2EditText.setText(likes.get(1));
+        dislike3EditText.setText(likes.get(2));
+        emailEditText.setText(myProfile.getEmail());
+        phoneEditText.setText(myProfile.getPhone());
     }
 
 
