@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.UI.MainActivity;
 import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentViewFragment;
 
@@ -26,6 +27,7 @@ public class AppointmentViewFragment extends Fragment {
     private Button denyButton;
     private static final String APPOINTMENT_ID = "APPOINTMENT_ID";
     private Appointment appointment;
+    private int pos;
 
 
     public static AppointmentViewFragment newInstance(Appointment appt) {
@@ -61,15 +63,62 @@ public class AppointmentViewFragment extends Fragment {
 
         appointment_text.setText(appointment.getName());
 
+        String[] memberNames = appointment.memberNames;
+        if(memberNames[0] == ((MainActivity) getActivity()).username){
+            pos = 0;
+        }
+        else{
+            pos = 1;
+        }
         confirmButton = (Button) v.findViewById(R.id.confirm_button);
         denyButton  = (Button) v.findViewById(R.id.deny_button);
 
         confirmButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                String[] statuses = appointment.getStatus();
+                if(pos == 0){
+                    appointment.setStatus("CONFIRMED", statuses[1]);
+                    statuses[0] = "CONFIRMED";
+                }
+                else{
+                    appointment.setStatus(statuses[0], "CONFIRMED");
+                    statuses[1] = "CONFIRMED";
+                }
+                String[] nameArgs = appointment.getName().split("|");
+                String status;
+                if(statuses[0] == "DENIED" || statuses[1] == "DENIED"){
+                    status = "DENIED";
+                }
+                else if(statuses[0] == "PENDING" || statuses[1] == "PENDING"){
+                    status = "PENDING";
+                }
+                else{
+                    status = "CONFIMED";
+                }
+                String newName = String.format("%s | %s | %s | %s", nameArgs[0], nameArgs[1], nameArgs[2], status);
+                appointment.setName(newName);
+                getActivity().onBackPressed();
             }
         });
+
+        denyButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String[] statuses = appointment.getStatus();
+                if(pos == 0){
+                    appointment.setStatus("DENIED", statuses[1]);
+                }
+                else{
+                    appointment.setStatus(statuses[0], "DENIED");
+                }
+                String[] nameArgs = appointment.getName().split("|");
+                String newName = String.format("%s | %s | %s | %s", nameArgs[0], nameArgs[1], nameArgs[2], "DENIED");
+                appointment.setName(newName);
+                getActivity().onBackPressed();
+            }
+        });
+
 
         return v;
     }
