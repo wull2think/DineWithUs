@@ -17,12 +17,13 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager vp;
     private FragmentPageManager pageManager;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        username = "Niteesh Sundaram";
 
         vp = (ViewPager) findViewById(R.id.view_pager);
         System.out.println("ViewPage - " + vp);
