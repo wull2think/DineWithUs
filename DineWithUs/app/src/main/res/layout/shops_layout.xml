@@ -56,12 +56,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <SearchView
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:id="@+id/searchShopView"
-        android:layout_gravity="center_horizontal" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="194dp"
@@ -208,5 +202,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="8dp" />
     </LinearLayout>
+
+    <Button
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/searchButton"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.35" />
 
 </LinearLayout>
