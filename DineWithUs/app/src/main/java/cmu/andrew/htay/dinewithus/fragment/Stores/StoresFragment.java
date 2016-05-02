@@ -159,6 +159,7 @@ public class StoresFragment extends Fragment {
                 }
                 request = String.format("GET Stores %s %s %s %s %f %f %f", cuisine, price, startTime, endTime, longitude, latitude, range);
                 System.out.println(request);
+                getUpdate();
             }
         });
 

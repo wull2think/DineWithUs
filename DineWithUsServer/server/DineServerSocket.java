@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.net.*;
 import java.util.ArrayList;
 
+import util.IOUtil;
+
 import cmu.andrew.htay.dinewithus.entities.*;
 
 import database.DBMethods;
@@ -17,8 +19,9 @@ import database.DBMethods;
 public class DineServerSocket extends Socket
 	implements Runnable{
 
-	Thread T;
-	Socket server;
+	protected Thread T;
+	protected Socket server;
+	protected IOUtil io = new IOUtil();
 	
 	public DineServerSocket(Socket server){
 		this.server = server;
@@ -67,7 +70,9 @@ public class DineServerSocket extends Socket
 			}
 		}
 		catch(IOException e){
-			System.err.println("Failed to dispatch" + e.toString());
+			String error = "Failed to dispatch" + e.toString();
+			System.err.println(error);
+			io.logFile(error, "log.txt");
 		}
 	}
 	
@@ -86,8 +91,8 @@ public class DineServerSocket extends Socket
 			break;
 		case "Stores":
             //Stores CUISINE PRICE OPENINGTIME CLOSINGTIME LATITUDE LONGITUDE RANGE
-			String cuisine = args[2];
-			String price = args[3];
+			String cuisine = args[2].toUpperCase();
+			String price = args[3].toUpperCase();
 			String opening = args[4];
 			String closing = args[5];
 			double longitude = Double.parseDouble(args[6]);

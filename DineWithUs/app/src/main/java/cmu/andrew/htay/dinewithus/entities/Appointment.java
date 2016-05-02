@@ -28,6 +28,11 @@ public class Appointment implements Serializable {
         this.memberNames = new String[2];
     }
 
+    public void setMemberNames(String nameA, String nameB){
+        this.memberNames[0] = nameA;
+        this.memberNames[1] = nameB;
+    }
+
     public void setMemberIDs(int ID1, int ID2){
         this.memberIDs[0] = ID1;
         this.memberIDs[1] = ID2;
@@ -64,6 +69,10 @@ public class Appointment implements Serializable {
 
     public void setAppointmentName(String name){
         this.name = name;
+    }
+
+    public String[] getMemberNames(){
+        return this.memberNames;
     }
 
     public int[] getMemberIDs(){
