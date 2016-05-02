@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.net.*;
 import java.util.ArrayList;
 
+import util.IOUtil;
+
 import cmu.andrew.htay.dinewithus.entities.*;
 
 import database.DBMethods;
@@ -17,8 +19,9 @@ import database.DBMethods;
 public class DineServerSocket extends Socket
 	implements Runnable{
 
-	Thread T;
-	Socket server;
+	protected Thread T;
+	protected Socket server;
+	protected IOUtil io = new IOUtil();
 	
 	public DineServerSocket(Socket server){
 		this.server = server;
@@ -67,7 +70,9 @@ public class DineServerSocket extends Socket
 			}
 		}
 		catch(IOException e){
-			System.err.println("Failed to dispatch" + e.toString());
+			String error = "Failed to dispatch" + e.toString();
+			System.err.println(error);
+			io.logFile(error, "log.txt");
 		}
 	}
 	

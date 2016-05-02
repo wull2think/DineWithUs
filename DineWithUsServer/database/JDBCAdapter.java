@@ -552,6 +552,7 @@ public class JDBCAdapter {
 		
 		String userA = getUsername(appointment.getMemberIDs()[0]);
 		String userB = getUsername(appointment.getMemberIDs()[1]);
+		appointment.setMemberNames(userA, userB);
 
 		return appointment;
 	}
