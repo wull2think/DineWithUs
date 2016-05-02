@@ -189,7 +189,7 @@ public class StoresFragment extends Fragment {
         }
     }
     public void getUpdate() {
-        getShopsTask = new StoreGet(storeNames, storeSet, this, request);
+        getShopsTask = new StoreGet(storeNames, storeSet, this, request, getContext());
         getShopsTask.execute();
     }
 

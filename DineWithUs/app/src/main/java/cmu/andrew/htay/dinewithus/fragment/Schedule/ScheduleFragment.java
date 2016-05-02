@@ -68,13 +68,13 @@ public class ScheduleFragment extends Fragment {
     }
 
     public void sendUpdate() {
-        ScheduleUpdate sbTask = new ScheduleUpdate("htay", sbList);
+        ScheduleUpdate sbTask = new ScheduleUpdate("htay", sbList, getContext());
         sbTask.execute();
 
     }
 
     public void getUpdate() {
-        ScheduleGet sbTask = new ScheduleGet("htay", sbList, this);
+        ScheduleGet sbTask = new ScheduleGet("htay", sbList, this, getContext());
         sbTask.execute();
     }
 
