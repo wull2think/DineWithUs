@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import cmu.andrew.htay.dinewithus.R;
@@ -21,6 +22,8 @@ public class AppointmentViewFragment extends Fragment {
     private TextView interests_title_text;
     private TextView interests_text;
     private TextView contact_text;
+    private Button confirmButton;
+    private Button denyButton;
     private static final String APPOINTMENT_ID = "APPOINTMENT_ID";
     private Appointment appointment;
 
@@ -58,6 +61,15 @@ public class AppointmentViewFragment extends Fragment {
 
         appointment_text.setText(appointment.getName());
 
+        confirmButton = (Button) v.findViewById(R.id.confirm_button);
+        denyButton  = (Button) v.findViewById(R.id.deny_button);
+
+        confirmButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+            }
+        });
 
         return v;
     }
