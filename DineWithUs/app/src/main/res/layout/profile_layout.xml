@@ -125,7 +125,7 @@
         android:id="@+id/dislike3EditText"
         android:layout_alignTop="@+id/dislike2EditText"
         android:layout_alignParentEnd="true"
-        android:maxLength="10"
+
         android:hint="@string/profile_dislike3"
         android:textColor="#ff0000" />
 

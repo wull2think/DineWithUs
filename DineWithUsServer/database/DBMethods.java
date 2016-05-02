@@ -190,13 +190,14 @@ public class DBMethods extends DatabaseConstants {
 	//update profile for username
 	
 	//update name
-	public void updateProfileName(String username, String name) {
+	public void updateProfileName(String username, String firstname, String lastname) {
 
 		jdbc = new JDBCAdapter(url, driverName,
                 user, passwd);
 
 		int userID = jdbc.getUserID(username);
-		jdbc.updateProfile(userID, "NAME", "\""+name+"\"");
+		jdbc.updateProfile(userID, "FIRSTNAME", "\""+firstname+"\"");
+		jdbc.updateProfile(userID, "LASTNAME", "\""+lastname+"\"");
 		
 		try {
 			jdbc.close();
@@ -226,13 +227,13 @@ public class DBMethods extends DatabaseConstants {
 	}
 	
 	//update image
-	public void updateProfileImage(String username, String imagePath) {
+	public void updateProfileGender(String username, String gender) {
 
 		jdbc = new JDBCAdapter(url, driverName,
                 user, passwd);
 
 		int userID = jdbc.getUserID(username);
-		jdbc.updateProfile(userID, "IMAGEPATH", "\""+imagePath+"\"");
+		jdbc.updateProfile(userID, "GENDER", "\""+gender+"\"");
 		
 		try {
 			jdbc.close();
@@ -278,12 +279,13 @@ public class DBMethods extends DatabaseConstants {
 	
 	
 	//update appointment status for appointmentID
-	public void updateAppointmentStatus(int appointmentID, String status) {
+	public void updateAppointmentStatus(int appointmentID, String statusA, String statusB) {
 
 		jdbc = new JDBCAdapter(url, driverName,
                 user, passwd);
 
-		jdbc.updateAppointment(appointmentID, "STATUS", "\""+status+"\"");
+		jdbc.updateAppointment(appointmentID, "STATUS_A", "\""+statusA+"\"");
+		jdbc.updateAppointment(appointmentID, "STATUS_B", "\""+statusB+"\"");
 		
 		try {
 			jdbc.close();
@@ -332,13 +334,12 @@ public class DBMethods extends DatabaseConstants {
 	
 	
 	//update date
-	public void updateScheduleDate(int scheduleID, java.util.Date date) {
+	public void updateScheduleDate(int scheduleID, String date) {
 
 		jdbc = new JDBCAdapter(url, driverName,
                 user, passwd);
 
-		Date sqlDate = new Date(date.getTime());
-		jdbc.updateScheduleDate(scheduleID, sqlDate);
+		jdbc.updateScheduleDate(scheduleID, date);
 		
 		try {
 			jdbc.close();

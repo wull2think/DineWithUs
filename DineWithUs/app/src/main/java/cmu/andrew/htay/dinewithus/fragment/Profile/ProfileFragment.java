@@ -7,8 +7,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Typeface;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -16,6 +22,8 @@ import cmu.andrew.htay.dinewithus.R;
 import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.intents.ProfileGet;
 import cmu.andrew.htay.dinewithus.intents.ProfileUpdate;
+import cmu.andrew.htay.dinewithus.intents.ScheduleGet;
+import cmu.andrew.htay.dinewithus.intents.ScheduleUpdate;
 
 
 public class ProfileFragment extends Fragment {
@@ -23,16 +31,15 @@ public class ProfileFragment extends Fragment {
     private EditText like1EditText, like2EditText, like3EditText;
     private EditText dislike1EditText, dislike2EditText, dislike3EditText;
     private EditText phoneEditText, emailEditText;
-    private TextView nameView;
-    private TextView ageView;
-    private TextView genderView;
+
+    private ImageButton btnCamera;
 
     private ArrayList<String> likes;
     private ArrayList<String> dislikes;
-    private ArrayList<EditText> textViewList;
     private String like1, like2, like3;
     private String dislike1, dislike2, dislike3;
     private String phone, email;
+    private ProfileGet profTask;
     private Profile myProfile;
 
     public static ProfileFragment newInstance() {
@@ -47,7 +54,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        textViewList = new ArrayList<EditText>();
         myProfile = new Profile();
         //Populate array list with three dummy values
         likes = myProfile.getLikes();
@@ -65,6 +71,8 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.profile_layout, parent, false);
         System.out.println("PROFILE VIEW");
+
+        btnCamera = (ImageButton) v.findViewById(R.id.imageButton);
 
         like1EditText = (EditText) v.findViewById(R.id.like1EditText);
         like2EditText = (EditText) v.findViewById(R.id.like2EditText);
@@ -88,40 +96,21 @@ public class ProfileFragment extends Fragment {
         phoneEditText.addTextChangedListener(phoneWatcher);
         emailEditText.addTextChangedListener(emailWatcher);
 
-        nameView = (TextView) v.findViewById(R.id.nameView);
-        ageView = (TextView) v.findViewById(R.id.ageView);
-        genderView = (TextView) v.findViewById(R.id.genderView);
-        getUpdate();
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCamera();
+            }
+        });
 
+        getUpdate();
         return v;
     }
 
-    /*private EditText like1EditText, like2EditText, like3EditText;
-    private EditText dislike1EditText, dislike2EditText, dislike3EditText;
-    private EditText phoneEditText, emailEditText;
-    private TextView nameView;
-    private TextView ageView;
-    private TextView genderView;*/
-
-    public void updateAllFields() {
-        System.out.println("NEW NAME: "+  myProfile.getFirstname() + " " + myProfile.getLastname());
-        nameView.setText(myProfile.getFirstname() + " " + myProfile.getLastname());
-        ageView.setText(Integer.toString(myProfile.getAge()));
-        phoneEditText.setText(myProfile.getPhone());
-        emailEditText.setText(myProfile.getEmail());
-        genderView.setText(myProfile.getGender());
-        dislike1EditText.setText(myProfile.getDislikes().get(0));
-        dislike2EditText.setText(myProfile.getDislikes().get(1));
-        dislike3EditText.setText(myProfile.getDislikes().get(2));
-        like1EditText.setText(myProfile.getLikes().get(0));
-        like2EditText.setText(myProfile.getLikes().get(1));
-        like3EditText.setText(myProfile.getLikes().get(2));
-
-    }
-
     public void sendUpdate() {
-        ProfileUpdate pUpdateTask = new ProfileUpdate(myProfile);
-        pUpdateTask.execute();
+        ProfileUpdate profTask = new ProfileUpdate("htay", myProfile);
+        profTask.execute();
+
     }
 
     public void getUpdate() {
@@ -129,6 +118,28 @@ public class ProfileFragment extends Fragment {
         profTask.execute();
     }
 
+    public void updateAllFields() {
+
+    }
+
+
+    //Source: https://www.simplifiedcoding.net/android-camera-app-tutorial-create-a-simple-camera-app/
+    //We
+    private void openCamera() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == getActivity().RESULT_OK) {
+            Bitmap bp = (Bitmap) data.getExtras().get("data");
+            btnCamera.setImageBitmap(bp);
+            btnCamera.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
+    }
 
     private void saveProfile() {
         return;

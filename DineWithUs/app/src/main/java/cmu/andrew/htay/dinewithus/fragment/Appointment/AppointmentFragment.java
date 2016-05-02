@@ -16,6 +16,7 @@ import java.util.LinkedHashMap;
 import cmu.andrew.htay.dinewithus.R;
 import cmu.andrew.htay.dinewithus.intents.AppointmentGet;
 import cmu.andrew.htay.dinewithus.entities.Appointment;
+import cmu.andrew.htay.dinewithus.intents.AppointmentUpdate;
 
 
 public class AppointmentFragment extends Fragment {
@@ -85,6 +86,12 @@ public class AppointmentFragment extends Fragment {
     }
 
     public void sendUpdate() {
+        ArrayList<Appointment> apptList = new ArrayList<>();
+        for(Appointment appt : appLHM.values()) {
+            apptList.add(appt);
+        }
+        AppointmentUpdate apptTask = new AppointmentUpdate("htay", apptList);
+        apptTask.execute();
 
     }
 

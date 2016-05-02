@@ -34,14 +34,18 @@ public class MyPageChangeListener implements ViewPager.OnPageChangeListener {
 
         switch(oldPosition) {
             case 0:
+                AppointmentFragmentHolder afh = (AppointmentFragmentHolder)pageManager.getRegisteredFragment(oldPosition);
+                AppointmentFragment af = afh.getAppointmentFragment();
+                af.sendUpdate();
                 break;
             case 1:
                 ProfileFragment pf = (ProfileFragment)pageManager.getRegisteredFragment(oldPosition);
                 pf.sendUpdate();
                 break;
-            case 2:
-                break;
             case 3:
+                ScheduleFragmentHolder sbfh = (ScheduleFragmentHolder)pageManager.getRegisteredFragment(oldPosition);
+                ScheduleFragment sbf = sbfh.getScheduleFragment();
+                sbf.sendUpdate();
                 break;
             default:
                 System.out.println("View does not exist, no updates needed");

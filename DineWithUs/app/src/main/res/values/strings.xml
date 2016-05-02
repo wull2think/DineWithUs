@@ -70,6 +70,8 @@
     <string name="scheduleViewText">Schedule View</string>
 
 
+    <string name="camera_button">&#xf030; Take Picture</string>
+    
     <string-array name="cuisine_array">
         <item>Chinese</item>
         <item>Indian</item>

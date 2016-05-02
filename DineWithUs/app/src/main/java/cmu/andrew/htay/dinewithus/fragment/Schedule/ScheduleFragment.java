@@ -6,17 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
-import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import cmu.andrew.htay.dinewithus.R;
-import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentFragmentHolder;
-import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentViewFragment;
+import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
+import cmu.andrew.htay.dinewithus.intents.ScheduleGet;
+import cmu.andrew.htay.dinewithus.intents.ScheduleUpdate;
 
 
 public class ScheduleFragment extends Fragment {
 
     private ScheduleFragmentHolder fragHolder;
     private CalendarView calendarView;
+    private ArrayList<ScheduleBlock> sbList;
 
     public static ScheduleFragment newInstance(ScheduleFragmentHolder fragHolder) {
         Bundle args = new Bundle();
@@ -31,6 +34,7 @@ public class ScheduleFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.sbList = new ArrayList<>();
 
     }
 
@@ -64,10 +68,17 @@ public class ScheduleFragment extends Fragment {
     }
 
     public void sendUpdate() {
+        ScheduleUpdate sbTask = new ScheduleUpdate("htay", sbList);
+        sbTask.execute();
 
     }
 
     public void getUpdate() {
+        ScheduleGet sbTask = new ScheduleGet("htay", sbList, this);
+        sbTask.execute();
+    }
+
+    public void updateAllFields() {
 
     }
 }
