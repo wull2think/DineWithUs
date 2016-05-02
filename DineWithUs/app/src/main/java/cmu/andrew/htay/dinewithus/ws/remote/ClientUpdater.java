@@ -34,11 +34,13 @@ public class ClientUpdater  extends ClientConnector  {
             String error = "Server handshake failed: " + e.toString();
             System.err.println(error);
             IOUtil.logFile(context, "log.txt", error);
+            return error;
 
         } catch (Exception e) {
             String error = "Server handshake failed: " + e.toString();
             System.err.println(error);
             IOUtil.logFile(context, "log.txt", error);
+            return error;
         }
 
         return reply;
