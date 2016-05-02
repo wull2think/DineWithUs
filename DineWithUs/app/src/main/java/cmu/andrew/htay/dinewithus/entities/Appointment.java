@@ -11,6 +11,7 @@ public class Appointment implements Serializable {
     private String name;
     private int appointmentID = -1;
     private int[] memberIDs;
+    public String[] memberNames;
     private int restaurantID;
     private String appointmentDate;
     private int startTime;
@@ -24,6 +25,12 @@ public class Appointment implements Serializable {
 
         this.memberIDs = new int[2];
         this.status = new String[2];
+        this.memberNames = new String[2];
+    }
+
+    public void setMemberNames(String nameA, String nameB){
+        this.memberNames[0] = nameA;
+        this.memberNames[1] = nameB;
     }
 
     public void setMemberIDs(int ID1, int ID2){
@@ -50,6 +57,8 @@ public class Appointment implements Serializable {
         this.status[1] = statusB;
     }
 
+    public void setName(String name){this.name = name;}
+
     public void setDate(String date){
         this.appointmentDate = date;
     }
@@ -60,6 +69,10 @@ public class Appointment implements Serializable {
 
     public void setAppointmentName(String name){
         this.name = name;
+    }
+
+    public String[] getMemberNames(){
+        return this.memberNames;
     }
 
     public int[] getMemberIDs(){

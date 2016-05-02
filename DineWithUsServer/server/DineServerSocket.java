@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.net.*;
 import java.util.ArrayList;
 
+import util.IOUtil;
+
 import cmu.andrew.htay.dinewithus.entities.*;
 
 import database.DBMethods;
@@ -17,8 +19,8 @@ import database.DBMethods;
 public class DineServerSocket extends Socket
 	implements Runnable{
 
-	Thread T;
-	Socket server;
+	protected Thread T;
+	protected Socket server;
 	
 	public DineServerSocket(Socket server){
 		this.server = server;
@@ -33,8 +35,10 @@ public class DineServerSocket extends Socket
 				dss.start();
 			}
 		}
-		catch(Exception E){
-			System.err.println("Failed to accept");
+		catch(Exception e){
+			String error = "Socket failed to accept"  + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 			System.exit(1);
 		}
 	}
@@ -67,7 +71,9 @@ public class DineServerSocket extends Socket
 			}
 		}
 		catch(IOException e){
-			System.err.println("Failed to dispatch" + e.toString());
+			String error = "Failed to dispatch" + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -86,8 +92,8 @@ public class DineServerSocket extends Socket
 			break;
 		case "Stores":
             //Stores CUISINE PRICE OPENINGTIME CLOSINGTIME LATITUDE LONGITUDE RANGE
-			String cuisine = args[2];
-			String price = args[3];
+			String cuisine = args[2].toUpperCase();
+			String price = args[3].toUpperCase();
 			String opening = args[4];
 			String closing = args[5];
 			double longitude = Double.parseDouble(args[6]);
@@ -133,7 +139,7 @@ public class DineServerSocket extends Socket
 		
 		switch(targetEntity){
 			case "Profile":
-				Profile clientProfile = new Profile();
+				Profile clientProfile = null;
 				reply = "READY FOR PROFILE";
 		    	System.out.println("Got Profile for " + 
 		    			username + ", replying: " +reply);
@@ -143,17 +149,28 @@ public class DineServerSocket extends Socket
 		            reader = new ObjectInputStream(server.getInputStream());
 		            clientProfile = (Profile) reader.readObject();
 		        } catch (ClassNotFoundException e) {
-		            e.printStackTrace();
+					String error = "Class mismatch:" + e.toString();
+					System.err.println(error);
+					IOUtil.logFile(error, "log.txt");
 		        } catch (IOException e) {
-		            e.printStackTrace();
+					String error = "IOexception in socket" + e.toString();
+					System.err.println(error);
+					IOUtil.logFile(error, "log.txt");
 		        } catch (Exception e) {
-		            System.err.println(e);
+					String error = "Failed to reply to client " + e.toString();
+					System.err.println(error);
+					IOUtil.logFile(error, "log.txt");
 		        }
-				updateProfile(username, clientProfile);
+				
+				//default behavior - if update error occurs, rollback and do not 
+				//commit to DB
+				if(clientProfile != null) {
+					updateProfile(username, clientProfile);
+				}
 				
 				break;
 			case "Appointments":
-				ArrayList<Appointment> clientAppts = new ArrayList<Appointment>();
+				ArrayList<Appointment> clientAppts = null;
 				reply = "READY FOR APPOINTMENTS";
 		    	System.out.println("Got Appointments for " + 
 		    			username + ", replying: " +reply);
@@ -163,16 +180,27 @@ public class DineServerSocket extends Socket
 		            reader = new ObjectInputStream(server.getInputStream());
 		            clientAppts = (ArrayList<Appointment>) reader.readObject();
 		        } catch (ClassNotFoundException e) {
-		            e.printStackTrace();
+					String error = "Class mismatch:" + e.toString();
+					System.err.println(error);
+					IOUtil.logFile(error, "log.txt");
 		        } catch (IOException e) {
-		            e.printStackTrace();
+					String error = "IOexception in socket" + e.toString();
+					System.err.println(error);
+					IOUtil.logFile(error, "log.txt");
 		        } catch (Exception e) {
-		            System.err.println(e);
+					String error = "Failed to reply to client " + e.toString();
+					System.err.println(error);
+					IOUtil.logFile(error, "log.txt");
 		        }
-				updateAppointments(username, clientAppts);
+				
+				//default behavior - if update error occurs, rollback and do not 
+				//commit to DB
+				if(clientAppts != null) {
+					updateAppointments(username, clientAppts);
+				}				
 				break;
 			case "Schedules":
-				ArrayList<ScheduleBlock> clientSchedules = new ArrayList<>();
+				ArrayList<ScheduleBlock> clientSchedules = null;
 				reply = "READY FOR SCHEDULES";
 		    	System.out.println("Got Schedules for " + 
 		    			username + ", replying: " +reply);
@@ -182,13 +210,21 @@ public class DineServerSocket extends Socket
 		            reader = new ObjectInputStream(server.getInputStream());
 		            clientSchedules = (ArrayList<ScheduleBlock>) reader.readObject();
 		        } catch (ClassNotFoundException e) {
-		            e.printStackTrace();
+					String error = "Class mismatch:" + e.toString();
+					System.err.println(error);
+					IOUtil.logFile(error, "log.txt");
 		        } catch (IOException e) {
-		            e.printStackTrace();
+					String error = "IOexception in socket" + e.toString();
+					System.err.println(error);
+					IOUtil.logFile(error, "log.txt");
 		        } catch (Exception e) {
-		            System.err.println(e);
+					String error = "Failed to reply to client " + e.toString();
+					System.err.println(error);
+					IOUtil.logFile(error, "log.txt");
 		        }
-				updateSchedule(username, clientSchedules);
+				if(clientSchedules != null) {
+					updateSchedule(username, clientSchedules);
+				}
 				break;
 		}
 	}
@@ -213,9 +249,11 @@ public class DineServerSocket extends Socket
 		DBMethods DBWrapper = new DBMethods();
 		for (Appointment appt : apptList) {
 			System.out.println("GOT APPT: " + appt.getAppointmentID());
+			System.out.println(appt.getName());
 			System.out.println(appt.getStatus()[0]+ " " + appt.getStatus()[1]);
 			if(appt.getAppointmentID() >= 0) { //apt exists in DB
 				DBWrapper.updateAppointmentStatus(appt.getAppointmentID(), 
+						appt.getName(),
 						appt.getStatus()[0], appt.getStatus()[1]);
 			}
 			else { //appt does not exist, create new one

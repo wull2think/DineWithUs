@@ -4,6 +4,7 @@ package cmu.andrew.htay.dinewithus.intents;
  * Created by HuiJun on 4/25/16.
  */
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 
@@ -20,17 +21,21 @@ public class ScheduleGet extends AsyncTask<Void, Void, Void> {
     private ArrayList<ScheduleBlock> scheduleList;
     private ScheduleFragment sbFrag;
     private String username;
+    private Context context;
 
-    public ScheduleGet(String username, ArrayList<ScheduleBlock> scheduleList, ScheduleFragment sbFrag) {
+    public ScheduleGet(String username, ArrayList<ScheduleBlock> scheduleList,
+                       ScheduleFragment sbFrag,
+                       Context context) {
         this.scheduleList = scheduleList;
         this.sbFrag = sbFrag;
         this.username = username;
+        this.context = context;
     }
 
     @Override
     protected Void doInBackground(Void... arg0) {
 
-        ClientRequester clientIO = new ClientRequester();
+        ClientRequester clientIO = new ClientRequester(context);
 
         ArrayList<ScheduleBlock> sbList = new ArrayList<>();
         System.out.println("Connecting to server...");

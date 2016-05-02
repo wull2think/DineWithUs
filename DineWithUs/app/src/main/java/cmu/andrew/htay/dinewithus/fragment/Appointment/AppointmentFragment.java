@@ -41,11 +41,6 @@ public class AppointmentFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        /*appointmentList.add("Friday | April 1 | 8 PM | Orient-Express");
-        appointmentList.add("Sunday | April 3 | 11 AM | Bagel Factory");
-        appointmentList.add("Monday | April 4 | 7 PM | Lulu&apos;s Noodles");*/
-
         this.appLHM = new LinkedHashMap<String, Appointment>();
         appointmentList = new ArrayList<String>();
 
@@ -70,8 +65,6 @@ public class AppointmentFragment extends Fragment {
         appointmentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
-
                 String appointmentString = (String) appointmentListView.getItemAtPosition(position);
                 Appointment appt = appLHM.get(appointmentString);
                 final AppointmentViewFragment avfrag =

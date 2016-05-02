@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import util.IOUtil;
+
 import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
@@ -23,8 +25,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (authenticate) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		if(storedPass.equals(password)) {
@@ -46,8 +49,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (getProfile) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return storedProfile;
@@ -73,8 +77,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (getAppointments) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return appointmentList;
@@ -99,8 +104,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (getScheduleBlocks) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return sbList;
@@ -131,8 +137,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (getStores) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return storeSet;
@@ -156,8 +163,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (addAppointment) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return appointmentID;
@@ -178,8 +186,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (addScheduleBlock) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return sbID;
@@ -202,8 +211,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (updateProfileName) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -221,8 +231,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (updateProfileAge) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -238,8 +249,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (updateProfileGender) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -255,8 +267,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (updateProfilePhone) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -272,26 +285,30 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (updateProfileEmail) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
 	
 	//update appointment status for appointmentID
-	public void updateAppointmentStatus(int appointmentID, String statusA, String statusB) {
+	public void updateAppointmentStatus(int appointmentID, String name,
+			String statusA, String statusB) {
 
 		jdbc = new JDBCAdapter(url, driverName,
                 user, passwd);
 
+		jdbc.updateAppointment(appointmentID, "NAME", "\""+name+"\"");
 		jdbc.updateAppointment(appointmentID, "STATUS_A", "\""+statusA+"\"");
 		jdbc.updateAppointment(appointmentID, "STATUS_B", "\""+statusB+"\"");
 		
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (updateProfileGender) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -310,8 +327,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (updateScheduleStart) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -327,8 +345,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (updateScheduleEnd) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -344,8 +363,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (updateScheduleDate) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -365,8 +385,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (deleteAppointment) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 	}
@@ -383,8 +404,9 @@ public class DBMethods extends DatabaseConstants {
 		try {
 			jdbc.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "Database Error (deleteSchedule) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	

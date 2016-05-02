@@ -7,6 +7,7 @@ package cmu.andrew.htay.dinewithus.intents;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 
@@ -19,21 +20,25 @@ public class AppointmentGet extends AsyncTask<Void, Void, Void> {
 
     private ArrayList<String> appointmentList;
     private LinkedHashMap<String, Appointment> appLHM;
-    AppointmentFragment apptFrag;
+    private AppointmentFragment apptFrag;
     private String username;
+    private Context context;
 
     public AppointmentGet(String username, ArrayList<String> appointmentList,
-                          LinkedHashMap<String, Appointment> appLHM, AppointmentFragment apptFrag) {
+                          LinkedHashMap<String, Appointment> appLHM,
+                          AppointmentFragment apptFrag,
+                          Context context) {
         this.appointmentList = appointmentList;
         this.appLHM = appLHM;
         this.apptFrag = apptFrag;
         this.username = username;
+        this.context = context;
     }
 
     @Override
     protected Void doInBackground(Void... arg0) {
 
-        ClientRequester clientIO = new ClientRequester();
+        ClientRequester clientIO = new ClientRequester(context);
 
         ArrayList<Appointment> serverApptList = new ArrayList<Appointment>();
         System.out.println("Connecting to server...");
