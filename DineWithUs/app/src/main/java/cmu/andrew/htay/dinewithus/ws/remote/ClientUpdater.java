@@ -53,9 +53,14 @@ public class ClientUpdater  extends ClientConnector  {
             out.writeObject(entity);
             out.close();
         } catch (IOException e) {
+            String error = "Sending entity failed (IOException)";
+            System.err.println(error);
+            IOUtil.logFile(context, "log.txt", error);
+        } catch (Exception e) {
             String error = "Sending entity failed: " + e.toString();
             System.err.println(error);
             IOUtil.logFile(context, "log.txt", error);
         }
+
     }
 }

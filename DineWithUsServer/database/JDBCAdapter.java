@@ -700,7 +700,7 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			String error = "SQL query error (getStoreIDs) " + ex.toString();
+			String error = "SQL query error (getStoresForIDs) " + ex.toString();
 			System.err.println(error);
 			IOUtil.logFile(error, "log.txt");
 		}
@@ -760,7 +760,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getStoreIDs) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return storeIDs;
@@ -827,7 +829,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getStoreIDswRange) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return storeIDs;
