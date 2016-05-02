@@ -389,8 +389,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (deleteMapProfile) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     }
     
@@ -403,8 +404,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (deleteMapSchedule) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     }
     
@@ -432,7 +434,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "Username not found" + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 
 		return password;
@@ -453,7 +457,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "Username not found" + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 
 		return id;
@@ -473,7 +479,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "UserID not found" + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 
 		return username;
@@ -481,7 +489,7 @@ public class JDBCAdapter {
 
     //get ProfileID for UserID
 	public Profile getProfile(int id) {
-		Profile storedProfile = new Profile();
+		Profile storedProfile = new Profile(); //default to blank profile
 		String query =  "SELECT * FROM " + "profiles" + 
 						" WHERE idUser = " + id;
 
@@ -497,7 +505,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getProfile) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		//get likes
@@ -512,7 +522,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getLikes) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		//get dislikes
@@ -527,7 +539,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getDislikes) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return storedProfile;
@@ -549,7 +563,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getApptIDs) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return appointmentIDs;
@@ -578,7 +594,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getAppt) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		String userA = getUsername(appointment.getMemberIDs()[0]);
@@ -603,7 +621,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getSchedIDs) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return scheduleIDs;
@@ -629,7 +649,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getSched) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 
 		return schedule;
@@ -647,7 +669,7 @@ public class JDBCAdapter {
 		
 		if(idList.isEmpty()) {
 			System.err.println("No Stores Found for Search");
-			return storeSet;
+			return storeSet; //default to empty stores
 		}
 		//cut the , off the last bit
 		set = set.substring(0,set.length()-1);
@@ -678,7 +700,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getStoreIDs) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 
 		
