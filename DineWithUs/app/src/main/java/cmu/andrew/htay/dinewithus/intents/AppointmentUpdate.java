@@ -38,7 +38,7 @@ public class AppointmentUpdate extends AsyncTask<Void, Void, Void> {
                 System.out.println("Sending output");
                 clientIO.sendOutput("UPDATE Appointments " + username);
                 serverReply = clientIO.handleHandshake();
-                if(serverReply.equals("READY FOR APPOINTMENTS")) {
+                if(serverReply != null && serverReply.equals("READY FOR APPOINTMENTS")) {
                     clientIO.sendEntity(apptList);
                 }
             }
