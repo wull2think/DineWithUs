@@ -22,12 +22,12 @@ public class StoreSet implements Serializable {
         }
         return null;
     }
-    
-    
+
+
     public ArrayList<Store> getStoreList() {
-    	return storeList;
+        return storeList;
     }
-    
+
     public long getLatitudeForStore(String name) {
         Store store = getStore(name);
         return store.getLatitude();
@@ -53,7 +53,7 @@ public class StoreSet implements Serializable {
         return store.getClosingTime();
     }
 
-    public int getPriceRangeForStore(String name) {
+    public String getPriceRangeForStore(String name) {
         Store store = getStore(name);
         return store.getPriceRange();
     }

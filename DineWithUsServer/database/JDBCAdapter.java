@@ -612,7 +612,7 @@ public class JDBCAdapter {
 				store.setRating(rs.getInt("RATING"));
 				store.setOpeningTime(rs.getInt("START"));
 				store.setClosingTime(rs.getInt("END"));
-				store.setPriceRange(rs.getInt("PRICERANGE"));
+				store.setPriceRange(rs.getString("PRICERANGE"));
 				store.setCuisine(rs.getString("CUISINE"));
 				store.setDescription(rs.getString("DESCRIPTION"));
 				store.setMenuURL(rs.getString("MENUURL"));
