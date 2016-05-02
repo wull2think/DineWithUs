@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/profile_name"
+        android:text="@string/profile_name_first"
         android:id="@+id/nameView"
         android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true" />
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/profile_age"
+        android:text="@string/profile_name_last"
         android:id="@+id/ageView"
         android:layout_below="@+id/nameView"
         android:layout_alignParentStart="true" />
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/profile_gender"
+        android:text="@string/profile_age"
         android:id="@+id/genderView"
         android:layout_below="@+id/ageView"
         android:layout_alignParentStart="true" />
@@ -165,6 +165,15 @@
         android:layout_alignParentStart="true"
         android:hint="@string/profile_email_hint"
         android:textColor="#0000ff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/profile_gender"
+        android:id="@+id/textView13"
+        android:layout_below="@+id/genderView"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
 </ScrollView>
