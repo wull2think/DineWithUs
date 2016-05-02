@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class Store implements Serializable {
 
-	private int storeID;
+    private int storeID;
     private String name;
     private String address;
     private long latitude;
@@ -16,7 +16,7 @@ public class Store implements Serializable {
     private int rating;
     private int openingTime;
     private int closingTime;
-    private int priceRange;
+    private String priceRange;
     private String cuisine;
     private String description;
     private String menuURL;
@@ -30,9 +30,9 @@ public class Store implements Serializable {
     }
 
     public int getStoreID() {
-    	return storeID;
+        return storeID;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -61,7 +61,7 @@ public class Store implements Serializable {
         return closingTime;
     }
 
-    public int getPriceRange() {
+    public String getPriceRange() {
         return priceRange;
     }
 
@@ -92,9 +92,9 @@ public class Store implements Serializable {
     public String getHoursNotes() {
         return hoursNotes;
     }
-    
+
     public void setStoreID(int storeID) {
-    	this.storeID = storeID;
+        this.storeID = storeID;
     }
 
     public void setName(String name) {
@@ -125,7 +125,7 @@ public class Store implements Serializable {
         this.closingTime = endTime;
     }
 
-    public void setPriceRange(int priceRange) {
+    public void setPriceRange(String priceRange) {
         this.priceRange = priceRange;
     }
 
