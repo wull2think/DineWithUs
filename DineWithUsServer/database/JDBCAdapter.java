@@ -427,6 +427,26 @@ public class JDBCAdapter {
 
 		return id;
 	}
+	
+	public String getUsername(int id) {
+
+		String query =  "SELECT USERNAME FROM " + "users"  + 
+				" WHERE idUser = " + id + ";";
+		
+		String username = "";
+
+		try {
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				username = rs.getString("USERNAME");
+			}
+		}
+		catch (SQLException ex) {
+			System.err.println(ex);
+		}
+
+		return username;
+	}
 
     //get ProfileID for UserID
 	public Profile getProfile(int id) {
@@ -529,6 +549,9 @@ public class JDBCAdapter {
 		catch (SQLException ex) {
 			System.err.println(ex);
 		}
+		
+		String userA = getUsername(appointment.getMemberIDs()[0]);
+		String userB = getUsername(appointment.getMemberIDs()[1]);
 
 		return appointment;
 	}
@@ -654,7 +677,9 @@ public class JDBCAdapter {
 		 }
 		 if(!price.equals("*")) {
 				sb.append(" AND PRICERANGE = ");
+				sb.append("\"");
 				sb.append(price);
+				sb.append("\"");
 		 }
 
 		 if(!opening.equals("*")) {
@@ -719,7 +744,9 @@ public class JDBCAdapter {
 		 }
 		 if(!price.equals("*")) {
 				sb.append(" AND PRICERANGE = ");
+				sb.append("\"");
 				sb.append(price);
+				sb.append("\"");
 		 }
 
 		 if(!opening.equals("*")) {
