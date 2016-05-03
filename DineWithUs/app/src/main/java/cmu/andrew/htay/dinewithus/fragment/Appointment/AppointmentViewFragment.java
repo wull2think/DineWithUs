@@ -34,6 +34,8 @@ public class AppointmentViewFragment extends Fragment {
     private TextView restaurant_text;
     private TextView address_text;
     private TextView time_text;
+    private TextView start_text;
+    private TextView end_text;
     private TextView with_text;
     private TextView interests_title_text;
     private TextView interests_text;
@@ -91,9 +93,9 @@ public class AppointmentViewFragment extends Fragment {
         restaurant_text = (TextView) v.findViewById(R.id.restaurant_text);
         address_text =  (TextView) v.findViewById(R.id.address_text);
         time_text = (TextView) v.findViewById(R.id.time_text);
+        start_text = (TextView) v.findViewById(R.id.start_text);
+        end_text = (TextView) v.findViewById(R.id.end_text);
         with_text = (TextView) v.findViewById(R.id.with_text);
-        interests_title_text = (TextView) v.findViewById(R.id.interests_title_text);
-        interests_text = (TextView) v.findViewById(R.id.interests_text);
         contact_text =  (TextView) v.findViewById(R.id.contact_text);
 
 
@@ -185,7 +187,11 @@ public class AppointmentViewFragment extends Fragment {
                 apptList.add(appointment);
                 AppointmentUpdate apptTask = new AppointmentUpdate("htay", apptList, getContext());
                 apptTask.execute();
-
+                restaurant_text.setText(appointment.getRestaurant_name());
+                address_text.setText(appointment.getRestaurant_address());
+                time_text.setText(appointment.getDate());
+                start_text.setText(appointment.getStartTime());
+                end_text.setText(appointment.getEndTime());
                 getActivity().onBackPressed();
             }
         });
