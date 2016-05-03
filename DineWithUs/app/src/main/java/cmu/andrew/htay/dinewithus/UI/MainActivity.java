@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager vp;
     private FragmentPageManager pageManager;
-    public String username;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         //add current resteraunt to favorites
     }
 
+    public String getUsername() {
+        return username;
+    }
 
 
     @Override

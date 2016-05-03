@@ -20,8 +20,13 @@ import java.util.ArrayList;
 import cmu.andrew.htay.dinewithus.R;
 import cmu.andrew.htay.dinewithus.UI.MainActivity;
 import cmu.andrew.htay.dinewithus.entities.Appointment;
+import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentViewFragment;
+import cmu.andrew.htay.dinewithus.fragment.profile.ProfileFragment;
+import cmu.andrew.htay.dinewithus.intents.AppointmentGet;
+import cmu.andrew.htay.dinewithus.intents.AppointmentProfileGet;
 import cmu.andrew.htay.dinewithus.intents.AppointmentUpdate;
+import cmu.andrew.htay.dinewithus.intents.ProfileGet;
 
 
 public class AppointmentViewFragment extends Fragment {
@@ -43,6 +48,7 @@ public class AppointmentViewFragment extends Fragment {
     private static final int MY_PERMISSION_SEND_SMS = 2;
     private boolean enableLocMgr = true;
     private boolean enableSMS = true;
+    private Profile contactProfile = new Profile();
 
 
     public static AppointmentViewFragment newInstance(Appointment appt) {
@@ -60,8 +66,22 @@ public class AppointmentViewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         appointment = (Appointment)getArguments().getSerializable(APPOINTMENT_ID);
 
+
     }
 
+    public void updateAllFields() {
+        appointment_text.setText(appointment.getName());
+        restaurant_text.setText(appointment.getRestaurant_name());
+        address_text.setText(appointment.getRestaurant_address());
+        contact_text.setText(contactProfile.getPhone());
+        String likeString = "";
+        ArrayList<String> apptLikes = contactProfile.getLikes();
+        for(String like : apptLikes) {
+            likeString += like + "\n";
+        }
+        interests_text.setText(likeString);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -76,10 +96,26 @@ public class AppointmentViewFragment extends Fragment {
         interests_text = (TextView) v.findViewById(R.id.interests_text);
         contact_text =  (TextView) v.findViewById(R.id.contact_text);
 
-        appointment_text.setText(appointment.getName());
+
+
+
+        String userA = appointment.getMemberNames()[0];
+        String userB = appointment.getMemberNames()[1];
+
+        String myUserName = ((MainActivity) getActivity()).getUsername();
+
+        String otherUser = userA;
+        if(myUserName.equals(otherUser)) {
+            otherUser = userB;
+        }
+
+        AppointmentProfileGet profTask =
+                new AppointmentProfileGet(otherUser, contactProfile, this,
+                getContext());
+        profTask.execute();
 
         String[] memberNames = appointment.memberNames;
-        if(memberNames[0].equals(((MainActivity) getActivity()).username)){
+        if(memberNames[0].equals(((MainActivity) getActivity()).getUsername())){
             pos = 0;
         }
         else{
