@@ -151,15 +151,15 @@ public class AppointmentViewFragment extends Fragment {
                 apptList.add(appointment);
                 AppointmentUpdate apptTask = new AppointmentUpdate("htay", apptList, getContext());
                 apptTask.execute();
-                restaurant_text.setText(appointment.getRestaurant_name());
-                address_text.setText(appointment.getRestaurant_address());
-                time_text.setText(appointment.getDate());
-                start_text.setText(appointment.getStartTime());
-                end_text.setText(appointment.getEndTime());
                 getActivity().onBackPressed();
             }
         });
 
+        restaurant_text.setText(appointment.getRestaurant_name());
+        address_text.setText(appointment.getRestaurant_address());
+        time_text.setText(appointment.getDate());
+        start_text.setText(appointment.getStartTime());
+        end_text.setText(appointment.getEndTime());
 
         return v;
     }
