@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/scheduleViewText"
+        android:id="@+id/schedule_text"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="12am-2am"
+        android:id="@+id/checkTime1"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/schedule_text" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="2am-4am"
+        android:id="@+id/checkTime2"
+        android:layout_below="@+id/checkTime1"
+        android:layout_alignStart="@+id/checkTime1" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="4am-6am"
+        android:id="@+id/checkTime3"
+        android:layout_below="@+id/checkTime2"
+        android:layout_alignStart="@+id/checkTime2" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="6am-8am"
+        android:id="@+id/checkTime4"
+        android:layout_below="@+id/checkTime3"
+        android:layout_alignStart="@+id/checkTime3" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="8am-10am"
+        android:id="@+id/checkTime5"
+        android:layout_below="@+id/checkTime4"
+        android:layout_alignStart="@+id/checkTime4" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="10am-12pm"
+        android:id="@+id/checkTime6"
+        android:layout_below="@+id/checkTime5"
+        android:layout_alignStart="@+id/checkTime5" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="12pm-2pm"
+        android:id="@+id/checkTime7"
+        android:layout_below="@+id/checkTime6"
+        android:layout_alignStart="@+id/checkTime6" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="2pm-4pm"
+        android:id="@+id/checkTime8"
+        android:layout_below="@+id/checkTime7"
+        android:layout_alignLeft="@+id/checkTime6" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="4pm-6pm"
+        android:id="@+id/checkTime9"
+        android:layout_below="@+id/checkTime8"
+        android:layout_alignLeft="@+id/checkTime6" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="6pm-8pm"
+        android:id="@+id/checkTime10"
+        android:layout_below="@+id/checkTime9"
+        android:layout_alignLeft="@+id/checkTime6" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="8pm-10pm"
+        android:id="@+id/checkTime11"
+        android:layout_below="@+id/checkTime10"
+        android:layout_alignLeft="@+id/checkTime6" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="10pm-12am"
+        android:id="@+id/checkTime12"
+        android:layout_below="@+id/checkTime11"
+        android:layout_alignLeft="@+id/checkTime6" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Free Time"
+        android:id="@+id/saveTimeButton"
+        android:layout_below="@+id/checkTime12"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

@@ -10,3 +10,5 @@
 05-02-2016 23:03:25: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
 05-02-2016 23:06:03: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
 05-02-2016 23:06:46: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
+05-02-2016 23:15:57: SQL query error (getStoreIDs) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'THAI""' at line 1
+05-02-2016 23:17:46: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
