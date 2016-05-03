@@ -85,6 +85,34 @@ public class DBMethods extends DatabaseConstants {
 		return appointmentList;
 	}
 	
+	//get all appointments for store
+		public ArrayList<Appointment> getAppointmentsForStore(String storeName) {
+
+			jdbc = new JDBCAdapter(url, driverName,
+	                user, passwd);
+			
+			int storeID = jdbc.getStoreID(storeName);
+		
+			ArrayList<Integer> appointmentIDList = 
+					jdbc.getAppointmentIDsForStore(storeID);
+			
+			ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
+			for(int apptID : appointmentIDList) {
+				Appointment appt = jdbc.getAppointment(apptID);
+				appointmentList.add(appt);
+			}
+			
+			try {
+				jdbc.close();
+			} catch (SQLException e) {
+				String error = "Database Error (getAppointmentForStore) " + e.toString();
+				System.err.println(error);
+				IOUtil.logFile(error, "log.txt");
+			}
+			
+			return appointmentList;
+		}
+	
 	//get all scheduleblocks for username
 	public ArrayList<ScheduleBlock> getScheduleBlocks(String username) {
 
@@ -286,6 +314,49 @@ public class DBMethods extends DatabaseConstants {
 			jdbc.close();
 		} catch (SQLException e) {
 			String error = "Database Error (updateProfileEmail) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+	}
+	
+
+	public void updateProfileLikes(String username, ArrayList<String> likes) {
+
+		jdbc = new JDBCAdapter(url, driverName,
+                user, passwd);
+
+		int userID = jdbc.getUserID(username);
+		jdbc.deleteLikes(userID);
+		for(String like : likes) {
+			System.out.println(like);
+			jdbc.addLike(userID, like);
+		}
+		
+		try {
+			jdbc.close();
+		} catch (SQLException e) {
+			String error = "Database Error (updateProfileLikes) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+	}
+	
+	public void updateProfileDislikes(String username, ArrayList<String> dislikes) {
+
+		jdbc = new JDBCAdapter(url, driverName,
+                user, passwd);
+
+		int userID = jdbc.getUserID(username);
+		jdbc.deleteDislikes(userID);
+		for(String dislike : dislikes) {
+			System.out.println(dislike);
+			jdbc.addDislike(userID, dislike);
+		}
+		
+		try {
+			jdbc.close();
+		} catch (SQLException e) {
+			String error = "Database Error (updateProfileDislikes) " + e.toString();
 			System.err.println(error);
 			IOUtil.logFile(error, "log.txt");
 		}
