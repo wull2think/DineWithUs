@@ -9,6 +9,8 @@ import java.util.LinkedHashMap;
  */
 public class Appointment implements Serializable {
     private String name;
+    private String restaurant_name;
+    private String restaurant_address;
     private int appointmentID = -1;
     private int[] memberIDs;
     public String[] memberNames;
@@ -59,6 +61,10 @@ public class Appointment implements Serializable {
 
     public void setName(String name){this.name = name;}
 
+    public void setRestaurant_name(String restaurant_name) { this.restaurant_name = restaurant_name; }
+
+    public void setRestaurant_address(String restaurant_address) { this.restaurant_address = restaurant_address; }
+
     public void setDate(String date){
         this.appointmentDate = date;
     }
@@ -100,12 +106,13 @@ public class Appointment implements Serializable {
         return this.endTime;
     }
 
+    public String getRestaurant_name() { return this.restaurant_name; }
+
+    public String getRestaurant_address() { return this.restaurant_address; }
 
     public String[] getStatus(){
         return this.status;
     }
-
-
 
     public String getDateString(){
         //TODO: Remove timezone and year from this

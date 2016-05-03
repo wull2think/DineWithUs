@@ -122,7 +122,7 @@ public class AppointmentViewFragment extends Fragment {
                 apptList.add(appointment);
                 AppointmentUpdate apptTask = new AppointmentUpdate("htay", apptList, getContext());
                 apptTask.execute();
-
+                appointment.
                 getActivity().onBackPressed();
             }
         });
