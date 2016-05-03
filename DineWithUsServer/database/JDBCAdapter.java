@@ -573,7 +573,7 @@ public class JDBCAdapter {
 		ArrayList<Integer> scheduleIDs = new ArrayList<Integer>();
 		
 		int userID = getUserID(username);
-		String query =  "SELECT * FROM " + "schdules" + 
+		String query =  "SELECT * FROM " + "schedules" + 
 				" WHERE idUser = " + userID +
 				" AND DATE = \"" + date + "\"";
 
