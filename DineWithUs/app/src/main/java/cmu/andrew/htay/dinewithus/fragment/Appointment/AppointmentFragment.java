@@ -95,5 +95,6 @@ public class AppointmentFragment extends Fragment {
 
     public void updateAllFields() {
         appointmentAdapter.notifyDataSetChanged();
+
     }
 }

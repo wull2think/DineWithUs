@@ -1,12 +1,19 @@
 package cmu.andrew.htay.dinewithus.fragment.appointment;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,6 +38,11 @@ public class AppointmentViewFragment extends Fragment {
     private static final String APPOINTMENT_ID = "APPOINTMENT_ID";
     private Appointment appointment;
     private int pos;
+
+    private static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 1;
+    private static final int MY_PERMISSION_SEND_SMS = 2;
+    private boolean enableLocMgr = true;
+    private boolean enableSMS = true;
 
 
     public static AppointmentViewFragment newInstance(Appointment appt) {
@@ -75,6 +87,9 @@ public class AppointmentViewFragment extends Fragment {
         }
         confirmButton = (Button) v.findViewById(R.id.confirm_button);
         denyButton  = (Button) v.findViewById(R.id.deny_button);
+        Button saveTimeButton =
+                (Button) v.findViewById(R.id.smsAppointmentButton);
+        saveTimeButton.setOnClickListener(smsAppointmentButtonClicked);
 
         confirmButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -107,7 +122,8 @@ public class AppointmentViewFragment extends Fragment {
                 apptList.add(appointment);
                 AppointmentUpdate apptTask = new AppointmentUpdate("htay", apptList, getContext());
                 apptTask.execute();
-
+                restaurant_text.setText(appointment.getRestaurant_name()); //Set restaurant name
+                address_text.setText(appointment.getRestaurant_address()); //Set restaurant address
                 getActivity().onBackPressed();
             }
         });
@@ -140,5 +156,82 @@ public class AppointmentViewFragment extends Fragment {
 
 
         return v;
+    }
+
+    View.OnClickListener smsAppointmentButtonClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            sendSMSMessage();
+        }
+    };
+
+    protected void sendSMSMessage() {
+        {
+            Log.i("Send SMS", "");
+            String phoneNumber = contact_text.getText().toString();
+            String message = "HEY GOOD LOOKING!!";
+            //check for SMS permissions
+            if (ContextCompat.checkSelfPermission(getContext(),
+                    android.Manifest.permission.SEND_SMS) !=
+                    PackageManager.PERMISSION_GRANTED) {
+
+                //request if no permission allowed
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.SEND_SMS},
+                        MY_PERMISSION_SEND_SMS);
+                System.out.println("DASDS");
+            }
+
+            if (enableSMS) {
+                System.out.println("D123ASDS");
+                try {
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(phoneNumber, null, message, null, null);
+                    Toast.makeText(getActivity(), "SMS successfully sent", Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Toast.makeText(getActivity(), "SMS failed, please try again later", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+    }
+
+    @Override
+    //handler for requester permissions
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSION_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted
+                    enableLocMgr = true;
+
+                } else {
+
+                    // permission denied, log the error
+                    enableLocMgr = false;
+                }
+                return;
+            }
+            case MY_PERMISSION_SEND_SMS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted
+                    enableSMS = true;
+
+                } else {
+
+                    // permission denied, log the error
+                    enableSMS = false;
+                }
+                return;
+            }
+
+        }
     }
 }

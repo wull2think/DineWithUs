@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">DineWithUs</string>
     <string name="gpsEnableText">Show only Stores Near Me</string>
+    <string name="profile_name">Niteesh Sundaram</string>
     <string name="profile_name_first">Niteesh</string>
     <string name="profile_name_last">Sundaram</string>
     <string name="profile_age">22</string>
@@ -29,7 +30,9 @@
     <string name="appView_header">Appointment View</string>
     <string name="appViewRestName">Restaurant Name</string>
     <string name="appViewRestAddr">Restaurant Address</string>
-    <string name="appViewAppInfo">Date and Time</string>
+    <string name="appViewAppInfo">Date</string>
+    <string name="appViewStartTime">Start Time</string>
+    <string name="appViewEndTime">End Time</string>
     <string name="appViewWith">With</string>
     <string name="appViewConfirm">Confirm</string>
     <string name="appViewDeny">Deny</string>
@@ -65,7 +68,7 @@
     <string name="appointmentViewInterests">Interests:</string>
     <string name="appointmentViewInterestsList">Interests List</string>
     <string name="appointmentViewContact">Contact:</string>
-    <string name="appointmentViewNumber">1-800-NUM-BERS</string>
+    <string name="appointmentViewNumber">4123030054</string>
     <string name="loginLayoutName">Name</string>
     <string name="loginLayoutPassword">Password</string>
     <string name="scheduleViewText">Schedule View</string>
