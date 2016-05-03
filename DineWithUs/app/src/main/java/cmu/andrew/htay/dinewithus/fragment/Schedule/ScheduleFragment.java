@@ -57,7 +57,7 @@ public class ScheduleFragment extends Fragment {
                                             int dayOfMonth) {
 
                 final ScheduleViewFragment avfrag =
-                        ScheduleViewFragment.newInstance("<insert date here>");
+                        ScheduleViewFragment.newInstance(String.format("%d/%d/%d", month+1, dayOfMonth, year));
 
                 fragHolder.replaceFragment(avfrag, true);
 
