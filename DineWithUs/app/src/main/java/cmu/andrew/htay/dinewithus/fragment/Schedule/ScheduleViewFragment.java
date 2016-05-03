@@ -19,21 +19,13 @@ import cmu.andrew.htay.dinewithus.intents.ScheduleUpdate;
 
 
 public class ScheduleViewFragment extends Fragment {
-    private TextView appointment_text;
-    private TextView restaurant_text;
-    private TextView address_text;
-    private TextView time_text;
-    private TextView with_text;
-    private TextView interests_title_text;
-    private TextView interests_text;
-    private TextView contact_text;
     private CheckBox[] checkTimes;
 
     private ScheduleFragmentHolder fragHolder;
 
     public static ScheduleViewFragment newInstance(String appointmentString) {
         Bundle args = new Bundle();
-
+        args.putString("date", appointmentString);
         ScheduleViewFragment fragment = new ScheduleViewFragment();
         fragment.setArguments(args);
 
@@ -83,6 +75,9 @@ public class ScheduleViewFragment extends Fragment {
                     ScheduleBlock sb = new ScheduleBlock();
                     sb.setStartTime(i*2);
                     sb.setEndTime(i*2 + 2);
+                    String dateString = getArguments().getString("date");
+                    sb.setDate(dateString);
+                    System.out.println("Date: " + dateString);
                     sbList.add(sb);
                 }
             }
