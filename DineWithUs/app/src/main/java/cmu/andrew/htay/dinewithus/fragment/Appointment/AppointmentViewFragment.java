@@ -122,7 +122,8 @@ public class AppointmentViewFragment extends Fragment {
                 apptList.add(appointment);
                 AppointmentUpdate apptTask = new AppointmentUpdate("htay", apptList, getContext());
                 apptTask.execute();
-                appointment.
+                restaurant_text.setText(appointment.getRestaurant_name()); //Set restaurant name
+                address_text.setText(appointment.getRestaurant_address()); //Set restaurant address
                 getActivity().onBackPressed();
             }
         });
