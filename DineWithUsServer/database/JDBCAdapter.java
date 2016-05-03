@@ -191,7 +191,36 @@ public class JDBCAdapter {
 	
     //add to Stores
     //add to Likes
+	public void addLike(int userID, String like) {
+		String query =  "INSERT INTO likes "+ 
+		" (`idUser`, `Like`) " +
+	    " VALUES (" + userID + ",\"" + like + "\");" ;
+
+    	try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			String error = "SQL update error (addLike) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+		
+	}
+	
     //add to Dislikes
+	public void addDislike(int userID, String dislike) {
+		String query =  "INSERT INTO dislikes "+ 
+		" (`idUser`, `Dislike`) " +
+	    " VALUES (" + userID + ",\"" + dislike + "\");" ;
+
+    	try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			String error = "SQL update error (addDislike) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+		
+	}
     
     //add MapAppointment
 	public void addAppointmentMapping(int idUser, int idAppointment) {		
@@ -410,6 +439,34 @@ public class JDBCAdapter {
 		}
     }
     
+    public void deleteLikes(int userID) {
+
+		String query =  "DELETE FROM " + "likes" + 
+		" WHERE idUser = " + userID + ";" ;
+    	
+		try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			String error = "SQL update error (deleteUser) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+    }
+    
+    public void deleteDislikes(int userID) {
+
+		String query =  "DELETE FROM " + "dislikes" + 
+		" WHERE idUser = " + userID + ";" ;
+    	
+		try {
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			String error = "SQL update error (deleteUser) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+    }
+    
 
     //delete Profile
     //delete Store
@@ -464,6 +521,29 @@ public class JDBCAdapter {
 
 		return id;
 	}
+	
+    //get storeID for STORENAME
+	public int getStoreID(String name) {
+
+		String query =  "SELECT idStore FROM " + "stores"  + 
+				" WHERE NAME = \"" + name + "\";";
+		int id = -1;
+
+		try {
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				id = rs.getInt("idStore");
+			}
+		}
+		catch (SQLException ex) {
+			String error = "StoreName not found" + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+
+		return id;
+	}
+	
 	
 	public String getUsername(int id) {
 
@@ -572,6 +652,29 @@ public class JDBCAdapter {
 		
 	}
 	
+	//get appointments for userID
+	public ArrayList<Integer> getAppointmentIDsForStore(int storeID) {
+
+		ArrayList<Integer> appointmentIDs = new ArrayList<Integer>();
+		
+		String query =  "SELECT * FROM " + "mapappointments" + 
+				" WHERE idStore = " + storeID;
+
+		try {
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				appointmentIDs.add(rs.getInt("idAppointment"));
+			}
+		}
+		catch (SQLException ex) {
+			String error = "SQL query error (getApptIDsForStore) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+		
+		return appointmentIDs;
+		
+	}
 	
     //get appointment for appointmentID
 	public Appointment getAppointment(int appointmentID) {
