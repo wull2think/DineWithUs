@@ -91,12 +91,6 @@ public class JDBCAdapter {
     	
    }
     
-    //add to Profile
-    public void addProfile(Profile profile) {		
-		
-    	
-    	
-   }
     
     //add to Appointments
 	public int addAppointment(Appointment appointment) {		
@@ -499,6 +493,29 @@ public class JDBCAdapter {
 		return password;
 	}
 
+	 //get all usernames
+		public ArrayList<String> getUsers() {
+			
+			String query =  "SELECT USERNAME FROM " + "users"  + 
+					" WHERE USERNAME IS NOT NULL";
+			ArrayList<String> users = new ArrayList<>();
+
+			try {
+				ResultSet rs = statement.executeQuery(query);
+				while (rs.next()) {
+					users.add(rs.getString("USERNAME"));
+				}
+			}
+			catch (SQLException ex) {
+				String error = "Username not found" + ex.toString();
+				System.err.println(error);
+				IOUtil.logFile(error, "log.txt");
+			}
+
+			return users;
+		}
+		
+	
     
     //get userID for USERNAME
 	public int getUserID(String name) {

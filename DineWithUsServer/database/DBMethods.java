@@ -37,6 +37,39 @@ public class DBMethods extends DatabaseConstants {
 		return false;
 	}
 	
+	//get userID for username
+	public int getUserID(String username) {
+
+		jdbc = new JDBCAdapter(url, driverName,
+                user, passwd);
+	
+		int userID = jdbc.getUserID(username);
+		
+		return userID;
+	}
+	
+	//get all users
+	
+	public ArrayList<String> getUsers() {
+		ArrayList<String> userList = new ArrayList<>();
+
+		jdbc = new JDBCAdapter(url, driverName,
+                user, passwd);
+		
+		userList = jdbc.getUsers();
+
+		try {
+			jdbc.close();
+		} catch (SQLException e) {
+			String error = "Database Error (getUsers) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+		
+		
+		return userList;
+	}
+	
 	//get profile for username
 	public Profile getProfile(String username) {
 

@@ -34,8 +34,7 @@ public class AppointmentViewFragment extends Fragment {
     private TextView restaurant_text;
     private TextView address_text;
     private TextView time_text;
-    private TextView start_text;
-    private TextView end_text;
+    private TextView time_view_text;
     private TextView with_text;
     private TextView interests_text;
     private TextView contact_text;
@@ -80,6 +79,7 @@ public class AppointmentViewFragment extends Fragment {
         for(String like : apptLikes) {
             likeString += like + "\n";
         }
+        likeString = likeString.substring(0,likeString.length()-1);
         interests_text.setText(likeString);
         with_text.setText(contactProfile.getFirstname());
 
@@ -93,14 +93,18 @@ public class AppointmentViewFragment extends Fragment {
         restaurant_text = (TextView) v.findViewById(R.id.restaurant_text);
         address_text =  (TextView) v.findViewById(R.id.address_text);
         time_text = (TextView) v.findViewById(R.id.time_text);
-        start_text = (TextView) v.findViewById(R.id.start_text);
-        end_text = (TextView) v.findViewById(R.id.end_text);
+        time_view_text = (TextView) v.findViewById(R.id.time_view_text);
         with_text = (TextView) v.findViewById(R.id.with_field_text);
         contact_text =  (TextView) v.findViewById(R.id.contact_text);
         interests_text =  (TextView) v.findViewById(R.id.like_field_text);
 
 
-
+        restaurant_text.setText(appointment.getRestaurant_name());
+        address_text.setText(appointment.getRestaurant_address());
+        time_text.setText(appointment.getDate());
+        String timeString = Integer.toString(appointment.getStartTime()) + " " +
+                Integer.toString(appointment.getEndTime());
+        time_view_text.setText(timeString);
 
         String userA = appointment.getMemberNames()[0];
         String userB = appointment.getMemberNames()[1];
@@ -125,32 +129,29 @@ public class AppointmentViewFragment extends Fragment {
             pos = 1;
         }
         confirmButton = (Button) v.findViewById(R.id.confirm_button);
-        denyButton  = (Button) v.findViewById(R.id.deny_button);
+        denyButton = (Button) v.findViewById(R.id.deny_button);
         Button saveTimeButton =
                 (Button) v.findViewById(R.id.smsAppointmentButton);
         saveTimeButton.setOnClickListener(smsAppointmentButtonClicked);
 
-        confirmButton.setOnClickListener(new View.OnClickListener(){
+        confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 String[] statuses = appointment.getStatus();
-                if(pos == 0){
+                if (pos == 0) {
                     appointment.setStatus("CONFIRMED", statuses[1]);
                     statuses[0] = "CONFIRMED";
-                }
-                else{
+                } else {
                     appointment.setStatus(statuses[0], "CONFIRMED");
                     statuses[1] = "CONFIRMED";
                 }
                 String[] nameArgs = appointment.getName().split("-");
                 String status;
-                if(statuses[0].contains("DENIED") || statuses[1].contains("DENIED")){
+                if (statuses[0].contains("DENIED") || statuses[1].contains("DENIED")) {
                     status = " DENIED";
-                }
-                else if(statuses[0].contains("PENDING") || statuses[1].contains("PENDING")){
+                } else if (statuses[0].contains("PENDING") || statuses[1].contains("PENDING")) {
                     status = " PENDING";
-                }
-                else{
+                } else {
                     status = " CONFIRMED";
                 }
                 String newName = String.format("%s-%s-%s-%s", nameArgs[0], nameArgs[1], nameArgs[2], status);
@@ -167,14 +168,13 @@ public class AppointmentViewFragment extends Fragment {
             }
         });
 
-        denyButton.setOnClickListener(new View.OnClickListener(){
+        denyButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 String[] statuses = appointment.getStatus();
-                if(pos == 0){
+                if (pos == 0) {
                     appointment.setStatus("DENIED", statuses[1]);
-                }
-                else{
+                } else {
                     appointment.setStatus(statuses[0], "DENIED");
                 }
                 String[] nameArgs = appointment.getName().split("-");
@@ -191,12 +191,6 @@ public class AppointmentViewFragment extends Fragment {
                 getActivity().onBackPressed();
             }
         });
-
-        restaurant_text.setText(appointment.getRestaurant_name());
-        address_text.setText(appointment.getRestaurant_address());
-        time_text.setText(appointment.getDate());
-        start_text.setText(appointment.getStartTime());
-        end_text.setText(appointment.getEndTime());
 
         return v;
     }

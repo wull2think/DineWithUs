@@ -86,7 +86,6 @@ public class StoresFragment extends Fragment {
 
         currLocationView = (TextView) v.findViewById(R.id.currLocationView);
         enableLocationBox = (CheckBox) v.findViewById(R.id.enableLocationBox);
-        searchShopView = (SearchView) v.findViewById(R.id.searchShopView);
         shopListView = (ListView) v.findViewById(R.id.shopListView);
         cuisineDropdownView = (Spinner) v.findViewById(R.id.cuisineDropdownView);
         cuisineSwitchView = (Switch) v.findViewById(R.id.cuisineSwitchView);
