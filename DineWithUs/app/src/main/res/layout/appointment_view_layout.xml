@@ -62,10 +62,37 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/appViewWith"
+        android:id="@+id/with_field_text"
+        android:layout_below="@+id/with_text"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/appViewLikes"
+        android:id="@+id/like_text"
+        android:layout_below="@+id/with_field_text"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/appViewLikes"
+        android:id="@+id/like_field_text"
+        android:layout_below="@+id/like_text"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/appointmentViewContact"
         android:id="@+id/contact_title_text"
-        android:layout_below="@+id/with_text"
+        android:layout_below="@+id/like_field_text"
         android:layout_alignParentStart="true" />
 
     <TextView

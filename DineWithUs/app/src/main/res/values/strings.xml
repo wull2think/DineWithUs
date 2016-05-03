@@ -34,6 +34,7 @@
     <string name="appViewStartTime">Start Time</string>
     <string name="appViewEndTime">End Time</string>
     <string name="appViewWith">With</string>
+    <string name="appViewLikes">Likes</string>
     <string name="appViewConfirm">Confirm</string>
     <string name="appViewDeny">Deny</string>
 

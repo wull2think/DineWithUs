@@ -37,7 +37,6 @@ public class AppointmentViewFragment extends Fragment {
     private TextView start_text;
     private TextView end_text;
     private TextView with_text;
-    private TextView interests_title_text;
     private TextView interests_text;
     private TextView contact_text;
     private Button confirmButton;
@@ -82,6 +81,7 @@ public class AppointmentViewFragment extends Fragment {
             likeString += like + "\n";
         }
         interests_text.setText(likeString);
+        with_text.setText(contactProfile.getFirstname());
 
     }
 
@@ -95,8 +95,9 @@ public class AppointmentViewFragment extends Fragment {
         time_text = (TextView) v.findViewById(R.id.time_text);
         start_text = (TextView) v.findViewById(R.id.start_text);
         end_text = (TextView) v.findViewById(R.id.end_text);
-        with_text = (TextView) v.findViewById(R.id.with_text);
+        with_text = (TextView) v.findViewById(R.id.with_field_text);
         contact_text =  (TextView) v.findViewById(R.id.contact_text);
+        interests_text =  (TextView) v.findViewById(R.id.like_field_text);
 
 
 
