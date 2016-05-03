@@ -731,6 +731,16 @@ public class JDBCAdapter {
 		String userA = getUsername(appointment.getMemberIDs()[0]);
 		String userB = getUsername(appointment.getMemberIDs()[1]);
 		appointment.setMemberNames(userA, userB);
+		ArrayList<Integer> id = new ArrayList<>();
+		id.add(appointment.getRestaurantID());
+		StoreSet storeSet = getStoresWithIDs(id);
+		ArrayList<Store> storeList = storeSet.getStoreList();
+		for(Store store : storeList) {
+			String storeName = store.getName();
+			String address = store.getAddress();
+			appointment.setRestaurant_name(storeName);
+			appointment.setRestaurant_address(address);
+		}
 
 		return appointment;
 	}
