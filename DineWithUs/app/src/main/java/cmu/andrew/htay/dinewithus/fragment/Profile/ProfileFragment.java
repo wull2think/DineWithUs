@@ -15,6 +15,9 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -31,6 +34,7 @@ public class ProfileFragment extends Fragment {
     private EditText like1EditText, like2EditText, like3EditText;
     private EditText dislike1EditText, dislike2EditText, dislike3EditText;
     private EditText phoneEditText, emailEditText;
+    private TextView firstnameTextView, lastnameTextView, ageTextView, genderTextView;
 
     private ImageButton btnCamera;
 
@@ -85,6 +89,11 @@ public class ProfileFragment extends Fragment {
         phoneEditText = (EditText) v.findViewById(R.id.phoneEditText);
         emailEditText = (EditText) v.findViewById(R.id.emailEditText);
 
+        firstnameTextView = (TextView) v.findViewById(R.id.firstnameView);
+        lastnameTextView = (TextView) v.findViewById(R.id.lastnameView);
+        ageTextView = (TextView) v.findViewById(R.id.ageView);
+        genderTextView = (TextView) v.findViewById(R.id.genderView);
+
         like1EditText.addTextChangedListener(likeWatcher1);
         like2EditText.addTextChangedListener(likeWatcher2);
         like3EditText.addTextChangedListener(likeWatcher3);
@@ -95,6 +104,8 @@ public class ProfileFragment extends Fragment {
 
         phoneEditText.addTextChangedListener(phoneWatcher);
         emailEditText.addTextChangedListener(emailWatcher);
+
+
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,16 +130,21 @@ public class ProfileFragment extends Fragment {
     }
 
     public void updateAllFields() {
+        System.out.println("Updating fields");
         likes = myProfile.getLikes();
         dislikes = myProfile.getDislikes();
         like1EditText.setText(likes.get(0));
         like2EditText.setText(likes.get(1));
         like3EditText.setText(likes.get(2));
-        dislike1EditText.setText(likes.get(0));
-        dislike2EditText.setText(likes.get(1));
-        dislike3EditText.setText(likes.get(2));
+        dislike1EditText.setText(dislikes.get(0));
+        dislike2EditText.setText(dislikes.get(1));
+        dislike3EditText.setText(dislikes.get(2));
         emailEditText.setText(myProfile.getEmail());
         phoneEditText.setText(myProfile.getPhone());
+        firstnameTextView.setText(myProfile.getFirstname());
+        lastnameTextView.setText(myProfile.getLastname());
+        ageTextView.setText(Integer.toString(myProfile.getAge()));
+        genderTextView.setText(myProfile.getGender());
     }
 
 
@@ -164,13 +180,14 @@ public class ProfileFragment extends Fragment {
             try
             {
                 like1 = s.toString();
-                likes.add(0, like1);
+                likes.set(0, like1);
                 saveProfile();
+                System.out.println("DEBUG: " + s.toString());
             } // end try
             catch (NumberFormatException e)
             {
                 like1 = "American"; // default if an exception occurs
-                likes.add(0, like1);
+                likes.set(0, like1);
                 saveProfile();
             } // end catch
         } // end method onTextChanged
@@ -197,13 +214,14 @@ public class ProfileFragment extends Fragment {
             try
             {
                 like2 = s.toString();
-                likes.add(1, like2);
+                likes.set(1, like2);
+                System.out.println("DEBUG: " + s.toString());
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
                 like2 = "American"; // default if an exception occurs
-                likes.add(1, like2);
+                likes.set(1, like2);
                 saveProfile();
             } // end catch
         } // end method onTextChanged
@@ -230,13 +248,14 @@ public class ProfileFragment extends Fragment {
             try
             {
                 like3 = s.toString();
-                likes.add(2, like3);
+                likes.set(2, like3);
+                System.out.println("DEBUG: " + s.toString());
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
                 like3 = "American"; // default if an exception occurs
-                likes.add(2, like3);
+                likes.set(2, like3);
                 saveProfile();
             } // end catch
         } // end method onTextChanged
@@ -263,13 +282,14 @@ public class ProfileFragment extends Fragment {
             try
             {
                 dislike1 = s.toString();
-                dislikes.add(0, dislike1);
+                dislikes.set(0, dislike1);
+                System.out.println("DEBUG: " + s.toString());
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
                 dislike1 = "Canadian"; // default if an exception occurs
-                dislikes.add(0, dislike1);
+                dislikes.set(0, dislike1);
                 saveProfile();
             } // end catch
         } // end method onTextChanged
@@ -296,13 +316,14 @@ public class ProfileFragment extends Fragment {
             try
             {
                 dislike2 = s.toString();
-                dislikes.add(1, dislike2);
+                dislikes.set(1, dislike2);
+                System.out.println("DEBUG: " + s.toString());
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
                 dislike2 = "Canadian"; // default if an exception occurs
-                dislikes.add(1, dislike2);
+                dislikes.set(1, dislike2);
                 saveProfile();
             } // end catch
         } // end method onTextChanged
@@ -329,13 +350,14 @@ public class ProfileFragment extends Fragment {
             try
             {
                 dislike3 = s.toString();
-                dislikes.add(2, dislike3);
+                dislikes.set(2, dislike3);
+                System.out.println("DEBUG: " + s.toString());
                 saveProfile();
             } // end try
             catch (NumberFormatException e)
             {
                 dislike3 = "Canadian"; // default if an exception occurs
-                dislikes.add(2, dislike3);
+                dislikes.set(2, dislike3);
                 saveProfile();
             } // end catch
         } // end method onTextChanged

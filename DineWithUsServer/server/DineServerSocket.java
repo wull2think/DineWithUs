@@ -232,6 +232,7 @@ public class DineServerSocket extends Socket
 	private void updateProfile(String username, Profile profile) {
 		System.out.println("GOT PROFILE: " + profile.getFirstname() + 
 				" " + profile.getLastname());
+		System.out.println("LIKES: " + profile.getLikes().get(0));
 		DBMethods DBWrapper = new DBMethods();
 
 		DBWrapper.updateProfileName(username, 
@@ -239,8 +240,9 @@ public class DineServerSocket extends Socket
 		DBWrapper.updateProfileAge(username, profile.getAge());
 		DBWrapper.updateProfileAge(username, profile.getAge());
 		DBWrapper.updateProfilePhoneString(username, profile.getPhone());
-		DBWrapper.updateProfileGender(username, profile.getGender());
 		DBWrapper.updateProfileEmail(username, profile.getEmail());
+		DBWrapper.updateProfileLikes(username, profile.getLikes());
+		DBWrapper.updateProfileDislikes(username, profile.getDislikes());
 		
 	}
 	

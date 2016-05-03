@@ -52,7 +52,6 @@ public class ProfileGet extends AsyncTask<Void, Void, Void> {
         profile.setFirstname(serverProfile.getFirstname());
         profile.setLastname(serverProfile.getLastname());
         profile.setPhone(serverProfile.getPhone());
-
         ArrayList<String> likes = serverProfile.getLikes();
         ArrayList<String> dislikes = serverProfile.getDislikes();
 
@@ -75,10 +74,8 @@ public class ProfileGet extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void result) {
-        /*
         super.onPostExecute(result);
         profileFrag.updateAllFields();
-        */
     }
 
 }
