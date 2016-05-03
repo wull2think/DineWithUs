@@ -4,6 +4,7 @@ package cmu.andrew.htay.dinewithus.intents;
  * Created by HuiJun on 4/25/16.
  */
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import java.util.ArrayList;
@@ -16,16 +17,19 @@ import cmu.andrew.htay.dinewithus.ws.remote.ClientUpdater;
 public class ScheduleUpdate extends AsyncTask<Void, Void, Void> {
     private ArrayList<ScheduleBlock>  sbList;
     private String username;
+    private Context context;
 
-    public ScheduleUpdate(String username, ArrayList<ScheduleBlock> sbList) {
+    public ScheduleUpdate(String username, ArrayList<ScheduleBlock> sbList,
+                          Context context) {
         this.sbList = sbList;
         this.username = username;
+        this.context = context;
     }
 
     @Override
     protected Void doInBackground(Void... arg0) {
 
-        ClientUpdater clientIO = new ClientUpdater();
+        ClientUpdater clientIO = new ClientUpdater(context);
 
         String serverReply = "";
         System.out.println("Connecting to server...");
@@ -35,7 +39,7 @@ public class ScheduleUpdate extends AsyncTask<Void, Void, Void> {
                 System.out.println("Sending output");
                 clientIO.sendOutput("UPDATE Schedules " + username);
                 serverReply = clientIO.handleHandshake();
-                if(serverReply.equals("READY FOR SCHEDULES")) {
+                if(serverReply != null && serverReply.equals("READY FOR SCHEDULES")) {
                     clientIO.sendEntity(sbList);
                 }
             }

@@ -1,5 +1,7 @@
 package cmu.andrew.htay.dinewithus.ws.remote;
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,11 +13,17 @@ import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
 import cmu.andrew.htay.dinewithus.entities.StoreSet;
+import cmu.andrew.htay.dinewithus.ws.local.IOUtil;
 
 /**
  * Created by HuiJun on 4/30/16.
  */
 public class ClientUpdater  extends ClientConnector  {
+
+    public ClientUpdater(Context context) {
+        super(context);
+    }
+
     public String handleHandshake() {
         String reply = "";
         try {
@@ -23,9 +31,16 @@ public class ClientUpdater  extends ClientConnector  {
                     (new InputStreamReader(sock.getInputStream()));
             reply = lineReader.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            String error = "Server handshake failed: " + e.toString();
+            System.err.println(error);
+            IOUtil.logFile(context, "log.txt", error);
+            return error;
+
         } catch (Exception e) {
-            System.err.println(e);
+            String error = "Server handshake failed: " + e.toString();
+            System.err.println(error);
+            IOUtil.logFile(context, "log.txt", error);
+            return error;
         }
 
         return reply;
@@ -40,7 +55,14 @@ public class ClientUpdater  extends ClientConnector  {
             out.writeObject(entity);
             out.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            String error = "Sending entity failed (IOException)";
+            System.err.println(error);
+            IOUtil.logFile(context, "log.txt", error);
+        } catch (Exception e) {
+            String error = "Sending entity failed: " + e.toString();
+            System.err.println(error);
+            IOUtil.logFile(context, "log.txt", error);
         }
+
     }
 }

@@ -83,13 +83,13 @@ public class AppointmentFragment extends Fragment {
         for(Appointment appt : appLHM.values()) {
             apptList.add(appt);
         }
-        AppointmentUpdate apptTask = new AppointmentUpdate("htay", apptList);
+        AppointmentUpdate apptTask = new AppointmentUpdate("htay", apptList, getContext());
         apptTask.execute();
 
     }
 
     public void getUpdate() {
-        AppointmentGet apptTask = new AppointmentGet("htay", appointmentList, appLHM, this);
+        AppointmentGet apptTask = new AppointmentGet("htay", appointmentList, appLHM, this, getContext());
         apptTask.execute();
     }
 

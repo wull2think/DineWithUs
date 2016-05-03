@@ -77,7 +77,7 @@ public class StoreDetailsFragment extends Fragment {
         shopHoursView.setText(hours);
 
 
-        WebImage setImageTask = new WebImage(shopPhotoView, store.getShopPictureURL());
+        WebImage setImageTask = new WebImage(shopPhotoView, store.getShopPictureURL(), getContext());
         setImageTask.execute();
 
         return v;

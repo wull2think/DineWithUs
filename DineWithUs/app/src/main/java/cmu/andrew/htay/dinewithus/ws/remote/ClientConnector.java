@@ -1,5 +1,7 @@
 package cmu.andrew.htay.dinewithus.ws.remote;
 
+import android.content.Context;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.OutputStreamWriter;
@@ -11,6 +13,7 @@ import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
 import cmu.andrew.htay.dinewithus.entities.StoreSet;
+import cmu.andrew.htay.dinewithus.ws.local.IOUtil;
 
 /**
  * Created by HuiJun on 4/14/16.
@@ -21,8 +24,10 @@ public class ClientConnector
         protected ObjectInputStream reader;
         protected PrintWriter writer;
         protected Socket sock;
+        protected Context context;
 
-        public ClientConnector() {
+        public ClientConnector(Context context) {
+            this.context = context;
         }//constructor
 
         public boolean openConnection(){
@@ -31,8 +36,9 @@ public class ClientConnector
                 sock = new Socket(strHost, iPort);
             }
             catch(IOException socketError){
-                if (DEBUG) System.err.println
-                        ("Unable to connect to " + strHost);
+                String error = "Unable to connect to " + strHost;
+                System.err.println(error);
+                IOUtil.logFile(context, "log.txt", error);
                 return false;
             }
             return true;
@@ -45,7 +51,9 @@ public class ClientConnector
             try {
                 reader.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                String error = "unable to close reader/writer " + e.toString();
+                System.err.println(error);
+                IOUtil.logFile(context, "log.txt", error);
             }
             writer.close();
         }
@@ -61,12 +69,11 @@ public class ClientConnector
 
             }
             catch (Exception e){
-                System.err.println(e);
-                System.err.println
-                        ("Unable to obtain stream to/from " + strHost);
+                String error = "Unable to obtain stream to/from " + strHost;
+                System.err.println(error);
+                IOUtil.logFile(context, "log.txt", error);
                 return false;
             }
-            System.out.println("INITALIZED");
             return true;
         }
 
@@ -89,8 +96,14 @@ public class ClientConnector
                 sock.close();
             }
             catch (IOException e){
-                if (DEBUG) System.err.println
-                        ("Error closing socket to " + strHost);
+                String error = "Error closing socket to " + strHost;
+                System.err.println(error);
+                IOUtil.logFile(context, "log.txt", error);
+            }
+            catch (Exception e){
+                String error = "Error closing socket to " + strHost;
+                System.err.println(error);
+                IOUtil.logFile(context, "log.txt", error);
             }
         }
 

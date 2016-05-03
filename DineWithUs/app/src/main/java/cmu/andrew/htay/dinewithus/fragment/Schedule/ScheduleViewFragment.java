@@ -9,9 +9,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import cmu.andrew.htay.dinewithus.R;
+import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
 import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentFragmentHolder;
 import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentViewFragment;
+import cmu.andrew.htay.dinewithus.intents.ScheduleUpdate;
 
 
 public class ScheduleViewFragment extends Fragment {
@@ -23,18 +27,7 @@ public class ScheduleViewFragment extends Fragment {
     private TextView interests_title_text;
     private TextView interests_text;
     private TextView contact_text;
-    private CheckBox checkTime1;
-    private CheckBox checkTime2;
-    private CheckBox checkTime3;
-    private CheckBox checkTime4;
-    private CheckBox checkTime5;
-    private CheckBox checkTime6;
-    private CheckBox checkTime7;
-    private CheckBox checkTime8;
-    private CheckBox checkTime9;
-    private CheckBox checkTime10;
-    private CheckBox checkTime11;
-    private CheckBox checkTime12;
+    private CheckBox[] checkTimes;
 
     private ScheduleFragmentHolder fragHolder;
 
@@ -57,47 +50,44 @@ public class ScheduleViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.schedule_view_layout, parent, false);
+        checkTimes = new CheckBox[12];
 
-        checkTime1 = (CheckBox) v.findViewById(R.id.checkTime1);
-        checkTime2 = (CheckBox) v.findViewById(R.id.checkTime2);
-        checkTime3 = (CheckBox) v.findViewById(R.id.checkTime3);
-        checkTime4 = (CheckBox) v.findViewById(R.id.checkTime4);
-        checkTime5 = (CheckBox) v.findViewById(R.id.checkTime5);
-        checkTime6 = (CheckBox) v.findViewById(R.id.checkTime6);
+        checkTimes[0] = (CheckBox) v.findViewById(R.id.checkTime1);
+        checkTimes[1] = (CheckBox) v.findViewById(R.id.checkTime2);
+        checkTimes[2] = (CheckBox) v.findViewById(R.id.checkTime3);
+        checkTimes[3] = (CheckBox) v.findViewById(R.id.checkTime4);
+        checkTimes[4] = (CheckBox) v.findViewById(R.id.checkTime5);
+        checkTimes[5] = (CheckBox) v.findViewById(R.id.checkTime6);
 
-        checkTime7 = (CheckBox) v.findViewById(R.id.checkTime7);
-        checkTime8 = (CheckBox) v.findViewById(R.id.checkTime8);
-        checkTime9 = (CheckBox) v.findViewById(R.id.checkTime9);
-        checkTime10 = (CheckBox) v.findViewById(R.id.checkTime10);
-        checkTime11 = (CheckBox) v.findViewById(R.id.checkTime11);
-        checkTime12 = (CheckBox) v.findViewById(R.id.checkTime12);
+        checkTimes[6] = (CheckBox) v.findViewById(R.id.checkTime7);
+        checkTimes[7] = (CheckBox) v.findViewById(R.id.checkTime8);
+        checkTimes[8] = (CheckBox) v.findViewById(R.id.checkTime9);
+        checkTimes[9] = (CheckBox) v.findViewById(R.id.checkTime10);
+        checkTimes[10] = (CheckBox) v.findViewById(R.id.checkTime11);
+        checkTimes[11] = (CheckBox) v.findViewById(R.id.checkTime12);
 
         Button saveTimeButton =
                 (Button) v.findViewById(R.id.saveTimeButton);
         saveTimeButton.setOnClickListener(saveTimeButtonClicked);
 
-
-        /* Needs to return from database a list of possible appointments for each day.
-           This will appropriately set the radio buttons. */
-
-        /*checkTime1.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                String appointmentString = "LOL";
-                final AppointmentViewFragment avfrag =
-                        AppointmentViewFragment.newInstance(appointmentString);
-
-                fragHolder.replaceFragment(avfrag, true);
-            }
-        });*/
         return v;
     }
 
     View.OnClickListener saveTimeButtonClicked = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //Save Schedule Data
+            ArrayList<ScheduleBlock> sbList = new ArrayList<ScheduleBlock>();
+
+            for(int i = 0; i < 12; i++){
+                if(checkTimes[i].isChecked()){
+                    ScheduleBlock sb = new ScheduleBlock();
+                    sb.setStartTime(i*2);
+                    sb.setEndTime(i*2 + 2);
+                    sbList.add(sb);
+                }
+            }
+            ScheduleUpdate sbTask = new ScheduleUpdate("htay", sbList, getContext());
+            sbTask.execute();
         }
     };
 }

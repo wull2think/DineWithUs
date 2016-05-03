@@ -108,18 +108,28 @@ public class ProfileFragment extends Fragment {
     }
 
     public void sendUpdate() {
-        ProfileUpdate profTask = new ProfileUpdate("htay", myProfile);
+        ProfileUpdate profTask = new ProfileUpdate("htay", myProfile, getContext());
         profTask.execute();
 
     }
 
     public void getUpdate() {
-        ProfileGet profTask = new ProfileGet("htay", myProfile, this);
+        ProfileGet profTask = new ProfileGet("htay", myProfile, this, getContext());
         profTask.execute();
     }
 
     public void updateAllFields() {
-
+        System.out.println("Updating fields");
+        likes = myProfile.getLikes();
+        dislikes = myProfile.getDislikes();
+        like1EditText.setText(likes.get(0));
+        like2EditText.setText(likes.get(1));
+        like3EditText.setText(likes.get(2));
+        dislike1EditText.setText(likes.get(0));
+        dislike2EditText.setText(likes.get(1));
+        dislike3EditText.setText(likes.get(2));
+        emailEditText.setText(myProfile.getEmail());
+        phoneEditText.setText(myProfile.getPhone());
     }
 
 

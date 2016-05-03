@@ -4,6 +4,7 @@ package cmu.andrew.htay.dinewithus.intents;
  * Created by HuiJun on 4/25/16.
  */
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ArrayAdapter;
 
@@ -24,18 +25,22 @@ public class StoreGet extends AsyncTask<Void, Void, Void> {
     private ArrayList<Store> serverStoreList;
     private StoresFragment storefrag;
     private String request;
+    private Context context;
 
-    public StoreGet(ArrayList<String> storeNames, StoreSet storeSet, StoresFragment storefrag, String request) {
+    public StoreGet(ArrayList<String> storeNames, StoreSet storeSet,
+                    StoresFragment storefrag, String request,
+                    Context context) {
         this.storeSet = storeSet;
         this.storeNames = storeNames;
         this.storefrag = storefrag;
         this.request = request;
+        this.context = context;
     }
 
     @Override
     protected Void doInBackground(Void... arg0) {
 
-        ClientRequester clientIO = new ClientRequester();
+        ClientRequester clientIO = new ClientRequester(context);
 
         StoreSet serverStoreSet = new StoreSet();
         System.out.println("Connecting to server...");

@@ -4,6 +4,7 @@ package cmu.andrew.htay.dinewithus.intents;
  * Created by HuiJun on 4/25/16.
  */
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.EditText;
 
@@ -20,17 +21,19 @@ public class ProfileGet extends AsyncTask<Void, Void, Void> {
     private Profile profile;
     private ProfileFragment profileFrag;
     private String username = "htay";
+    private Context context;
 
-    public ProfileGet(String username, Profile profile, ProfileFragment profileFrag) {
+    public ProfileGet(String username, Profile profile, ProfileFragment profileFrag, Context context) {
         this.profile = profile;
         this.profileFrag = profileFrag;
         this.username = username;
+        this.context = context;
     }
 
     @Override
     protected Void doInBackground(Void... arg0) {
 
-        ClientRequester clientIO = new ClientRequester();
+        ClientRequester clientIO = new ClientRequester(context);
 
         Profile serverProfile = new Profile();
         System.out.println("Connecting to server...");
@@ -72,10 +75,10 @@ public class ProfileGet extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void result) {
-        /*
+
         super.onPostExecute(result);
         profileFrag.updateAllFields();
-        */
+
     }
 
 }

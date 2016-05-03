@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">DineWithUs</string>
     <string name="gpsEnableText">Show only Stores Near Me</string>
-    <string name="profile_name">Niteesh Sundaram</string>
+    <string name="profile_name_first">Niteesh</string>
+    <string name="profile_name_last">Sundaram</string>
     <string name="profile_age">22</string>
     <string name="profile_gender">Male</string>
     <string name="profile_likes">Likes</string>

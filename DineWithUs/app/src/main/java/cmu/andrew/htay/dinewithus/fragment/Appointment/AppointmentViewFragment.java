@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import cmu.andrew.htay.dinewithus.R;
 import cmu.andrew.htay.dinewithus.UI.MainActivity;
 import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.fragment.appointment.AppointmentViewFragment;
+import cmu.andrew.htay.dinewithus.intents.AppointmentUpdate;
 
 
 public class AppointmentViewFragment extends Fragment {
@@ -64,7 +67,7 @@ public class AppointmentViewFragment extends Fragment {
         appointment_text.setText(appointment.getName());
 
         String[] memberNames = appointment.memberNames;
-        if(memberNames[0] == ((MainActivity) getActivity()).username){
+        if(memberNames[0].equals(((MainActivity) getActivity()).username)){
             pos = 0;
         }
         else{
@@ -85,19 +88,26 @@ public class AppointmentViewFragment extends Fragment {
                     appointment.setStatus(statuses[0], "CONFIRMED");
                     statuses[1] = "CONFIRMED";
                 }
-                String[] nameArgs = appointment.getName().split("|");
+                String[] nameArgs = appointment.getName().split("-");
                 String status;
-                if(statuses[0] == "DENIED" || statuses[1] == "DENIED"){
-                    status = "DENIED";
+                if(statuses[0].contains("DENIED") || statuses[1].contains("DENIED")){
+                    status = " DENIED";
                 }
-                else if(statuses[0] == "PENDING" || statuses[1] == "PENDING"){
-                    status = "PENDING";
+                else if(statuses[0].contains("PENDING") || statuses[1].contains("PENDING")){
+                    status = " PENDING";
                 }
                 else{
-                    status = "CONFIMED";
+                    status = " CONFIRMED";
                 }
-                String newName = String.format("%s | %s | %s | %s", nameArgs[0], nameArgs[1], nameArgs[2], status);
+                String newName = String.format("%s-%s-%s-%s", nameArgs[0], nameArgs[1], nameArgs[2], status);
                 appointment.setName(newName);
+                System.out.println(appointment.getName());
+
+                ArrayList<Appointment> apptList = new ArrayList<>();
+                apptList.add(appointment);
+                AppointmentUpdate apptTask = new AppointmentUpdate("htay", apptList, getContext());
+                apptTask.execute();
+
                 getActivity().onBackPressed();
             }
         });
@@ -112,9 +122,18 @@ public class AppointmentViewFragment extends Fragment {
                 else{
                     appointment.setStatus(statuses[0], "DENIED");
                 }
-                String[] nameArgs = appointment.getName().split("|");
-                String newName = String.format("%s | %s | %s | %s", nameArgs[0], nameArgs[1], nameArgs[2], "DENIED");
-                appointment.setName(newName);
+                String[] nameArgs = appointment.getName().split("-");
+                System.out.printf("Name: %s\n", appointment.getName());
+                String newName = String.format("%s-%s-%s-%s", nameArgs[0], nameArgs[1], nameArgs[2], " DENIED");
+                appointment.setAppointmentName(newName);
+                System.out.println("New Name:" + newName);
+                System.out.println("New Appointment Name: " + appointment.getName());
+
+                ArrayList<Appointment> apptList = new ArrayList<>();
+                apptList.add(appointment);
+                AppointmentUpdate apptTask = new AppointmentUpdate("htay", apptList, getContext());
+                apptTask.execute();
+
                 getActivity().onBackPressed();
             }
         });

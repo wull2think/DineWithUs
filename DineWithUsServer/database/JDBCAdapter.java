@@ -11,6 +11,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 
+import util.IOUtil;
+
 import cmu.andrew.htay.dinewithus.entities.Appointment;
 import cmu.andrew.htay.dinewithus.entities.Profile;
 import cmu.andrew.htay.dinewithus.entities.ScheduleBlock;
@@ -39,12 +41,15 @@ public class JDBCAdapter {
             statement = connection.createStatement();
         }
         catch (ClassNotFoundException ex) {
-            System.err.println("Cannot find the database driver classes.");
-            System.err.println(ex);
+			String error = "Cannot find the database driver classes.";
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+
         }
         catch (SQLException ex) {
-            System.err.println("Cannot connect to this database.");
-            System.err.println(ex);
+			String error = "Cannot connect to this database.";
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
         }
         
      }
@@ -61,8 +66,10 @@ public class JDBCAdapter {
     	try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (AddUser) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+			return -1;
 		}
     	
     	query = "SELECT LAST_INSERT_ID()";
@@ -75,7 +82,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (AddUser) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     	
 		return userID;
@@ -115,8 +124,10 @@ public class JDBCAdapter {
     	try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (addAppointment) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+			return -1;
 		}
     	
     	query = "SELECT LAST_INSERT_ID()";
@@ -129,7 +140,10 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (addAppointment) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+			deleteAppointment(appointmentID); //rollback
 		}
     	
 		return appointmentID;
@@ -149,8 +163,10 @@ public class JDBCAdapter {
     	try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (addSchedule) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+			return -1;
 		}
     	
     	query = "SELECT LAST_INSERT_ID()";
@@ -162,8 +178,11 @@ public class JDBCAdapter {
 				scheduleID = rs.getInt(1);
 			}
 		}
-		catch (SQLException ex) {
-			System.err.println(ex);
+		catch (SQLException e) {
+			String error = "SQL query error (AddUser) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+			deleteSchedule(scheduleID);
 		}
     	
 		return scheduleID;
@@ -183,8 +202,9 @@ public class JDBCAdapter {
     	try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (addApptMapping) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     	
    }
@@ -198,8 +218,9 @@ public class JDBCAdapter {
     	try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (addSchedMapping) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     	
    }
@@ -217,8 +238,9 @@ public class JDBCAdapter {
 	try {
 		statement.executeUpdate(query);
 	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		String error = "SQL update error (updatePassword) " + e.toString();
+		System.err.println(error);
+		IOUtil.logFile(error, "log.txt");
 	}
 	
 	}
@@ -231,8 +253,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (updateProfile) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 	}
@@ -245,8 +268,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (updateAppointment) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -258,8 +282,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (updateSchedule) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -271,8 +296,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (addScheduleDate) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
 	
@@ -285,8 +311,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (updateStore) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 	}
     
@@ -302,8 +329,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (deleteUser) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     }
     
@@ -316,8 +344,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (deleteAppt) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     }
 
@@ -330,8 +359,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (deleteSched) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     }
     
@@ -344,8 +374,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (deleteMapAppt) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     }
     
@@ -358,8 +389,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (deleteMapProfile) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     }
     
@@ -372,8 +404,9 @@ public class JDBCAdapter {
 		try {
 			statement.executeUpdate(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			String error = "SQL update error (deleteMapSchedule) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
     }
     
@@ -401,7 +434,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "Username not found" + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 
 		return password;
@@ -422,7 +457,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "Username not found" + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 
 		return id;
@@ -442,7 +479,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "UserID not found" + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 
 		return username;
@@ -450,7 +489,7 @@ public class JDBCAdapter {
 
     //get ProfileID for UserID
 	public Profile getProfile(int id) {
-		Profile storedProfile = new Profile();
+		Profile storedProfile = new Profile(); //default to blank profile
 		String query =  "SELECT * FROM " + "profiles" + 
 						" WHERE idUser = " + id;
 
@@ -466,7 +505,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getProfile) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		//get likes
@@ -481,7 +522,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getLikes) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		//get dislikes
@@ -496,7 +539,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getDislikes) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return storedProfile;
@@ -518,7 +563,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getApptIDs) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return appointmentIDs;
@@ -547,7 +594,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getAppt) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		String userA = getUsername(appointment.getMemberIDs()[0]);
@@ -572,7 +621,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getSchedIDs) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return scheduleIDs;
@@ -598,7 +649,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getSched) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 
 		return schedule;
@@ -616,7 +669,7 @@ public class JDBCAdapter {
 		
 		if(idList.isEmpty()) {
 			System.err.println("No Stores Found for Search");
-			return storeSet;
+			return storeSet; //default to empty stores
 		}
 		//cut the , off the last bit
 		set = set.substring(0,set.length()-1);
@@ -647,7 +700,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getStoresForIDs) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 
 		
@@ -705,7 +760,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getStoreIDs) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return storeIDs;
@@ -772,7 +829,9 @@ public class JDBCAdapter {
 			}
 		}
 		catch (SQLException ex) {
-			System.err.println(ex);
+			String error = "SQL query error (getStoreIDswRange) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
 		}
 		
 		return storeIDs;
