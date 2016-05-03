@@ -382,8 +382,8 @@ public class JDBCAdapter {
     //delete Schedule
     public void deleteSchedule(int scheduleID) {
 
-		String query =  "DELETE FROM " + "users" + 
-		" WHERE idSchedule = " + scheduleID + ";" ;
+		String query =  "DELETE FROM " + "schedules" + 
+		" WHERE idSchedule = " + scheduleID + ";";
     	
 		try {
 			statement.executeUpdate(query);
@@ -544,7 +544,7 @@ public class JDBCAdapter {
 		return id;
 	}
 	
-	
+    
 	public String getUsername(int id) {
 
 		String query =  "SELECT USERNAME FROM " + "users"  + 
@@ -565,6 +565,32 @@ public class JDBCAdapter {
 		}
 
 		return username;
+	}
+	
+	//get appointments for userID
+	public ArrayList<Integer> getScheduleIDsForDate(String username, String date) {
+
+		ArrayList<Integer> scheduleIDs = new ArrayList<Integer>();
+		
+		int userID = getUserID(username);
+		String query =  "SELECT * FROM " + "schdules" + 
+				" WHERE idUser = " + userID +
+				" AND DATE = \"" + date + "\"";
+
+		try {
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				scheduleIDs.add(rs.getInt("idSchedule"));
+			}
+		}
+		catch (SQLException ex) {
+			String error = "SQL query error (getScheduleIDsForDate) " + ex.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+		
+		return scheduleIDs;
+		
 	}
 
     //get ProfileID for UserID

@@ -120,7 +120,8 @@ public class DineServerSocket extends Socket
 			break;
 		case "Schedules":
 			username = args[2];
-			ArrayList<ScheduleBlock> sbList = DBWrapper.getScheduleBlocks(username);
+			ArrayList<ScheduleBlock> sbList = 
+					DBWrapper.getScheduleBlocks(username);
 
 			os.writeObject(sbList);
 			System.out.println("Wrote ScheduleBlockList object");
@@ -267,19 +268,20 @@ public class DineServerSocket extends Socket
 	
 	private void updateSchedule(String username, 
 			ArrayList<ScheduleBlock> sbList) {
+		
 		DBMethods DBWrapper = new DBMethods();
+		ArrayList<String> dateList = new ArrayList<>();
 		for (ScheduleBlock sb : sbList) {
 			System.out.println("GOT SCHEDULE: " + sb.getID());
 			System.out.println(sb.getStartTime() + " - " + sb.getEndTime());
-			if(sb.getID() >= 0) { //apt exists in DB
-				DBWrapper.updateScheduleStart(sb.getID(), sb.getStartTime());
-				DBWrapper.updateScheduleEnd(sb.getID(), sb.getEndTime());
-				DBWrapper.updateScheduleDate(sb.getID(), sb.getDate());
+			String date = sb.getDate();
+			if(!dateList.contains(date)) {
+				DBWrapper.deleteScheduleForDate(username, date);
+				dateList.add(date);
 			}
-			else { //appt does not exist, create new one
-				DBWrapper.addScheduleBlock(username, sb);
+
+			DBWrapper.addScheduleBlock(username, sb);
 				
-			}
 		}
 	}
 

@@ -113,7 +113,7 @@ public class DBMethods extends DatabaseConstants {
 			return appointmentList;
 		}
 	
-	//get all scheduleblocks for username
+	//get all scheduleblocks for username in date
 	public ArrayList<ScheduleBlock> getScheduleBlocks(String username) {
 
 		jdbc = new JDBCAdapter(url, driverName,
@@ -471,6 +471,27 @@ public class DBMethods extends DatabaseConstants {
 
 		jdbc.deleteSchedule(idSchedule);
 		jdbc.deleteMapSchedule(idSchedule);
+		
+		try {
+			jdbc.close();
+		} catch (SQLException e) {
+			String error = "Database Error (deleteSchedule) " + e.toString();
+			System.err.println(error);
+			IOUtil.logFile(error, "log.txt");
+		}
+	}
+
+	//delete schedule for scheduleID
+	public void deleteScheduleForDate(String username, String date) {
+
+		jdbc = new JDBCAdapter(url, driverName,
+                user, passwd);
+
+		ArrayList<Integer> ids = jdbc.getScheduleIDsForDate(username, date);
+		for(int id : ids) {
+			jdbc.deleteSchedule(id);
+			jdbc.deleteMapSchedule(id);
+		}
 		
 		try {
 			jdbc.close();

@@ -11,7 +11,7 @@ import java.util.Calendar;
  */
 public class IOUtil {
 
-    public static void logFile(String filename, String error) {
+    public static void logFile(String error, String filename) {
         Calendar time = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
         String timeStamp = dateFormat.format(time.getTime());
