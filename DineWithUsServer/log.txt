@@ -1,0 +1,12 @@
+05-02-2016 20:39:39: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'dinewithusdb.schdules' doesn't exist
+05-02-2016 20:43:29: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table 'dinewithusdb.schdules' doesn't exist
+05-02-2016 21:44:15: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
+05-02-2016 22:56:05: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
+05-02-2016 22:56:41: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
+05-02-2016 22:59:38: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
+05-02-2016 23:01:57: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
+05-02-2016 23:02:33: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
+05-02-2016 23:03:18: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
+05-02-2016 23:03:25: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
+05-02-2016 23:06:03: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
+05-02-2016 23:06:46: SQL query error (getScheduleIDsForDate) com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'idUser' in 'where clause'
